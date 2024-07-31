@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - VirtualCamera
+  - PlayerCollisions
   layers:
   - Default
   - TransparentFX
@@ -40,4 +42,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3296106045
+    locked: 0
+  - name: Foreground
+    uniqueID: 2894382053
+    locked: 0
+  - name: UI
+    uniqueID: 1748805253
     locked: 0
