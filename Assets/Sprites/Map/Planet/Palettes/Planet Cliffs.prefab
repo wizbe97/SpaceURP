@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4617993396026735785}
   - component: {fileID: 3395859163094517181}
   m_Layer: 0
-  m_Name: Planet_Cliffs
+  m_Name: Planet Cliffs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

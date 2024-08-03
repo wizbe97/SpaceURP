@@ -1841,7 +1841,7 @@ GameObject:
   - component: {fileID: 5001657348782171194}
   - component: {fileID: 8788325185799723651}
   m_Layer: 0
-  m_Name: Planet_Grass_Sand
+  m_Name: Planet Grass And Sand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
