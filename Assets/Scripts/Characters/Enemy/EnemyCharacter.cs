@@ -13,7 +13,7 @@ public class EnemyCharacter : Character
     [SerializeField] private FloatingHealthBar healthBar;
     public GameObject floatingDamage;
 
-    public float hitPoints;
+    private float hitPoints;
 
     private void OnEnable()
     {

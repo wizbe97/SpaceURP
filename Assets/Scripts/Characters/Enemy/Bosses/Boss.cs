@@ -13,6 +13,9 @@ public abstract class Boss : MonoBehaviour
     // List of all available abilities
     private List<System.Action> abilities;
 
+    // Track the index of the last used ability
+    private int lastUsedAbilityIndex = -1;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -44,13 +47,24 @@ public abstract class Boss : MonoBehaviour
     // Setup abilities (to be implemented in derived classes)
     protected abstract void SetupAbilities();
 
-    // Execute a random ability
+    // Execute a random ability, ensuring it's not the same as the last used ability
     private void ExecuteRandomAbility()
     {
-        if (abilities.Count > 0)
+        if (abilities.Count > 1)
         {
-            int randomIndex = Random.Range(0, abilities.Count);
+            int randomIndex;
+            do
+            {
+                randomIndex = Random.Range(0, abilities.Count);
+            } while (randomIndex == lastUsedAbilityIndex);
+
             abilities[randomIndex]?.Invoke();
+            lastUsedAbilityIndex = randomIndex;
+        }
+        else if (abilities.Count == 1)
+        {
+            // If there's only one ability, just execute it
+            abilities[0]?.Invoke();
         }
     }
 
