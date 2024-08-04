@@ -10,7 +10,8 @@ public abstract class Character : MonoBehaviour
     {
         PLAYER,
         RANGED_ENEMY,
-        MELEE_ENEMY
+        MELEE_ENEMY,
+        BOSS
     }
 
     public CharacterCategory characterCategory;
