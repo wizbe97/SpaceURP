@@ -1,16 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CrystalGuardian : Boss
 {
     [SerializeField] private GameObject crystalSpikes; // Spike prefab
-    [SerializeField] private float spawnGap = 1.0f; // Gap time between spawns
+    [SerializeField] private float spawnGap = 2.0f; // Gap time between spawns
     [SerializeField] private int minNumberOfSpikes = 3; // Minimum number of spikes to spawn
     [SerializeField] private int maxNumberOfSpikes = 10; // Maximum number of spikes to spawn
     [SerializeField] private float crystalSpikeDuration = 3.0f; // Duration before crystal spikes are destroyed
 
     private Transform player; // Player's transform
+    private bool isSpawningSpikes = false; // Flag to indicate if spikes are being spawned
 
     // Start is called before the first frame update
     protected override void Start()
@@ -41,13 +41,25 @@ public class CrystalGuardian : Boss
     private void SpecialAbility1()
     {
         Debug.Log("CrystalGuardian uses Special Ability 1!");
-        // Start the coroutine to spawn spikes underneath the player
-        StartCoroutine(SpawnSpikes());
+
+        // Check if spikes are already spawning
+        if (!isSpawningSpikes)
+        {
+            // Start the coroutine to spawn spikes underneath the player
+            StartCoroutine(SpawnSpikes());
+        }
+        else
+        {
+            Debug.Log("Spikes are already spawning, cannot start another ability.");
+        }
     }
 
     // Coroutine to spawn spikes with a gap in between
     private IEnumerator SpawnSpikes()
     {
+        // Set the flag to true to indicate spikes are spawning
+        isSpawningSpikes = true;
+
         // Determine a random number of spikes to spawn within the specified range
         int numberOfSpikes = Random.Range(minNumberOfSpikes, maxNumberOfSpikes + 1); // +1 because max range is exclusive
 
@@ -64,19 +76,40 @@ public class CrystalGuardian : Boss
             // Wait for the specified gap time before spawning the next spike
             yield return new WaitForSeconds(spawnGap);
         }
+
+        // Set the flag to false to indicate spikes have finished spawning
+        isSpawningSpikes = false;
     }
 
     // Example ability 2
     private void SpecialAbility2()
     {
         Debug.Log("CrystalGuardian uses Special Ability 2!");
-        // Ability logic here
+
+        // Prevent this ability from starting if spikes are spawning
+        if (!isSpawningSpikes)
+        {
+            // Ability logic here
+        }
+        else
+        {
+            Debug.Log("Cannot use ability while spikes are spawning.");
+        }
     }
 
     // Example ability 3
     private void SpecialAbility3()
     {
         Debug.Log("CrystalGuardian uses Special Ability 3!");
-        // Ability logic here
+
+        // Prevent this ability from starting if spikes are spawning
+        if (!isSpawningSpikes)
+        {
+            // Ability logic here
+        }
+        else
+        {
+            Debug.Log("Cannot use ability while spikes are spawning.");
+        }
     }
 }
