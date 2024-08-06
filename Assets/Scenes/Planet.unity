@@ -335,6 +335,10 @@ PrefabInstance:
       value: LabEntranceTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 6816509262384116982, guid: 4e7093990d96f47868c085534fac679b, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816509262384116982, guid: 4e7093990d96f47868c085534fac679b, type: 3}
       propertyPath: sceneName
       value: Lab
       objectReference: {fileID: 0}
@@ -39619,6 +39623,10 @@ PrefabInstance:
     - target: {fileID: 1444273422265410113, guid: 615716f15f5344794bbed54e76d58666, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8574471372477719642, guid: 615716f15f5344794bbed54e76d58666, type: 3}
+      propertyPath: orthographic size
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

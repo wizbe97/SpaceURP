@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class NewScene : MonoBehaviour
 {
@@ -10,13 +11,18 @@ public class NewScene : MonoBehaviour
     {
         if (other.CompareTag("PlayerCollisions"))
         {
-            GameManager.Instance.scenePlayerSpawnPosition = spawnPoint.position;
-            GameManager.Instance.SaveAllData(isLocal: true);
-            // // Send a message to PlayerManager with spawn point information
-            // PlayerManager.Instance.SendMessage("SetSpawnPoint", spawnPoint.position);
-
-            // Load the new scene
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+            LoadNextLevel();
         }
+    }
+
+    public void LoadNextLevel()
+    {
+        GameManager.Instance.scenePlayerSpawnPosition = spawnPoint.position;
+        GameManager.Instance.SaveAllData(isLocal: true);
+        // // Send a message to PlayerManager with spawn point information
+        // PlayerManager.Instance.SendMessage("SetSpawnPoint", spawnPoint.position);
+
+        // Load the new scene
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }
