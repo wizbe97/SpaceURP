@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashCooldown = 3f;
     private bool dashOnCooldown = false; 
     public bool isMoving = false;
-    private readonly bool canMove = true;
+    public bool canMove = true;
 
     public float movementSpeed = 1250f;
     [HideInInspector] public Vector2 moveInput = Vector2.zero;

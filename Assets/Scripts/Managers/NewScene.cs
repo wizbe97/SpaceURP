@@ -5,6 +5,8 @@ using System.Collections;
 public class NewScene : MonoBehaviour
 {
     public string sceneName;
+    public Animator transition;
+    public float transitionTime = 1f;
     public Transform spawnPoint; // Reference to the spawn point Transform
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -23,6 +25,21 @@ public class NewScene : MonoBehaviour
         // PlayerManager.Instance.SendMessage("SetSpawnPoint", spawnPoint.position);
 
         // Load the new scene
+        StartCoroutine(LoadLevel());
+
+    }
+
+    IEnumerator LoadLevel()
+    {
+        transition.SetTrigger("Start");
+        FindAnyObjectByType<PlayerController>().canMove = false;
+
+        // Wait
+        yield return new WaitForSeconds(transitionTime);
+
+        // Load scene
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        FindAnyObjectByType<PlayerController>().canMove = true;
+
     }
 }
