@@ -20,9 +20,9 @@ TagManager:
   - Enemies
   - PlayerCollisions
   - EnemyCollisions
-  - 
-  - 
-  - 
+  - TilemapColliders
+  - IgnoreCrystal
+  - EnemyProjectiles
   - 
   - 
   - 
