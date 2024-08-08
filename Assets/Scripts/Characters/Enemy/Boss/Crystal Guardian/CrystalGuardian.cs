@@ -292,6 +292,7 @@ public class CrystalGuardian : Boss
                 // If nothing is hit, project the laser in the direction indefinitely
                 newLaserLineRenderer.SetPosition(1, spawnPosition + dir * 10.0f); // Max distance of 10 units
             }
+            newLaser.AddComponent<CrystalLaser>();
 
             // Instantiate visual effects at the start and end of the new laser
             GameObject startVFXInstance = Instantiate(startVFX, spawnPosition, Quaternion.identity);
