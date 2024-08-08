@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class CrystalGuardian : Boss
 {
+    // Crystal Spikes Ability Variables
+    [Header("Crystal Spikes Ability")]
     [SerializeField] private GameObject crystalSpikes; // Spike prefab
     [SerializeField] private float spawnGap = 2.0f; // Gap time between spawns
     [SerializeField] private int minNumberOfSpikes = 3; // Minimum number of spikes to spawn
     [SerializeField] private int maxNumberOfSpikes = 10; // Maximum number of spikes to spawn
     [SerializeField] private float crystalSpikeDuration = 3.0f; // Duration before crystal spikes are destroyed
+
+    // Crystal Laser Ability Variables
+    [Header("Crystal Laser Ability")]
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform crystal;

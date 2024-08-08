@@ -27614,25 +27614,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
-      propertyPath: endVFX
-      value: 
-      objectReference: {fileID: 4264508999995766664, guid: 586f295a8a3b94b2db4c2ada7678be32, type: 3}
-    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: crystal
       value: 
       objectReference: {fileID: 838749866}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
-      propertyPath: startVFX
-      value: 
-      objectReference: {fileID: 1962749615213639815, guid: 6692c09a1b62a4741b42187db07e3ac5, type: 3}
-    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 1521758148}
-    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
-      propertyPath: lineRenderer
-      value: 
-      objectReference: {fileID: 4131324309765433761, guid: 16f3d4c41e37f7740b3e72a65470ae15, type: 3}
     - target: {fileID: 6764035538404602076, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.93

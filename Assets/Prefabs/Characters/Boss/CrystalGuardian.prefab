@@ -15136,11 +15136,12 @@ MonoBehaviour:
   minNumberOfSpikes: 5
   maxNumberOfSpikes: 5
   crystalSpikeDuration: 6
-  lineRenderer: {fileID: 7391511811257300849}
-  firePoint: {fileID: 2570673627433895304}
+  lineRenderer: {fileID: 4131324309765433761, guid: 16f3d4c41e37f7740b3e72a65470ae15, type: 3}
+  firePoint: {fileID: 0}
   crystal: {fileID: 0}
-  startVFX: {fileID: 8960620162154153397}
-  endVFX: {fileID: 4837042296027369798}
+  startVFX: {fileID: 1962749615213639815, guid: 6692c09a1b62a4741b42187db07e3ac5, type: 3}
+  endVFX: {fileID: 4264508999995766664, guid: 586f295a8a3b94b2db4c2ada7678be32, type: 3}
+  splitLaserSpawnDelay: 0.5
 --- !u!114 &1144759644208558593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15157,7 +15158,7 @@ MonoBehaviour:
   maxHitPoints: 500
   characterCategory: 3
   attackCooldown: 3
-  damage: 50
+  damage: 25
   floatingHealthBar: {fileID: 1968890858847828780, guid: f502ccf4bbf154b45b2fb5ac4721cdd8, type: 3}
   shadow: {fileID: 5786553491338793297}
   collisionsCapsule: {fileID: 6130295185015113177}
