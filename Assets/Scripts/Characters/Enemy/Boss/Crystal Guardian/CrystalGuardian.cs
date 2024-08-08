@@ -262,7 +262,7 @@ public class CrystalGuardian : Boss
             LineRenderer newLaserLineRenderer = newLaser.AddComponent<LineRenderer>();
 
             // Copy settings from the original LineRenderer
-            newLaserLineRenderer.material = lineRenderer.material;
+            newLaserLineRenderer.material = lineRenderer.sharedMaterial;
             newLaserLineRenderer.startWidth = lineRenderer.startWidth;
             newLaserLineRenderer.endWidth = lineRenderer.endWidth;
             newLaserLineRenderer.startColor = lineRenderer.startColor;
