@@ -227,7 +227,7 @@ public class CrystalGuardian : Boss
         direction.Normalize();  // Normalize the direction vector
 
         // Use a layer mask that includes the crystal layer
-        int laserMask = LayerMask.GetMask("TilemapColliders", "IgnoreCrystal");
+        int laserMask = LayerMask.GetMask("CrystalHitBox", "IgnoreCrystal");
         RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, distance, laserMask);
 
         if (hit.collider != null)
@@ -301,7 +301,7 @@ public class CrystalGuardian : Boss
             newLaserLineRenderer.SetPosition(0, spawnPosition);
 
             // Raycast to determine the end position of the new laser, ignoring the crystal layer
-            int tilemapLayerMask = LayerMask.GetMask("TilemapColliders");
+            int tilemapLayerMask = LayerMask.GetMask("CrystalHitBox");
             RaycastHit2D hit = Physics2D.Raycast(spawnPosition, dir, Mathf.Infinity, tilemapLayerMask);
             if (hit.collider != null)
             {

@@ -23,7 +23,7 @@ TagManager:
   - TilemapColliders
   - IgnoreCrystal
   - EnemyProjectiles
-  - 
+  - CrystalHitbox
   - 
   - 
   - 
