@@ -110,6 +110,7 @@ public class CrystalGuardian : Boss
         // Prevent this ability from starting if spikes are spawning
         if (!isSpawningSpikes)
         {
+            DisableLaser();
             EnableLaser();
             UpdateLaser();
         }
@@ -128,6 +129,8 @@ public class CrystalGuardian : Boss
         if (!isSpawningSpikes)
         {
             DisableLaser();
+            EnableLaser();
+            UpdateLaser();
         }
         else
         {
