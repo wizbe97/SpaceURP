@@ -4,6 +4,7 @@ public class CrystalLaser : MonoBehaviour
 {
     private LineRenderer lineRenderer;
     private PolygonCollider2D polygonCollider;
+    [SerializeField] private int laserDamage = 10;
 
     private void Awake()
     {
@@ -63,5 +64,16 @@ public class CrystalLaser : MonoBehaviour
 
         // Update the PolygonCollider2D to match the laser's current shape
         polygonCollider.SetPath(0, points);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                StartCoroutine(player.DamageCharacter(laserDamage, 0)); // Set interval to 0 to ensure it's only called once
+            }
+        
     }
 }
