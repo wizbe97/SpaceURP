@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!dashOnCooldown && moveInput.magnitude > 0)
         {
+            GetComponent<BoxCollider2D>().enabled = false;
             Vector2 dashDirection = moveInput.normalized;
             rb.AddForce(dashDirection * dashForce, ForceMode2D.Impulse);
             isDashing = true;
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
         animationState.stateLock = false; 
         animationState.UpdateCharacterAnimationState(moveInput);
         action.CurrentItem();
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 
     private IEnumerator DashCooldown()
