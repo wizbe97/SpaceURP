@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6ec3ccf354cec5f4ca500d22d2f51639
+guid: 47533a48749f32b46bfcb42164d9455e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cave Objects_0
+      name: Death_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 112
-        width: 16
-        height: 32
+        y: 288
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe8898cde6fe85e43a51b7fcbf488a4e
-      internalID: 1443247417
+      spriteID: 1a46858254fa8c44786779b4217c0009
+      internalID: -1249893743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_1
+      name: Death_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 112
-        width: 16
-        height: 32
+        x: 288
+        y: 288
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ee9e58d5182a494481c0888305c3748
-      internalID: -1522976358
+      spriteID: 5145a7277bd0f554ba2cd209ae637a44
+      internalID: -1990827285
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_2
+      name: Death_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 112
-        width: 16
-        height: 32
+        x: 576
+        y: 288
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70d365d0571633d408f761ffff322d60
-      internalID: -1320673631
+      spriteID: d4f5099919868a347bbe54b36463a51f
+      internalID: -731262043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_3
+      name: Death_3
       rect:
         serializedVersion: 2
-        x: 48
-        y: 112
-        width: 16
-        height: 32
+        x: 864
+        y: 288
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d819a6dbed6bb94abedff249ca8b9f2
-      internalID: 768368471
+      spriteID: e3536663fb12b0846add5cab0dec4101
+      internalID: -625561897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_4
+      name: Death_4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 112
-        width: 16
-        height: 32
+        x: 1152
+        y: 288
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d43e92adb3179c4fa5fa3cde25569a7
-      internalID: 885521324
+      spriteID: 32b85ba23cf6b714a82575e3386d13b8
+      internalID: 1869920933
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_5
+      name: Death_5
       rect:
         serializedVersion: 2
-        x: 80
-        y: 112
-        width: 16
-        height: 32
+        x: 1440
+        y: 288
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a492476053fadef4ea30f98ed9d2abf9
-      internalID: -211739012
+      spriteID: c7b65604880b8364dab7c836a6e3a9e5
+      internalID: 1098568047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_6
+      name: Death_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 80
-        width: 16
-        height: 32
+        x: 1728
+        y: 288
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,125 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45e1a91b2b6bcd448ab0d9d3efa235b9
-      internalID: 567834912
+      spriteID: 9025ee8c7a0727c41816e315c1299a61
+      internalID: -1894196685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_7
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 80
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c9169ad71be625479a9085001f1c160
-      internalID: -1706867398
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cave Objects_8
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 80
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dad8061f4975fab47a5d8aaa18c64282
-      internalID: -1779268857
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cave Objects_9
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 80
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 705ba104763006342b5d9d0835a80df1
-      internalID: -647775115
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cave Objects_10
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 80
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 55561741852ae994aa7a333cf0cacf30
-      internalID: -2006403364
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cave Objects_11
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 80
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f30e4c8aef542594ea9b2845e37cc944
-      internalID: 466311589
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cave Objects_12
+      name: Death_7
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
-        width: 16
-        height: 32
+        y: 0
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,20 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: afc064754e6b69c4ab7055f624019bf4
-      internalID: -1864447274
+      spriteID: dbcfcd0332d301346b87842685a1f253
+      internalID: -1683863508
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_13
+      name: Death_8
       rect:
         serializedVersion: 2
-        x: 16
-        y: 48
-        width: 16
-        height: 32
+        x: 288
+        y: 0
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -410,20 +305,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2184636ec49bade45ac048e107bb200f
-      internalID: -2000070977
+      spriteID: 0d9b6d0bfa8f4f74aa74fd10efd41671
+      internalID: 1815621691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_14
+      name: Death_9
       rect:
         serializedVersion: 2
-        x: 32
-        y: 48
-        width: 16
-        height: 32
+        x: 576
+        y: 0
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,20 +326,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2142676437a8e147b218be6a2e0eefa
-      internalID: 2006134332
+      spriteID: edef7dce61109524186e6eb9456cf9a7
+      internalID: 1239438217
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_15
+      name: Death_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
-        height: 32
+        x: 864
+        y: 0
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,20 +347,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fcea2310cc3098469ed08e026685a83
-      internalID: 2110955405
+      spriteID: b9cba92fe34fca84a9f2d8bc0eb07267
+      internalID: -195029013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_16
+      name: Death_11
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 32
+        x: 1152
+        y: 0
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,20 +368,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf2d48f30d1ef1845bb652bd4ad5ec20
-      internalID: 289805498
+      spriteID: 8ce612319ad54c04dacb46c2500a825f
+      internalID: 211033381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Objects_17
+      name: Death_12
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 32
+        x: 1440
+        y: 0
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -494,8 +389,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a29d52d39a55c14eb58d8debdb689c8
-      internalID: 705684645
+      spriteID: 0811a68bfc3ac484d822dbccd36dd38f
+      internalID: -1467425909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_13
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84aa5e5021b56224d998544a41d11816
+      internalID: 385842359
       vertices: []
       indices: 
       edges: []
@@ -511,24 +427,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Cave Objects_0: 1443247417
-      Cave Objects_1: -1522976358
-      Cave Objects_10: -2006403364
-      Cave Objects_11: 466311589
-      Cave Objects_12: -1864447274
-      Cave Objects_13: -2000070977
-      Cave Objects_14: 2006134332
-      Cave Objects_15: 2110955405
-      Cave Objects_16: 289805498
-      Cave Objects_17: 705684645
-      Cave Objects_2: -1320673631
-      Cave Objects_3: 768368471
-      Cave Objects_4: 885521324
-      Cave Objects_5: -211739012
-      Cave Objects_6: 567834912
-      Cave Objects_7: -1706867398
-      Cave Objects_8: -1779268857
-      Cave Objects_9: -647775115
+      Death_0: -1249893743
+      Death_1: -1990827285
+      Death_10: -195029013
+      Death_11: 211033381
+      Death_12: -1467425909
+      Death_13: 385842359
+      Death_2: -731262043
+      Death_3: -625561897
+      Death_4: 1869920933
+      Death_5: 1098568047
+      Death_6: -1894196685
+      Death_7: -1683863508
+      Death_8: 1815621691
+      Death_9: 1239438217
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
