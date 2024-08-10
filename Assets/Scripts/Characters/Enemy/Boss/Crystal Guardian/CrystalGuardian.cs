@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CrystalGuardian : Boss
 {
@@ -29,6 +30,10 @@ public class CrystalGuardian : Boss
     private List<GameObject> splitLasers = new(); // List to track split lasers
     private List<GameObject> splitLaserStartVFX = new(); // List to track start VFX of split lasers
     private List<GameObject> splitLaserEndVFX = new(); // List to track end VFX of split lasers
+
+    private LineRenderer tempLine;
+    private GameObject tempStartVFX;
+    private GameObject tempEndVFX;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -141,9 +146,15 @@ public class CrystalGuardian : Boss
     // Enable the laser ability
     private void EnableLaser()
     {
-        if (lineRenderer != null)
+        if (tempLine == null)
         {
-            lineRenderer.enabled = true;
+            tempLine = Instantiate(lineRenderer);
+            tempStartVFX = Instantiate(startVFX, tempLine.GetPosition(0), Quaternion.identity);
+            tempEndVFX = Instantiate(endVFX, tempLine.GetPosition(1), Quaternion.identity);
+        }
+        if (tempLine != null)
+        {
+            tempLine.enabled = true;
         }
         for (int i = 0; i < particles.Count; i++)
         {
@@ -155,9 +166,15 @@ public class CrystalGuardian : Boss
     private void DisableLaser()
     {
         // Check if the laser ability is already disabled
-        if (lineRenderer != null)
+        if (tempLine != null)
         {
-            lineRenderer.enabled = false;
+            tempLine.enabled = false;
+            Destroy(tempLine.gameObject);
+            Destroy(tempStartVFX.gameObject);
+            Destroy(tempEndVFX.gameObject);
+            tempLine = null;
+            tempStartVFX = null;
+            tempEndVFX = null;
         }
         else
         {
@@ -200,8 +217,8 @@ public class CrystalGuardian : Boss
 
     private void UpdateLaser()
     {
-        lineRenderer.SetPosition(0, firePoint.position);  // Set the start of the laser at the fire point
-        lineRenderer.SetPosition(1, crystal.position);    // Initially set the end at the crystal
+        tempLine.SetPosition(0, firePoint.position);  // Set the start of the laser at the fire point
+        tempLine.SetPosition(1, crystal.position);    // Initially set the end at the crystal
 
         startVFX.transform.position = firePoint.position;
 
@@ -216,7 +233,7 @@ public class CrystalGuardian : Boss
         if (hit.collider != null)
         {
             Debug.Log("Laser hit: " + hit.collider.name);
-            lineRenderer.SetPosition(1, hit.point);
+            tempLine.SetPosition(1, hit.point);
 
             // Check if the laser hit the crystal
             if (hit.collider.transform == crystal)
@@ -228,10 +245,10 @@ public class CrystalGuardian : Boss
         else
         {
             // If nothing is hit, ensure the laser goes all the way to the crystal
-            lineRenderer.SetPosition(1, crystal.position);
+            tempLine.SetPosition(1, crystal.position);
         }
 
-        endVFX.transform.position = lineRenderer.GetPosition(1);
+        endVFX.transform.position = tempLine.GetPosition(1);
     }
 
     private IEnumerator SpawnSplitLasersWithDelay(Vector2 spawnPosition)
@@ -270,15 +287,15 @@ public class CrystalGuardian : Boss
             LineRenderer newLaserLineRenderer = newLaser.AddComponent<LineRenderer>();
 
             // Copy settings from the original LineRenderer
-            newLaserLineRenderer.material = lineRenderer.sharedMaterial;
-            newLaserLineRenderer.startWidth = lineRenderer.startWidth;
-            newLaserLineRenderer.endWidth = lineRenderer.endWidth;
-            newLaserLineRenderer.startColor = lineRenderer.startColor;
-            newLaserLineRenderer.endColor = lineRenderer.endColor;
+            newLaserLineRenderer.material = tempLine.sharedMaterial;
+            newLaserLineRenderer.startWidth = tempLine.startWidth;
+            newLaserLineRenderer.endWidth = tempLine.endWidth;
+            newLaserLineRenderer.startColor = tempLine.startColor;
+            newLaserLineRenderer.endColor = tempLine.endColor;
 
             // Set the sorting layer and order explicitly
-            newLaserLineRenderer.sortingLayerName = lineRenderer.sortingLayerName;
-            newLaserLineRenderer.sortingOrder = lineRenderer.sortingOrder;
+            newLaserLineRenderer.sortingLayerName = tempLine.sortingLayerName;
+            newLaserLineRenderer.sortingOrder = tempLine.sortingOrder;
 
             // Set the start and end positions for the new laser
             newLaserLineRenderer.SetPosition(0, spawnPosition);
