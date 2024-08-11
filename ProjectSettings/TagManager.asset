@@ -24,7 +24,7 @@ TagManager:
   - TilemapColliders
   - IgnoreCrystal
   - EnemyProjectiles
-  - 
+  - BossCollisions
   - 
   - 
   - 
