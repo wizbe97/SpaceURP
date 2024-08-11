@@ -58,11 +58,6 @@ public class CrystalGuardian : Boss
     protected override void Update()
     {
         base.Update();
-
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            SpecialAbility2();
-        }
     }
     // Setup abilities specific to CrystalGuardian
     protected override void SetupAbilities()
@@ -125,7 +120,6 @@ public class CrystalGuardian : Boss
         // Prevent this ability from starting if spikes are spawning
         if (!isSpawningSpikes)
         {
-            DisableLaser();
             EnableLaser();
             UpdateLaser();
         }
@@ -144,8 +138,6 @@ public class CrystalGuardian : Boss
         if (!isSpawningSpikes)
         {
             DisableLaser();
-            EnableLaser();
-            UpdateLaser();
         }
         else
         {
