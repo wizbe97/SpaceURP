@@ -16,7 +16,7 @@ public class CrystalGuardian : Boss
     [Header("Crystal Laser Ability")]
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private GameObject[] crystals;
+    private GameObject[] crystals;
     private Transform crystal;
     [SerializeField] private GameObject startVFX;
     [SerializeField] private GameObject endVFX;
