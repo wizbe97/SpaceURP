@@ -6042,11 +6042,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!4 &822772793 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-  m_PrefabInstance: {fileID: 1633880514}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &850109867
 GameObject:
   m_ObjectHideFlags: 0
@@ -6403,75 +6398,6 @@ Transform:
   - {fileID: 2084235897}
   m_Father: {fileID: 2130167455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1633880514
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10.880304
-      objectReference: {fileID: 0}
-    - target: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.02318696
-      objectReference: {fileID: 0}
-    - target: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 483766011785279985, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1118171842237304227, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3428491626935570964, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_Name
-      value: GreenTree
-      objectReference: {fileID: 0}
-    - target: {fileID: 3428491626935570964, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3428491626935570964, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
-      propertyPath: m_TagString
-      value: LaserHitTarget
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4b3eae2753160104a9769ec22ff68dc4, type: 3}
 --- !u!1001 &1637283158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6662,7 +6588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8574471372477719642, guid: 615716f15f5344794bbed54e76d58666, type: 3}
       propertyPath: orthographic size
-      value: 11.25
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6679,11 +6605,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5243314058462943998, guid: c6d953d9a44fdb14bb2969209ae39df1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.69
+      value: 17.92
       objectReference: {fileID: 0}
     - target: {fileID: 5243314058462943998, guid: c6d953d9a44fdb14bb2969209ae39df1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.3826456
+      value: -14.07
       objectReference: {fileID: 0}
     - target: {fileID: 5243314058462943998, guid: c6d953d9a44fdb14bb2969209ae39df1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6752,6 +6678,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &2046702653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7470630927806566330, guid: c6d953d9a44fdb14bb2969209ae39df1, type: 3}
+  m_PrefabInstance: {fileID: 1912339045}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2084235896
 GameObject:
   m_ObjectHideFlags: 0
@@ -27675,7 +27606,15 @@ PrefabInstance:
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: crystal
       value: 
-      objectReference: {fileID: 822772793}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: crystals.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: crystals.Array.data[0]
+      value: 
+      objectReference: {fileID: 2046702653}
     - target: {fileID: 6729629032636210766, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_Name
       value: CrystalGuardian
@@ -27750,4 +27689,3 @@ SceneRoots:
   - {fileID: 1125754873}
   - {fileID: 180995468}
   - {fileID: 1912339045}
-  - {fileID: 1633880514}
