@@ -9,6 +9,7 @@ TagManager:
   - CanBePickedUp
   - Enemy
   - WaveSpawner
+  - LaserHitTarget
   layers:
   - Default
   - TransparentFX
