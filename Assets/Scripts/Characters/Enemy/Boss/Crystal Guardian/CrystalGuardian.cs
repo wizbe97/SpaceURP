@@ -35,6 +35,13 @@ public class CrystalGuardian : Boss
     private GameObject tempStartVFX;
     private GameObject tempEndVFX;
 
+    // Ability state variables
+    public bool isSpecial1 = false;
+    public bool isSpecial2 = false;
+    public bool isSpecial3 = false;
+
+    private CrystalGuardianController cgController;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -53,12 +60,14 @@ public class CrystalGuardian : Boss
         {
             Debug.LogError("Player GameObject not found. Please ensure it is tagged 'Player'.");
         }
+        cgController = GetComponent<CrystalGuardianController>();
     }
 
     protected override void Update()
     {
         base.Update();
     }
+
     // Setup abilities specific to CrystalGuardian
     protected override void SetupAbilities()
     {
@@ -71,6 +80,9 @@ public class CrystalGuardian : Boss
     private void SpecialAbility1()
     {
         Debug.Log("CrystalGuardian uses Special Ability 1!");
+
+        // Ensure other abilities are disabled
+        SetAbilityStates(true, false, false);
 
         // Check if spikes are already spawning
         if (!isSpawningSpikes)
@@ -102,6 +114,8 @@ public class CrystalGuardian : Boss
                 GameObject spawnedSpike = Instantiate(crystalSpikes, player.position, Quaternion.identity);
                 // Destroy the spike after the specified duration
                 Destroy(spawnedSpike, crystalSpikeDuration);
+                cgController.canMove = false;
+
             }
 
             // Wait for the specified gap time before spawning the next spike
@@ -110,12 +124,18 @@ public class CrystalGuardian : Boss
 
         // Set the flag to false to indicate spikes have finished spawning
         isSpawningSpikes = false;
+
+        // Reset ability states
+        ResetAbilityStates();
     }
 
     // Example ability 2
     private void SpecialAbility2()
     {
         Debug.Log("CrystalGuardian uses Special Ability 2!");
+
+        // Ensure other abilities are disabled
+        SetAbilityStates(false, true, false);
 
         // Prevent this ability from starting if spikes are spawning
         if (!isSpawningSpikes)
@@ -134,21 +154,27 @@ public class CrystalGuardian : Boss
     {
         Debug.Log("CrystalGuardian uses Special Ability 3!");
 
+        // Ensure other abilities are disabled
+        SetAbilityStates(false, false, true);
+
         // Prevent this ability from starting if spikes are spawning
         if (!isSpawningSpikes)
         {
             DisableLaser();
+            cgController.canMove = false;
         }
         else
         {
             Debug.Log("Cannot use ability while spikes are spawning.");
         }
+
+        // Reset ability states
+        ResetAbilityStates();
     }
 
     // Enable the laser ability
     private void EnableLaser()
     {
-
         crystal = GetClosestCrystal();
 
         if (tempLine == null)
@@ -182,6 +208,7 @@ public class CrystalGuardian : Boss
 
         return closestCrystal;
     }
+
     // Disable the laser ability
     private void DisableLaser()
     {
@@ -369,5 +396,18 @@ public class CrystalGuardian : Boss
                 particles.Add(ps);
             }
         }
+    }
+
+    private void SetAbilityStates(bool special1, bool special2, bool special3)
+    {
+        isSpecial1 = special1;
+        isSpecial2 = special2;
+        isSpecial3 = special3;
+    }
+
+    private void ResetAbilityStates()
+    {
+        SetAbilityStates(false, false, false);
+        cgController.canMove = true;
     }
 }

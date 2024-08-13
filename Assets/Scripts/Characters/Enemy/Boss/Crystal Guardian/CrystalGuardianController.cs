@@ -18,7 +18,8 @@ public class CrystalGuardianController : MonoBehaviour
     private Rigidbody2D rb;    // Reference to the Rigidbody2D component
     private Animator animator; // Reference to the Animator component
     private Vector2 moveDirection = Vector2.zero; // Direction of movement
-    private bool canMove = true; // Flag to check if the enemy can move
+    public bool canMove = true; // Flag to check if the enemy can move
+    private CrystalGuardian crystalGuardian; // Reference to the CrystalGuardian script
 
     // Define the possible states of the enemy
     public enum EnemyStates
@@ -58,19 +59,19 @@ public class CrystalGuardianController : MonoBehaviour
                     canMove = false;
                     break;
                 case EnemyStates.SPECIAL_1:
-                    animator.Play("Special_1");
+                    animator.Play("Special1");
                     rb.velocity = Vector2.zero;
                     rb.drag = stopDrag;
                     canMove = false;
                     break;
                 case EnemyStates.SPECIAL_2:
-                    animator.Play("Special_2");
+                    animator.Play("Special2");
                     rb.velocity = Vector2.zero;
                     rb.drag = stopDrag;
                     canMove = false;
                     break;
                 case EnemyStates.SPECIAL_3:
-                    animator.Play("Special_3");
+                    animator.Play("Special3");
                     rb.velocity = Vector2.zero;
                     rb.drag = stopDrag;
                     canMove = false;
@@ -97,6 +98,7 @@ public class CrystalGuardianController : MonoBehaviour
         // Get the Rigidbody2D and Animator components attached to this enemy
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        crystalGuardian = GetComponent<CrystalGuardian>();
     }
 
     void Update()
@@ -115,7 +117,7 @@ public class CrystalGuardianController : MonoBehaviour
     private void HandleMovementAndState()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distanceToPlayer <= detectionRange && canMove && currentStateValue != EnemyStates.DIE)
+        if (distanceToPlayer <= detectionRange && canMove == true && currentStateValue != EnemyStates.DIE)
         {
             MoveTowardsPlayer();
         }
@@ -168,21 +170,29 @@ public class CrystalGuardianController : MonoBehaviour
     public void UpdateAnimationState()
     {
         SetEnemyDirection();
+
+        // Check if the enemy can move, and if not, force it to stay in IDLE state
+        if (!canMove)
+        {
+            CurrentState = EnemyStates.IDLE;
+            return;
+        }
+
         int stateIdentifier;
         if (isAttacking == false)
         {
             if (isMoving)
             {
-                stateIdentifier = 2;
+                stateIdentifier = 2; // WALK
             }
             else
             {
-                stateIdentifier = 1;
+                stateIdentifier = 1; // IDLE
             }
         }
         else
         {
-            stateIdentifier = 3;
+            stateIdentifier = 3; // ATTACK
         }
 
         switch (stateIdentifier)
@@ -196,8 +206,21 @@ public class CrystalGuardianController : MonoBehaviour
             case 3:
                 CurrentState = EnemyStates.ATTACK;
                 break;
+            case 4:
+                CurrentState = EnemyStates.SPECIAL_1;
+                break;
+            case 5:
+                CurrentState = EnemyStates.SPECIAL_2;
+                break;
+            case 6:
+                CurrentState = EnemyStates.SPECIAL_3;
+                break;
+            case 7:
+                CurrentState = EnemyStates.DIE;
+                break;
         }
     }
+
 
     private void SetEnemyDirection()
     {
