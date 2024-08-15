@@ -94,33 +94,32 @@ public class CrystalAnimationState : MonoBehaviour
 
         int stateIdentifier;
 
-        // Check for special abilities
-        // if (crystalGuardian.isSpecial1)
-        // {
-        //     stateIdentifier = 4; // SPECIAL_1
-        // }
-        // else if (crystalGuardian.isSpecial2)
-        // {
-        //     stateIdentifier = 5; // SPECIAL_2
-        // }
-        // else if (crystalGuardian.isSpecial3)
-        // {
-        //     stateIdentifier = 6; // SPECIAL_3
-        // }
+        if (crystalGuardian.isSpecial1)
+        {
+            stateIdentifier = 4; // SPECIAL_1
+        }
+        else if (crystalGuardian.isSpecial2)
+        {
+            stateIdentifier = 5; // SPECIAL_2
+        }
+        else if (crystalGuardian.isSpecial3)
+        {
+            stateIdentifier = 6; // SPECIAL_3
+        }
         if (crystalGuardianAttack.isAttacking == false)
         {
             if (crystalGuardianMovementController.isMoving)
             {
-                stateIdentifier = 2;
+                stateIdentifier = 2; // WALK
             }
             else
             {
-                stateIdentifier = 1;
+                stateIdentifier = 1; // IDLE
             }
         }
         else
         {
-            stateIdentifier = 3;
+            stateIdentifier = 3; // ATTACK
         }
 
 
