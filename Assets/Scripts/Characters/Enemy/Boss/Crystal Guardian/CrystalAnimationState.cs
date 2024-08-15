@@ -82,7 +82,6 @@ public class CrystalAnimationState : MonoBehaviour
 
     public void UpdateAnimationState()
     {
-
         // Check if the enemy is dead first
         if (currentStateValue == EnemyStates.DIE)
         {
@@ -90,10 +89,10 @@ public class CrystalAnimationState : MonoBehaviour
             return;
         }
 
-        // Set the direction of the enemy (for animation purposes)
+        // Initialize stateIdentifier
+        int stateIdentifier = 1; // Default to IDLE
 
-        int stateIdentifier;
-
+        // Prioritize special abilities
         if (crystalGuardian.isSpecial1)
         {
             stateIdentifier = 4; // SPECIAL_1
@@ -106,22 +105,14 @@ public class CrystalAnimationState : MonoBehaviour
         {
             stateIdentifier = 6; // SPECIAL_3
         }
-        if (crystalGuardianAttack.isAttacking == false)
-        {
-            if (crystalGuardianMovementController.isMoving)
-            {
-                stateIdentifier = 2; // WALK
-            }
-            else
-            {
-                stateIdentifier = 1; // IDLE
-            }
-        }
-        else
+        else if (crystalGuardianAttack.isAttacking)
         {
             stateIdentifier = 3; // ATTACK
         }
-
+        else if (crystalGuardianMovementController.isMoving)
+        {
+            stateIdentifier = 2; // WALK
+        }
 
         // Update the current state based on the determined stateIdentifier
         switch (stateIdentifier)
@@ -155,7 +146,6 @@ public class CrystalAnimationState : MonoBehaviour
                 break;
         }
     }
-
 
     private void SetEnemyDirection()
     {

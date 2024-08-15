@@ -45,7 +45,8 @@ public class CrystalGuardian : Boss
     public bool isSpecial2 = false;
     public bool isSpecial3 = false;
 
-    private CrystalGuardianController cgController;
+    private CrystalGuardianMovementController cgController;
+    private CrystalAnimationState crystalAnimationState;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -65,7 +66,8 @@ public class CrystalGuardian : Boss
         {
             Debug.LogError("Player GameObject not found. Please ensure it is tagged 'Player'.");
         }
-        cgController = GetComponent<CrystalGuardianController>();
+        cgController = GetComponent<CrystalGuardianMovementController>();
+        crystalAnimationState = GetComponent<CrystalAnimationState>();
     }
 
     protected override void Update()
@@ -84,16 +86,14 @@ public class CrystalGuardian : Boss
     // Special Ability 1: Crystal Spikes
     private void SpecialAbility1()
     {
-        Debug.Log("CrystalGuardian uses Special Ability 1!");
-
         // Ensure other abilities are disabled
-        SetAbilityStates(true, false, false);
 
         // Check if spikes are already spawning
-        if (!isSpawningSpikes && !cgController.stateLock)
+        if (!isSpawningSpikes && !crystalAnimationState.stateLock)
         {
-            // Start the coroutine to spawn spikes and keep the ability active
+            Debug.Log("CrystalGuardian uses Special Ability 1!");
             StartCoroutine(SpawnSpikes());
+            SetAbilityStates(true, false, false);
         }
         else
         {
@@ -122,23 +122,6 @@ public class CrystalGuardian : Boss
         ResetAbilityStates();
     }
 
-    // Special Ability 2: Crystal Laser
-    private void SpecialAbility2()
-    {
-        Debug.Log("CrystalGuardian uses Special Ability 2!");
-
-        SetAbilityStates(false, true, false);
-
-        if (!isSpawningSpikes && !cgController.stateLock)
-        {
-            StartCoroutine(LaserRoutine());
-        }
-        else
-        {
-            Debug.Log("Cannot use ability while spikes are spawning.");
-        }
-    }
-
     private IEnumerator LaserRoutine()
     {
         EnableLaser();
@@ -148,20 +131,37 @@ public class CrystalGuardian : Boss
         ResetAbilityStates();
     }
 
-    // Special Ability 3: Rock Fall
-    private void SpecialAbility3()
+    // Special Ability 2: Rock Fall
+    private void SpecialAbility2()
     {
         Debug.Log("CrystalGuardian uses Special Ability 3!");
 
-        SetAbilityStates(false, false, true);
 
-        if (!isSpawningSpikes && !cgController.stateLock)
+        if (!isSpawningSpikes && !crystalAnimationState.stateLock)
         {
             StartCoroutine(RockFallRoutine());
+            SetAbilityStates(false, true, false);
+
         }
         else
         {
-            Debug.Log("Cannot use ability while spikes are spawning.");
+            Debug.Log("Cannot use ability while spikes are spawning, or state locked.");
+        }
+    }
+
+    // Special Ability 3: Crystal Laser
+    private void SpecialAbility3()
+    {
+        Debug.Log("CrystalGuardian uses Special Ability 2!");
+
+        if (!isSpawningSpikes && !crystalAnimationState.stateLock)
+        {
+            StartCoroutine(LaserRoutine());
+            SetAbilityStates(false, false, true);
+        }
+        else
+        {
+            Debug.Log("Cannot use ability while spikes are spawning, or state locked.");
         }
     }
 
@@ -383,10 +383,12 @@ public class CrystalGuardian : Boss
         isSpecial1 = special1;
         isSpecial2 = special2;
         isSpecial3 = special3;
+        crystalAnimationState.UpdateAnimationState();
     }
 
     private void ResetAbilityStates()
     {
         SetAbilityStates(false, false, false);
+        crystalAnimationState.UpdateAnimationState();
     }
 }

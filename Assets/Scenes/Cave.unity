@@ -6678,7 +6678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8574471372477719642, guid: 615716f15f5344794bbed54e76d58666, type: 3}
       propertyPath: orthographic size
-      value: 6.0625
+      value: 6.96875
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27753,15 +27753,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: spawnGap
-      value: 0.5
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: laserTime
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: rockFallTime
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: abilityCooldown
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: maxNumberOfSpikes
@@ -27769,11 +27777,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: minNumberOfSpikes
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: crystals.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: crystalSpikeDuration
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: crystals.Array.data[0]
