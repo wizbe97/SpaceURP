@@ -92,7 +92,7 @@ BlendTree:
   m_Name: Walk
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: c0e6e48480f9ea340b8b2d23ffceb7a6, type: 2}
+    m_Motion: {fileID: 7400000, guid: 033afb356d57a400dafb47a22a308324, type: 2}
     m_Threshold: 0.14285715
     m_Position: {x: -1, y: -1}
     m_TimeScale: 1
@@ -100,7 +100,7 @@ BlendTree:
     m_DirectBlendParameter: moveX
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 8ab45c9dbc3b5dc41b689e62e7cecba2, type: 2}
+    m_Motion: {fileID: 7400000, guid: abc531f86d9d040a191c74b6b7d9aeb5, type: 2}
     m_Threshold: 0.42857146
     m_Position: {x: 1, y: -1}
     m_TimeScale: 1
