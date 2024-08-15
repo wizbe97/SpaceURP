@@ -6100,6 +6100,96 @@ Transform:
   - {fileID: 416959543}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1027446774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1027446776}
+  - component: {fileID: 1027446775}
+  - component: {fileID: 1027446777}
+  m_Layer: 12
+  m_Name: AttackHitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1027446775
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027446774}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 3.1184254, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 18, y: 18}
+    newSize: {x: 1.375, y: 1.625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.002697, y: 6.5810604}
+  m_EdgeRadius: 0
+--- !u!4 &1027446776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027446774}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1978797610}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1027446777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027446774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e11bc736ed33494bbb5d83b3b1a0b8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1125754870
 GameObject:
   m_ObjectHideFlags: 0
@@ -6588,7 +6678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8574471372477719642, guid: 615716f15f5344794bbed54e76d58666, type: 3}
       propertyPath: orthographic size
-      value: 5
+      value: 11.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6678,27 +6768,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1978797597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978797583}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 122839b7df135c6488d5db33fca484ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectionRange: 15
-  moveSpeed: 3
-  moveDrag: 15
-  stopDrag: 25
-  isMoving: 0
-  isAttacking: 0
-  attackRange: 3
-  canMove: 1
-  stateLock: 0
 --- !u!114 &1978797603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6712,7 +6781,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStateValue: 0
-  canMove: 1
   stateLock: 0
 --- !u!114 &1978797604
 MonoBehaviour:
@@ -6726,14 +6794,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee36d1c0982a5a84ebd129827c22e5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 10
-  attackRange: 5
-  isAttacking: 0
+  detectionRange: 25
   moveSpeed: 1500
   moveDrag: 15
   stopDrag: 25
   canMove: 1
+  player: {fileID: 0}
   isMoving: 0
+--- !u!4 &1978797610 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3871499805083650836, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+  m_PrefabInstance: {fileID: 8033322860247221742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1978797611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978797583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c002d9952fdb3c54d83159a609a75688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 5
+  attackCooldown: 3
+  attackRange: 5
+  isAttacking: 0
 --- !u!1 &2046702653 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7470630927806566330, guid: c6d953d9a44fdb14bb2969209ae39df1, type: 3}
@@ -27745,17 +27833,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3871499805083650836, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1027446776}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6729629032636210766, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       insertIndex: 2
-      addedObject: {fileID: 1978797604}
+      addedObject: {fileID: 1978797611}
     - targetCorrespondingSourceObject: {fileID: 6729629032636210766, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       insertIndex: 3
-      addedObject: {fileID: 1978797603}
+      addedObject: {fileID: 1978797604}
     - targetCorrespondingSourceObject: {fileID: 6729629032636210766, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       insertIndex: 4
-      addedObject: {fileID: 1978797597}
+      addedObject: {fileID: 1978797603}
     - targetCorrespondingSourceObject: {fileID: 6729629032636210766, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       insertIndex: 8
       addedObject: {fileID: 1978797590}

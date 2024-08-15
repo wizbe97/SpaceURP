@@ -7,12 +7,13 @@ public class CrystalAnimationState : MonoBehaviour
     private Animator animator; // Reference to the Animator component
 
     public EnemyStates currentStateValue;
-    public bool canMove = true; // Flag to check if the enemy can move
     public bool stateLock = false; // True means the state is locked, false means no state is locked
 
 
     private CrystalGuardian crystalGuardian; // Reference to the CrystalGuardian script
     private CrystalGuardianMovementController crystalGuardianMovementController;
+    private CrystalGuardianAttack crystalGuardianAttack;
+
     private Transform player;  // Reference to the player's transform
 
 
@@ -20,7 +21,8 @@ public class CrystalAnimationState : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         crystalGuardian = GetComponent<CrystalGuardian>();
-        crystalGuardianMovementController = GetComponent<CrystalGuardianMovementController>(); // Add this line
+        crystalGuardianMovementController = GetComponent<CrystalGuardianMovementController>();
+        crystalGuardianAttack = GetComponent<CrystalGuardianAttack>();
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
@@ -48,31 +50,31 @@ public class CrystalAnimationState : MonoBehaviour
             {
                 case EnemyStates.IDLE:
                     animator.Play("Idle");
-                    canMove = true;
+                    crystalGuardianMovementController.canMove = true;
                     break;
                 case EnemyStates.WALK:
                     animator.Play("Walk");
-                    canMove = true;
+                    crystalGuardianMovementController.canMove = true;
                     break;
                 case EnemyStates.ATTACK:
                     animator.Play("Attack");
-                    canMove = false;
+                    crystalGuardianMovementController.canMove = false;
                     break;
                 case EnemyStates.SPECIAL_1:
                     animator.Play("Special1");
-                    canMove = false;
+                    crystalGuardianMovementController.canMove = false;
                     break;
                 case EnemyStates.SPECIAL_2:
                     animator.Play("Special2");
-                    canMove = false;
+                    crystalGuardianMovementController.canMove = false;
                     break;
                 case EnemyStates.SPECIAL_3:
                     animator.Play("Special3");
-                    canMove = false;
+                    crystalGuardianMovementController.canMove = false;
                     break;
                 case EnemyStates.DIE:
                     animator.Play("Die");
-                    canMove = false;
+                    crystalGuardianMovementController.canMove = false;
                     break;
             }
         }
@@ -105,7 +107,7 @@ public class CrystalAnimationState : MonoBehaviour
         // {
         //     stateIdentifier = 6; // SPECIAL_3
         // }
-        if (crystalGuardianMovementController.isAttacking == false)
+        if (crystalGuardianAttack.isAttacking == false)
         {
             if (crystalGuardianMovementController.isMoving)
             {
@@ -120,8 +122,6 @@ public class CrystalAnimationState : MonoBehaviour
         {
             stateIdentifier = 3;
         }
-        Debug.Log($"isMoving: {crystalGuardianMovementController.isMoving}, isAttacking: {crystalGuardianMovementController.isAttacking}, stateIdentifier: {stateIdentifier}");
-
 
 
         // Update the current state based on the determined stateIdentifier
@@ -138,7 +138,6 @@ public class CrystalAnimationState : MonoBehaviour
             case 3:
                 SetEnemyDirection();
                 CurrentState = EnemyStates.ATTACK;
-                Invoke(nameof(crystalGuardianMovementController.ResetAttack), 1f);
                 break;
             case 4:
                 SetEnemyDirection();

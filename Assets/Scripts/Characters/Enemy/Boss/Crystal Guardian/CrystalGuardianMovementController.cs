@@ -5,19 +5,15 @@ using UnityEngine;
 public class CrystalGuardianMovementController : MonoBehaviour
 {
     [SerializeField] private float detectionRange = 10f;
-    [SerializeField] private float attackRange = 1.5f;    // Range within which the enemy attacks the player
-    public bool isAttacking = false;    // Public flag to check if the enemy is attacking
-
     [SerializeField] private float moveSpeed = 7500;
     [SerializeField] private float moveDrag = 15f;
     [SerializeField] private float stopDrag = 25f;
-    [SerializeField] private bool canMove = true;
+    public bool canMove = true;
     private Rigidbody2D rb;
-    private Transform player;  // Reference to the player's transform
+    [HideInInspector] public Transform player;  // Reference to the player's transform
 
-    private CrystalGuardian crystalGuardian;
     private CrystalAnimationState crystalAnimationState;
-    private Coroutine damageCoroutine;
+    private CrystalGuardianAttack crystalGuardianAttack;
 
     [HideInInspector] public bool isMoving = false;
 
@@ -29,8 +25,8 @@ public class CrystalGuardianMovementController : MonoBehaviour
             player = playerObject.transform;
         }
         rb = GetComponent<Rigidbody2D>();
-        crystalGuardian = GetComponent<CrystalGuardian>();
         crystalAnimationState = GetComponent<CrystalAnimationState>();
+        crystalGuardianAttack = GetComponent<CrystalGuardianAttack>();
     }
 
     public bool IsMoving
@@ -58,6 +54,10 @@ public class CrystalGuardianMovementController : MonoBehaviour
         {
             MoveTowardsPlayer();
         }
+        else
+        {
+            IsMoving = false;
+        }
     }
 
     public void MoveTowardsPlayer()
@@ -65,61 +65,35 @@ public class CrystalGuardianMovementController : MonoBehaviour
         if (!canMove) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        Vector2 direction = (player.position - transform.position).normalized;
 
-        rb.AddForce(moveSpeed * Time.deltaTime * direction, ForceMode2D.Force);
-        IsMoving = true;
-
-        if (distanceToPlayer > attackRange)
+        // Check if the boss is within detection range
+        if (distanceToPlayer <= detectionRange)
         {
-            // Move towards the player if not within attack range
-            IsMoving = true;
-        }
-        else
-        {
-            // Stop moving if within attack range
-            IsMoving = false;
-        }
+            // If the boss is too close to the player, move away
+            if (distanceToPlayer < crystalGuardianAttack.attackRange * 0.5f) // Example: 50% of attack range
+            {
+                // Move away from the player
+                Vector2 direction = (transform.position - player.position).normalized;
+                rb.AddForce(moveSpeed * Time.deltaTime * direction, ForceMode2D.Force);
+                IsMoving = true;
+            }
+            else if (distanceToPlayer > crystalGuardianAttack.attackRange)
+            {
+                // Move towards the player if not within attack range
+                Vector2 direction = (player.position - transform.position).normalized;
+                rb.AddForce(moveSpeed * Time.deltaTime * direction, ForceMode2D.Force);
+                IsMoving = true;
+            }
+            else
+            {
+                // Stop moving if within attack range
+                IsMoving = false;
+            }
 
-        CheckAttackRange(distanceToPlayer);
-    }
-
-    private void CheckAttackRange(float distanceToPlayer)
-    {
-        if (!crystalAnimationState.stateLock && distanceToPlayer <= attackRange)
-        {
-            AttackPlayer();
-        }
-    }
-
-    private void AttackPlayer()
-    {
-        if (!crystalAnimationState.stateLock) // Only start the attack if no other state is locked
-        {
-            canMove = false;
-            crystalAnimationState.stateLock = true;
-            isAttacking = true;
-            Debug.Log("Attacking player!");
-            crystalAnimationState.UpdateAnimationState();
+            // Always check if the boss should attack
+            crystalGuardianAttack.CheckAttackRange(distanceToPlayer);
         }
     }
 
-    private void OnAttackEnd()
-    {
-        isAttacking = false;
-        canMove = true;
-        crystalAnimationState.UpdateAnimationState();
-        crystalAnimationState.stateLock = false;
-    }
-
-    public void ResetAttack()
-    {
-        if (damageCoroutine != null)
-        {
-            StopCoroutine(damageCoroutine);
-            damageCoroutine = null;
-            isAttacking = false;
-        }
-    }
 
 }
