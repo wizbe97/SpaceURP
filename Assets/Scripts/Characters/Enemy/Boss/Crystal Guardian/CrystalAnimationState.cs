@@ -5,30 +5,25 @@ using UnityEngine;
 public class CrystalAnimationState : MonoBehaviour
 {
     private Animator animator; // Reference to the Animator component
-
-    public EnemyStates currentStateValue;
-    public bool stateLock = false; // True means the state is locked, false means no state is locked
-
-
     private CrystalGuardian crystalGuardian; // Reference to the CrystalGuardian script
-    private CrystalGuardianMovementController crystalGuardianMovementController;
-    private CrystalGuardianAttack crystalGuardianAttack;
-
-    private Transform player;  // Reference to the player's transform
-
+    private CrystalGuardianMovementController crystalGuardianMovementController; // Reference to the CrystalGuardianMovementController script
+    private CrystalGuardianAttack crystalGuardianAttack; // Reference to the CrystalGuardianAttack script
+    private Transform player; // Reference to the player's transform
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         crystalGuardian = GetComponent<CrystalGuardian>();
-        crystalGuardianMovementController = GetComponent<CrystalGuardianMovementController>();
-        crystalGuardianAttack = GetComponent<CrystalGuardianAttack>();
+
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
             player = playerObject.transform;
         }
+        crystalGuardianMovementController = GetComponent<CrystalGuardianMovementController>();
+        crystalGuardianAttack = GetComponent<CrystalGuardianAttack>();
     }
+
     public enum EnemyStates
     {
         IDLE,
@@ -40,7 +35,9 @@ public class CrystalAnimationState : MonoBehaviour
         DIE
     }
 
-    // Property to manage the current state and trigger corresponding actions
+    public EnemyStates currentStateValue;
+    public bool stateLock = false; // True means the state is locked, false means no state is locked
+
     public EnemyStates CurrentState
     {
         set
@@ -82,17 +79,14 @@ public class CrystalAnimationState : MonoBehaviour
 
     public void UpdateAnimationState()
     {
-        // Check if the enemy is dead first
         if (currentStateValue == EnemyStates.DIE)
         {
             CurrentState = EnemyStates.DIE;
             return;
         }
 
-        // Initialize stateIdentifier
         int stateIdentifier = 1; // Default to IDLE
 
-        // Prioritize special abilities
         if (crystalGuardian.isSpecial1)
         {
             stateIdentifier = 4; // SPECIAL_1
@@ -114,7 +108,6 @@ public class CrystalAnimationState : MonoBehaviour
             stateIdentifier = 2; // WALK
         }
 
-        // Update the current state based on the determined stateIdentifier
         switch (stateIdentifier)
         {
             case 1:
@@ -149,15 +142,24 @@ public class CrystalAnimationState : MonoBehaviour
 
     private void SetEnemyDirection()
     {
-        // If stateLock is true, do not update the direction
         if (stateLock)
         {
             return;
         }
 
-        // Calculate and set the direction for the animation
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector2 direction;
+
+        if (crystalGuardian.isSpecial3 && crystalGuardian.Crystal != null)
+        {
+            direction = (crystalGuardian.Crystal.position - transform.position).normalized;
+        }
+        else
+        {
+            direction = (player.position - transform.position).normalized;
+        }
+
         animator.SetFloat("xMove", direction.x);
         animator.SetFloat("yMove", direction.y);
     }
 }
+
