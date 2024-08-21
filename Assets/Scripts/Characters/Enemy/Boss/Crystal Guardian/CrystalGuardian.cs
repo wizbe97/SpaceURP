@@ -83,8 +83,8 @@ public class CrystalGuardian : Boss
 
     protected override void SetupAbilities()
     {
-        // AddAbility(SpecialAbility1);
-        // AddAbility(SpecialAbility2);
+        AddAbility(SpecialAbility1);
+        AddAbility(SpecialAbility2);
         AddAbility(SpecialAbility3);
     }
 
@@ -93,8 +93,9 @@ public class CrystalGuardian : Boss
         if (!isSpawningSpikes && !crystalAnimationState.stateLock)
         {
             Debug.Log("CrystalGuardian uses Special Ability 1!");
-            StartCoroutine(SpawnSpikes());
-            SetAbilityStates(true, false, false);
+            isSpecial1 = true;
+            crystalAnimationState.SetEnemyDirection();
+            crystalAnimationState.UpdateAnimationState();
         }
         else
         {
@@ -102,10 +103,11 @@ public class CrystalGuardian : Boss
         }
     }
 
-    private IEnumerator SpawnSpikes()
+    public IEnumerator SpawnSpikes()
     {
         DisableLaser();
         isSpawningSpikes = true;
+        crystalAnimationState.stateLock = true;
 
         int numberOfSpikes = Random.Range(minNumberOfSpikes, maxNumberOfSpikes + 1);
         for (int i = 0; i < numberOfSpikes; i++)
@@ -119,14 +121,17 @@ public class CrystalGuardian : Boss
         }
 
         isSpawningSpikes = false;
+        crystalAnimationState.PlayEndAnimation();
         ResetAbilityStates();
     }
 
-    private IEnumerator LaserRoutine()
+    public IEnumerator LaserRoutine()
     {
         EnableLaser();
         UpdateLaser();
+        crystalAnimationState.stateLock = true;
         yield return new WaitForSeconds(laserTime);
+        crystalAnimationState.PlayEndAnimation();
         DisableLaser();
         ResetAbilityStates();
     }
@@ -137,8 +142,9 @@ public class CrystalGuardian : Boss
 
         if (!isSpawningSpikes && !crystalAnimationState.stateLock)
         {
-            StartCoroutine(RockFallRoutine());
-            SetAbilityStates(false, true, false);
+            isSpecial2 = true;
+            crystalAnimationState.SetEnemyDirection();
+            crystalAnimationState.UpdateAnimationState();
         }
         else
         {
@@ -152,8 +158,9 @@ public class CrystalGuardian : Boss
 
         if (!isSpawningSpikes && !crystalAnimationState.stateLock)
         {
-            StartCoroutine(LaserRoutine());
-            SetAbilityStates(false, false, true);
+            isSpecial3 = true;
+            crystalAnimationState.SetEnemyDirection();
+            crystalAnimationState.UpdateAnimationState();
         }
         else
         {
@@ -161,10 +168,12 @@ public class CrystalGuardian : Boss
         }
     }
 
-    private IEnumerator RockFallRoutine()
+    public IEnumerator RockFallRoutine()
     {
         cgController.canMove = false;
+        crystalAnimationState.stateLock = true;
         yield return new WaitForSeconds(rockFallTime);
+        crystalAnimationState.PlayEndAnimation();
         cgController.canMove = true;
         ResetAbilityStates();
     }
@@ -391,6 +400,7 @@ public class CrystalGuardian : Boss
         }
 
         crystal.gameObject.layer = originalLayer;
+        crystalAnimationState.PlayEndAnimation();
     }
 
     void FillLists()
@@ -412,7 +422,7 @@ public class CrystalGuardian : Boss
         }
     }
 
-    private void SetAbilityStates(bool special1, bool special2, bool special3)
+    public void SetAbilityStates(bool special1, bool special2, bool special3)
     {
         isSpecial1 = special1;
         isSpecial2 = special2;
@@ -420,9 +430,13 @@ public class CrystalGuardian : Boss
         crystalAnimationState.UpdateAnimationState();
     }
 
-    private void ResetAbilityStates()
+    public void ResetAbilityStates()
     {
+        crystalAnimationState.stateLock = false;
+        isSpawningSpikes = false;
+        DisableLaser();
         SetAbilityStates(false, false, false);
+        crystalAnimationState.animator.SetBool("specialLoop", false);
         crystalAnimationState.UpdateAnimationState();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrystalAnimationState : MonoBehaviour
 {
-    private Animator animator; // Reference to the Animator component
+    [HideInInspector] public Animator animator; // Reference to the Animator component
     private CrystalGuardian crystalGuardian; // Reference to the CrystalGuardian script
     private CrystalGuardianMovementController crystalGuardianMovementController; // Reference to the CrystalGuardianMovementController script
     private CrystalGuardianAttack crystalGuardianAttack; // Reference to the CrystalGuardianAttack script
@@ -29,9 +29,12 @@ public class CrystalAnimationState : MonoBehaviour
         IDLE,
         WALK,
         ATTACK,
-        SPECIAL_1,
-        SPECIAL_2,
-        SPECIAL_3,
+        SPECIAL_1_START,
+        SPECIAL_1_LOOP,
+        SPECIAL_2_START,
+        SPECIAL_2_LOOP,
+        SPECIAL_3_LOOP,
+        SPECIAL_3_START,
         DIE
     }
 
@@ -57,16 +60,28 @@ public class CrystalAnimationState : MonoBehaviour
                     animator.Play("Attack");
                     crystalGuardianMovementController.canMove = false;
                     break;
-                case EnemyStates.SPECIAL_1:
-                    animator.Play("Special1");
+                case EnemyStates.SPECIAL_1_START:
+                    animator.Play("Special1_Start");
                     crystalGuardianMovementController.canMove = false;
                     break;
-                case EnemyStates.SPECIAL_2:
-                    animator.Play("Special2");
+                case EnemyStates.SPECIAL_1_LOOP:
+                    animator.Play("Special1_Loop");
                     crystalGuardianMovementController.canMove = false;
                     break;
-                case EnemyStates.SPECIAL_3:
-                    animator.Play("Special3");
+                case EnemyStates.SPECIAL_2_START:
+                    animator.Play("Special2_Start");
+                    crystalGuardianMovementController.canMove = false;
+                    break;
+                case EnemyStates.SPECIAL_2_LOOP:
+                    animator.Play("Special2_Loop");
+                    crystalGuardianMovementController.canMove = false;
+                    break;
+                case EnemyStates.SPECIAL_3_LOOP:
+                    animator.Play("Special3_Loop");
+                    crystalGuardianMovementController.canMove = false;
+                    break;
+                case EnemyStates.SPECIAL_3_START:
+                    animator.Play("Special3_Start");
                     crystalGuardianMovementController.canMove = false;
                     break;
                 case EnemyStates.DIE:
@@ -81,66 +96,51 @@ public class CrystalAnimationState : MonoBehaviour
     {
         if (currentStateValue == EnemyStates.DIE)
         {
-            CurrentState = EnemyStates.DIE;
+            SetCurrentState(EnemyStates.DIE);
             return;
         }
 
-        int stateIdentifier = 1; // Default to IDLE
-
-        if (crystalGuardian.isSpecial1)
-        {
-            stateIdentifier = 4; // SPECIAL_1
-        }
-        else if (crystalGuardian.isSpecial2)
-        {
-            stateIdentifier = 5; // SPECIAL_2
-        }
-        else if (crystalGuardian.isSpecial3)
-        {
-            stateIdentifier = 6; // SPECIAL_3
-        }
-        else if (crystalGuardianAttack.isAttacking)
-        {
-            stateIdentifier = 3; // ATTACK
-        }
-        else if (crystalGuardianMovementController.isMoving)
-        {
-            stateIdentifier = 2; // WALK
-        }
-
-        switch (stateIdentifier)
-        {
-            case 1:
-                SetEnemyDirection();
-                CurrentState = EnemyStates.IDLE;
-                break;
-            case 2:
-                SetEnemyDirection();
-                CurrentState = EnemyStates.WALK;
-                break;
-            case 3:
-                SetEnemyDirection();
-                CurrentState = EnemyStates.ATTACK;
-                break;
-            case 4:
-                SetEnemyDirection();
-                CurrentState = EnemyStates.SPECIAL_1;
-                break;
-            case 5:
-                SetEnemyDirection();
-                CurrentState = EnemyStates.SPECIAL_2;
-                break;
-            case 6:
-                SetEnemyDirection();
-                CurrentState = EnemyStates.SPECIAL_3;
-                break;
-            case 7:
-                CurrentState = EnemyStates.DIE; // This case is already handled at the start
-                break;
-        }
+        EnemyStates newState = DetermineState();
+        SetCurrentState(newState);
     }
 
-    private void SetEnemyDirection()
+    private EnemyStates DetermineState()
+    {
+        if (crystalGuardian.isSpecial1)
+        {
+            return animator.GetBool("specialLoop") ? EnemyStates.SPECIAL_1_LOOP : EnemyStates.SPECIAL_1_START;
+        }
+        if (crystalGuardian.isSpecial2)
+        {
+            return animator.GetBool("specialLoop") ? EnemyStates.SPECIAL_2_LOOP : EnemyStates.SPECIAL_2_START;
+        }
+        if (crystalGuardian.isSpecial3)
+        {
+            return animator.GetBool("specialLoop") ? EnemyStates.SPECIAL_3_LOOP : EnemyStates.SPECIAL_3_START;
+        }
+        if (crystalGuardianAttack.isAttacking)
+        {
+            return EnemyStates.ATTACK;
+        }
+        if (crystalGuardianMovementController.isMoving)
+        {
+            return EnemyStates.WALK;
+        }
+
+        return EnemyStates.IDLE;
+    }
+
+    private void SetCurrentState(EnemyStates newState)
+    {
+        if (newState != EnemyStates.DIE)
+        {
+            SetEnemyDirection();
+        }
+        CurrentState = newState;
+    }
+
+
+    public void SetEnemyDirection()
     {
         if (stateLock)
         {
@@ -161,5 +161,65 @@ public class CrystalAnimationState : MonoBehaviour
         animator.SetFloat("xMove", direction.x);
         animator.SetFloat("yMove", direction.y);
     }
+
+    private void SetBoolTrue()
+    {
+        animator.SetBool("specialLoop", true);
+
+        if (crystalGuardian.isSpecial1)
+        {
+            StartCoroutine(SpecialRoutine());
+            crystalGuardian.SetAbilityStates(true, false, false);
+        }
+
+        if (crystalGuardian.isSpecial2)
+        {
+            StartCoroutine(SpecialRoutine());
+            crystalGuardian.SetAbilityStates(false, true, false);
+        }
+
+        if (crystalGuardian.isSpecial3)
+        {
+            StartCoroutine(SpecialRoutine());
+            crystalGuardian.SetAbilityStates(false, false, true);
+        }
+    }
+
+    private IEnumerator SpecialRoutine()
+    {
+        if (crystalGuardian.isSpecial1)
+        {
+            yield return crystalGuardian.SpawnSpikes();
+            crystalGuardian.ResetAbilityStates();
+        }
+        else if (crystalGuardian.isSpecial2)
+        {
+            yield return crystalGuardian.RockFallRoutine();
+            crystalGuardian.ResetAbilityStates();
+        }
+        else if (crystalGuardian.isSpecial3)
+        {
+            yield return crystalGuardian.LaserRoutine();
+            crystalGuardian.ResetAbilityStates();
+        }
+    }
+
+    public void PlayEndAnimation()
+    {
+        if (crystalGuardian.isSpecial1)
+        {
+            Debug.Log("No End animation");
+        }
+        else if (crystalGuardian.isSpecial2)
+        {
+            animator.Play("Special2_End");
+        }
+        else if (crystalGuardian.isSpecial3)
+        {
+            Debug.Log("No End animation");
+        }
+
+    }
+
 }
 
