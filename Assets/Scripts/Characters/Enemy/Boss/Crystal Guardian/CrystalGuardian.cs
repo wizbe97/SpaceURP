@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CrystalGuardian : Boss
 {
@@ -82,6 +83,8 @@ public class CrystalGuardian : Boss
 
     protected override void Update()
     {
+        if(isSpecial1 || isSpecial2 || isSpecial3) return;
+        
         base.Update();
     }
 
@@ -94,18 +97,58 @@ public class CrystalGuardian : Boss
 
     private void SpecialAbility1()
     {
-        if (!isSpawningSpikes && !crystalAnimationState.stateLock)
-        {
-            Debug.Log("CrystalGuardian uses Special Ability 1!");
-            isSpecial1 = true;
-            crystalAnimationState.SetEnemyDirection();
-            crystalAnimationState.UpdateAnimationState();
-        }
-        else
-        {
-            Debug.Log("Spikes are already spawning, cannot start another ability.");
-        }
+        Debug.Log("CrystalGuardian uses Special Ability 1!");
+        StartCoroutine(SpecialAbilityWaitCO(ExecuteAbility1));
     }
+    private void ExecuteAbility1()
+    {
+        isSpecial1 = true;
+        crystalAnimationState.SetEnemyDirection();
+        crystalAnimationState.UpdateAnimationState();
+        Debug.Log("USED Special Ability 1!");
+    }
+    private void SpecialAbility2()
+    {
+        Debug.Log("CrystalGuardian uses Special Ability 2!");
+        StartCoroutine(SpecialAbilityWaitCO(ExecuteAbility2));
+    }
+    private void ExecuteAbility2()
+    {
+        isSpecial2 = true;
+        crystalAnimationState.SetEnemyDirection();
+        crystalAnimationState.UpdateAnimationState();
+        Debug.Log("USED Special Ability 2!");
+    }
+
+    private void SpecialAbility3()
+    {
+        Debug.Log("CrystalGuardian uses Special Ability 3!");
+        StartCoroutine(SpecialAbilityWaitCO(ExecuteAbility3));
+    }
+    private void ExecuteAbility3()
+    {
+        isSpecial3 = true;
+        crystal = GetClosestCrystal();
+        firePoint = GetClosestFirePoint();
+        crystalAnimationState.SetEnemyDirection();
+        crystalAnimationState.UpdateAnimationState();
+        Debug.Log("USED Special Ability 3!");
+    }
+
+    private IEnumerator SpecialAbilityWaitCO(UnityAction callback)
+    {
+        while (isSpawningSpikes || crystalAnimationState.stateLock)
+        {
+            Debug.Log("Waiting for spikes to go away or state to unlock");
+            yield return null;
+        }
+
+        //ADD DELAY BEFORE AFTER ATTACK FINISHES
+        yield return new WaitForSeconds(0.5f);
+
+        callback?.Invoke();
+    }
+
 
     public IEnumerator SpawnSpikes()
     {
@@ -142,38 +185,7 @@ public class CrystalGuardian : Boss
         ResetAbilityStates();
     }
 
-    private void SpecialAbility2()
-    {
-        Debug.Log("CrystalGuardian uses Special Ability 2!");
 
-        if (!isSpawningSpikes && !crystalAnimationState.stateLock)
-        {
-
-            isSpecial2 = true;
-            crystalAnimationState.SetEnemyDirection();
-            crystalAnimationState.UpdateAnimationState();
-        }
-        else
-        {
-            Debug.Log("Cannot use ability while spikes are spawning, or state locked.");
-        }
-    }
-
-    private void SpecialAbility3()
-    {
-        Debug.Log("CrystalGuardian uses Special Ability 3!");
-
-        if (!isSpawningSpikes && !crystalAnimationState.stateLock)
-        {
-            isSpecial3 = true;
-            crystalAnimationState.SetEnemyDirection();
-            crystalAnimationState.UpdateAnimationState();
-        }
-        else
-        {
-            Debug.Log("Cannot use ability while spikes are spawning, or state locked.");
-        }
-    }
 
     public IEnumerator RockFallRoutine()
     {

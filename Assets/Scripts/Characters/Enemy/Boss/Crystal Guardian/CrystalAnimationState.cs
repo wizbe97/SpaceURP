@@ -164,8 +164,8 @@ public class CrystalAnimationState : MonoBehaviour
 
     private void SetBoolTrue()
     {
-        animator.SetBool("specialLoop", true);
 
+        animator.SetBool("specialLoop", true);
         if (crystalGuardian.isSpecial1)
         {
             StartCoroutine(SpecialRoutine());
@@ -183,6 +183,7 @@ public class CrystalAnimationState : MonoBehaviour
             StartCoroutine(SpecialRoutine());
             crystalGuardian.SetAbilityStates(false, false, true);
         }
+
     }
 
     private IEnumerator SpecialRoutine()
