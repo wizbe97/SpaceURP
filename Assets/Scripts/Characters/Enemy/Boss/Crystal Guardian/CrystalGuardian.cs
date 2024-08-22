@@ -190,6 +190,7 @@ public class CrystalGuardian : Boss
     {
         crystal = GetClosestCrystal();
         firePoint = GetClosestFirePoint();
+        crystalAnimationState.SetEnemyDirection();
 
         if (tempLine == null)
         {
