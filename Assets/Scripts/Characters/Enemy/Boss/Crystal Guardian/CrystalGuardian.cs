@@ -49,6 +49,10 @@ public class CrystalGuardian : Boss
     public bool isSpecial2 = false;
     public bool isSpecial3 = false;
 
+    public bool isSpecial1Active = false;
+    public bool isSpecial2Active = false;
+    public bool isSpecial3Active = false;
+
     private CrystalGuardianMovementController cgController;
     private CrystalAnimationState crystalAnimationState;
 
@@ -105,6 +109,7 @@ public class CrystalGuardian : Boss
 
     public IEnumerator SpawnSpikes()
     {
+        isSpecial1Active = true;
         DisableLaser();
         isSpawningSpikes = true;
         crystalAnimationState.stateLock = true;
@@ -127,6 +132,7 @@ public class CrystalGuardian : Boss
 
     public IEnumerator LaserRoutine()
     {
+        isSpecial3Active = true;
         EnableLaser();
         UpdateLaser();
         crystalAnimationState.stateLock = true;
@@ -142,6 +148,7 @@ public class CrystalGuardian : Boss
 
         if (!isSpawningSpikes && !crystalAnimationState.stateLock)
         {
+
             isSpecial2 = true;
             crystalAnimationState.SetEnemyDirection();
             crystalAnimationState.UpdateAnimationState();
@@ -170,6 +177,7 @@ public class CrystalGuardian : Boss
 
     public IEnumerator RockFallRoutine()
     {
+        isSpecial2Active = true;
         cgController.canMove = false;
         crystalAnimationState.stateLock = true;
         yield return new WaitForSeconds(rockFallTime);
@@ -438,5 +446,8 @@ public class CrystalGuardian : Boss
         SetAbilityStates(false, false, false);
         crystalAnimationState.animator.SetBool("specialLoop", false);
         crystalAnimationState.UpdateAnimationState();
+        isSpecial1Active = false;
+        isSpecial2Active = false;
+        isSpecial3Active = false;
     }
 }

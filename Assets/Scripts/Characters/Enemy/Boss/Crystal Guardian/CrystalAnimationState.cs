@@ -187,17 +187,17 @@ public class CrystalAnimationState : MonoBehaviour
 
     private IEnumerator SpecialRoutine()
     {
-        if (crystalGuardian.isSpecial1)
+        if (crystalGuardian.isSpecial1 && !crystalGuardian.isSpecial1Active)
         {
             yield return crystalGuardian.SpawnSpikes();
             crystalGuardian.ResetAbilityStates();
         }
-        else if (crystalGuardian.isSpecial2)
+        else if (crystalGuardian.isSpecial2 && !crystalGuardian.isSpecial2Active)
         {
             yield return crystalGuardian.RockFallRoutine();
             crystalGuardian.ResetAbilityStates();
         }
-        else if (crystalGuardian.isSpecial3)
+        else if (crystalGuardian.isSpecial3 && !crystalGuardian.isSpecial3Active)
         {
             yield return crystalGuardian.LaserRoutine();
             crystalGuardian.ResetAbilityStates();
