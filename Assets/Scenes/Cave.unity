@@ -27789,16 +27789,44 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: fallSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: laserTime
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: rockPrefab
+      value: 
+      objectReference: {fileID: 2477032387566643, guid: 5289d5c7c0a6f3d488597eafc4ee64ae, type: 3}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: shadowPrefab
+      value: 
+      objectReference: {fileID: 1647405323741061754, guid: fb07acefbe104c9448bc2a064b028456, type: 3}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: abilityCooldown
-      value: 10
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: stalactitePrefab
+      value: 
+      objectReference: {fileID: 2477032387566643, guid: 5289d5c7c0a6f3d488597eafc4ee64ae, type: 3}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: stalactiteSpawnGap
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: crystalSpikeDuration
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: maxNumberOfstalactites
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: minNumberOfstalactites
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6729629032636210766, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_Name
