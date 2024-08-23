@@ -152,6 +152,8 @@ public class CrystalAnimationState : MonoBehaviour
         if (crystalGuardian.isSpecial3 && crystalGuardian.Crystal != null)
         {
             direction = (crystalGuardian.Crystal.position - transform.position).normalized;
+            direction.x = direction.x >= 0 ? 1 : -1;
+            direction.y = direction.y >= 0 ? 1 : -1;
         }
         else
         {
