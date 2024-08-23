@@ -50,6 +50,7 @@ public abstract class Boss : MonoBehaviour
     // Execute a random ability, ensuring it's not the same as the last used ability
     private void ExecuteRandomAbility()
     {
+        // abilities[2]?.Invoke();
         if (abilities.Count > 1)
         {
             int randomIndex;

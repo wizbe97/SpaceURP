@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBullet : Bullet
@@ -7,6 +8,8 @@ public class EnemyBullet : Bullet
     private Animator animator;
     private Transform playerTransform; // Reference to the player's transform
     private bool hasCollided = false;
+    public GameObject objectToAvoid;
+    private bool canGiveDamage = false;
 
     protected override void Start()
     {
@@ -14,12 +17,18 @@ public class EnemyBullet : Bullet
         // Initialize gunSpawnPosition in the child class
         gunSpawnPosition = transform.position;
         animator = GetComponent<Animator>();
+        Invoke(nameof(StartGivingDamage), 0.2f);
+    }
+    private void StartGivingDamage()
+    {
+        canGiveDamage = true;
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         // Only process collision if the bullet hasn't collided before
         if (hasCollided) return;
+        if (!canGiveDamage || other.gameObject == objectToAvoid) return;
 
         if (other.CompareTag("Player"))
         {

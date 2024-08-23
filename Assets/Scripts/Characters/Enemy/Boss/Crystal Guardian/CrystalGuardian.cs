@@ -1,41 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CrystalGuardian : Boss
 {
-    // Crystal Spikes Ability Variables
+    // Existing variables...
     [Header("Crystal Spikes Ability")]
-    [SerializeField] private GameObject crystalSpikes; // Spike prefab
-    [SerializeField] private float spawnGap = 2.0f; // Gap time between spawns
-    [SerializeField] private int minNumberOfSpikes = 3; // Minimum number of spikes to spawn
-    [SerializeField] private int maxNumberOfSpikes = 10; // Maximum number of spikes to spawn
-    [SerializeField] private float crystalSpikeDuration = 3.0f; // Duration before crystal spikes are destroyed
+    [SerializeField] private GameObject crystalSpikes;
+    [SerializeField] private float spawnGap = 2.0f;
+    [SerializeField] private int minNumberOfSpikes = 3;
+    [SerializeField] private int maxNumberOfSpikes = 10;
+    [SerializeField] private float crystalSpikeDuration = 3.0f;
 
-    // Crystal Laser Ability Variables
     [Header("Crystal Laser Ability")]
     [SerializeField] private LineRenderer lineRenderer;
-    [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform firePointLaser;
+
     private GameObject[] crystals;
     private Transform crystal;
     [SerializeField] private GameObject startVFX;
     [SerializeField] private GameObject endVFX;
-    [SerializeField] private float splitLaserSpawnDelay = 0.5f; // Delay before split lasers spawn
+    [SerializeField] private float splitLaserSpawnDelay = 0.5f;
+    [SerializeField] private float laserTime = 5.0f;
+
+    [Header("Rock Fall Ability")]
+    [SerializeField] private float rockFallTime = 5.0f;
 
     private readonly List<ParticleSystem> particles = new();
+    private Transform player;
+    private bool isSpawningSpikes = false;
 
-    private Transform player; // Player's transform
-    private bool isSpawningSpikes = false; // Flag to indicate if spikes are being spawned
-
-    private List<GameObject> splitLasers = new(); // List to track split lasers
-    private List<GameObject> splitLaserStartVFX = new(); // List to track start VFX of split lasers
-    private List<GameObject> splitLaserEndVFX = new(); // List to track end VFX of split lasers
+    private List<GameObject> splitLasers = new();
+    private List<GameObject> splitLaserStartVFX = new();
+    private List<GameObject> splitLaserEndVFX = new();
 
     private LineRenderer tempLine;
     private GameObject tempStartVFX;
     private GameObject tempEndVFX;
 
-    // Start is called before the first frame update
+    public bool isSpecial1 = false;
+    public bool isSpecial2 = false;
+    public bool isSpecial3 = false;
+
+    public bool isSpecial1Active = false;
+    public bool isSpecial2Active = false;
+    public bool isSpecial3Active = false;
+
+    private CrystalGuardianMovementController cgController;
+    private CrystalAnimationState crystalAnimationState;
+
     protected override void Start()
     {
         base.Start();
@@ -53,13 +67,18 @@ public class CrystalGuardian : Boss
         {
             Debug.LogError("Player GameObject not found. Please ensure it is tagged 'Player'.");
         }
+
+        cgController = GetComponent<CrystalGuardianMovementController>();
+        crystalAnimationState = GetComponent<CrystalAnimationState>();
     }
 
     protected override void Update()
     {
+        if(isSpecial1 || isSpecial2 || isSpecial3) return;
+        
         base.Update();
     }
-    // Setup abilities specific to CrystalGuardian
+
     protected override void SetupAbilities()
     {
         AddAbility(SpecialAbility1);
@@ -67,89 +86,112 @@ public class CrystalGuardian : Boss
         AddAbility(SpecialAbility3);
     }
 
-    // Example ability 1
     private void SpecialAbility1()
     {
         Debug.Log("CrystalGuardian uses Special Ability 1!");
-
-        // Check if spikes are already spawning
-        if (!isSpawningSpikes)
-        {
-            // Start the coroutine to spawn spikes underneath the player
-            StartCoroutine(SpawnSpikes());
-        }
-        else
-        {
-            Debug.Log("Spikes are already spawning, cannot start another ability.");
-        }
+        StartCoroutine(SpecialAbilityWaitCO(ExecuteAbility1));
+    }
+    private void ExecuteAbility1()
+    {
+        isSpecial1 = true;
+        crystalAnimationState.SetEnemyDirection();
+        crystalAnimationState.UpdateAnimationState();
+        Debug.Log("USED Special Ability 1!");
+    }
+    private void SpecialAbility2()
+    {
+        Debug.Log("CrystalGuardian uses Special Ability 2!");
+        StartCoroutine(SpecialAbilityWaitCO(ExecuteAbility2));
+    }
+    private void ExecuteAbility2()
+    {
+        isSpecial2 = true;
+        crystalAnimationState.SetEnemyDirection();
+        crystalAnimationState.UpdateAnimationState();
+        Debug.Log("USED Special Ability 2!");
     }
 
-    // Coroutine to spawn spikes with a gap in between
-    private IEnumerator SpawnSpikes()
+    private void SpecialAbility3()
     {
+        Debug.Log("CrystalGuardian uses Special Ability 3!");
+        StartCoroutine(SpecialAbilityWaitCO(ExecuteAbility3));
+    }
+    private void ExecuteAbility3()
+    {
+        isSpecial3 = true;
+        crystal = GetClosestCrystal();
+        crystalAnimationState.SetEnemyDirection();
+        crystalAnimationState.UpdateAnimationState();
+        Debug.Log("USED Special Ability 3!");
+    }
+
+    private IEnumerator SpecialAbilityWaitCO(UnityAction callback)
+    {
+        while (isSpawningSpikes || crystalAnimationState.stateLock)
+        {
+            Debug.Log("Waiting for spikes to go away or state to unlock");
+            yield return null;
+        }
+
+        //ADD DELAY BEFORE AFTER ATTACK FINISHES
+        yield return new WaitForSeconds(0.5f);
+
+        callback?.Invoke();
+    }
+
+
+    public IEnumerator SpawnSpikes()
+    {
+        isSpecial1Active = true;
         DisableLaser();
-        // Set the flag to true to indicate spikes are spawning
         isSpawningSpikes = true;
+        crystalAnimationState.stateLock = true;
 
-        // Determine a random number of spikes to spawn within the specified range
-        int numberOfSpikes = Random.Range(minNumberOfSpikes, maxNumberOfSpikes + 1); // +1 because max range is exclusive
-
+        int numberOfSpikes = Random.Range(minNumberOfSpikes, maxNumberOfSpikes + 1);
         for (int i = 0; i < numberOfSpikes; i++)
         {
             if (crystalSpikes != null && player != null)
             {
-                // Spawn spike at player's current position
                 GameObject spawnedSpike = Instantiate(crystalSpikes, player.position, Quaternion.identity);
-                // Destroy the spike after the specified duration
                 Destroy(spawnedSpike, crystalSpikeDuration);
             }
-
-            // Wait for the specified gap time before spawning the next spike
             yield return new WaitForSeconds(spawnGap);
         }
 
-        // Set the flag to false to indicate spikes have finished spawning
         isSpawningSpikes = false;
+        crystalAnimationState.PlayEndAnimation();
+        ResetAbilityStates();
     }
 
-    // Example ability 2
-    private void SpecialAbility2()
+    public IEnumerator LaserRoutine()
     {
-        Debug.Log("CrystalGuardian uses Special Ability 2!");
-
-        // Prevent this ability from starting if spikes are spawning
-        if (!isSpawningSpikes)
-        {
-            EnableLaser();
-            UpdateLaser();
-        }
-        else
-        {
-            Debug.Log("Cannot use ability while spikes are spawning.");
-        }
+        isSpecial3Active = true;
+        EnableLaser();
+        UpdateLaser();
+        crystalAnimationState.stateLock = true;
+        yield return new WaitForSeconds(laserTime);
+        crystalAnimationState.PlayEndAnimation();
+        DisableLaser();
+        ResetAbilityStates();
     }
 
-    // Example ability 3
-    private void SpecialAbility3()
+
+
+    public IEnumerator RockFallRoutine()
     {
-        Debug.Log("CrystalGuardian uses Special Ability 3!");
-
-        // Prevent this ability from starting if spikes are spawning
-        if (!isSpawningSpikes)
-        {
-            DisableLaser();
-        }
-        else
-        {
-            Debug.Log("Cannot use ability while spikes are spawning.");
-        }
+        isSpecial2Active = true;
+        cgController.canMove = false;
+        crystalAnimationState.stateLock = true;
+        yield return new WaitForSeconds(rockFallTime);
+        crystalAnimationState.PlayEndAnimation();
+        cgController.canMove = true;
+        ResetAbilityStates();
     }
 
-    // Enable the laser ability
     private void EnableLaser()
     {
-
         crystal = GetClosestCrystal();
+        crystalAnimationState.SetEnemyDirection();
 
         if (tempLine == null)
         {
@@ -182,16 +224,20 @@ public class CrystalGuardian : Boss
 
         return closestCrystal;
     }
-    // Disable the laser ability
+
+    public Transform Crystal
+    {
+        get { return crystal; }
+    }
+
     private void DisableLaser()
     {
-        // Check if the laser ability is already disabled
         if (tempLine != null)
         {
             tempLine.enabled = false;
             Destroy(tempLine.gameObject);
-            Destroy(tempStartVFX.gameObject);
-            Destroy(tempEndVFX.gameObject);
+            Destroy(tempStartVFX?.gameObject);
+            Destroy(tempEndVFX?.gameObject);
             tempLine = null;
             tempStartVFX = null;
             tempEndVFX = null;
@@ -206,124 +252,123 @@ public class CrystalGuardian : Boss
             particles[i].Stop();
         }
 
-        // Destroy all split lasers and their VFX
         foreach (GameObject laser in splitLasers)
         {
             if (laser != null)
             {
-                Destroy(laser); // Destroy or disable the laser
+                Destroy(laser);
             }
         }
-        splitLasers.Clear(); // Clear the list
+        splitLasers.Clear();
 
         foreach (GameObject vfx in splitLaserStartVFX)
         {
             if (vfx != null)
             {
-                Destroy(vfx); // Destroy the start VFX
+                Destroy(vfx);
             }
         }
-        splitLaserStartVFX.Clear(); // Clear the list
+        splitLaserStartVFX.Clear();
 
         foreach (GameObject vfx in splitLaserEndVFX)
         {
             if (vfx != null)
             {
-                Destroy(vfx); // Destroy the end VFX
+                Destroy(vfx);
             }
         }
-        splitLaserEndVFX.Clear(); // Clear the list
+        splitLaserEndVFX.Clear();
     }
 
     private void UpdateLaser()
     {
-        tempLine.SetPosition(0, firePoint.position);  // Set the start of the laser at the fire point
-        tempLine.SetPosition(1, crystal.position);    // Initially set the end at the crystal
+        if (crystal == null || firePointLaser == null) return;
 
-        tempStartVFX = Instantiate(startVFX, tempLine.GetPosition(0), Quaternion.identity);
-        tempEndVFX = Instantiate(endVFX, tempLine.GetPosition(1), Quaternion.identity);
+        // Update the positions of the line renderer
+        tempLine.SetPosition(0, firePointLaser.position);
+        tempLine.SetPosition(1, crystal.position);
 
-        startVFX.transform.position = firePoint.position;
+        // Instantiate and update VFX
+        if (tempStartVFX != null)
+        {
+            Destroy(tempStartVFX);
+        }
+        if (tempEndVFX != null)
+        {
+            Destroy(tempEndVFX);
+        }
+        tempStartVFX = Instantiate(startVFX, firePointLaser.position, Quaternion.identity);
+        tempEndVFX = Instantiate(endVFX, crystal.position, Quaternion.identity);
 
-        Vector2 direction = (Vector2)crystal.position - (Vector2)firePoint.position;  // Calculate the direction vector
-        float distance = direction.magnitude;  // Calculate the distance to the crystal
-        direction.Normalize();  // Normalize the direction vector
+        // Update the direction and check for hits
+        Vector2 direction = (Vector2)crystal.position - (Vector2)firePointLaser.position;
+        float distance = direction.magnitude;
+        direction.Normalize();
 
-        // Use a layer mask that includes the crystal layer
         int laserMask = LayerMask.GetMask("TilemapColliders", "IgnoreCrystal");
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, distance, laserMask);
+        RaycastHit2D hit = Physics2D.Raycast(firePointLaser.position, direction, distance, laserMask);
 
         if (hit.collider != null)
         {
             Debug.Log("Laser hit: " + hit.collider.name);
             tempLine.SetPosition(1, hit.point);
 
-            // Check if the laser hit the crystal
-            if (hit.collider.transform.tag == "LaserHitTarget")
+            if (hit.collider.CompareTag("LaserHitTarget"))
             {
-                // Start the coroutine to spawn split lasers with a delay
                 StartCoroutine(SpawnSplitLasersWithDelay(hit.point));
             }
         }
         else
         {
-            // If nothing is hit, ensure the laser goes all the way to the crystal
             tempLine.SetPosition(1, crystal.position);
         }
 
-        endVFX.transform.position = tempLine.GetPosition(1);
+        // Update the end VFX position
+        if (tempEndVFX != null)
+        {
+            tempEndVFX.transform.position = tempLine.GetPosition(1);
+        }
     }
 
     private IEnumerator SpawnSplitLasersWithDelay(Vector2 spawnPosition)
     {
-        // Wait for the specified delay before spawning split lasers
         yield return new WaitForSeconds(splitLaserSpawnDelay);
-
-        // Proceed to spawn split lasers
         SpawnSplitLasers(spawnPosition);
     }
 
     private void SpawnSplitLasers(Vector2 spawnPosition)
     {
-        // Define 8 directions for the split lasers (45 degrees apart)
         Vector2[] directions = new Vector2[]
         {
             Vector2.up,
             Vector2.down,
             Vector2.left,
             Vector2.right,
-            new Vector2(1, 1).normalized,   // Top-right
-            new Vector2(-1, 1).normalized,  // Top-left
-            new Vector2(1, -1).normalized,  // Bottom-right
-            new Vector2(-1, -1).normalized  // Bottom-left
+            new Vector2(1, 1).normalized,
+            new Vector2(-1, 1).normalized,
+            new Vector2(1, -1).normalized,
+            new Vector2(-1, -1).normalized
         };
 
-        // Save original layer and set the crystal layer to "IgnoreCrystal"
         int originalLayer = crystal.gameObject.layer;
         int ignoreLayer = LayerMask.NameToLayer("IgnoreCrystal");
         crystal.gameObject.layer = ignoreLayer;
 
         foreach (Vector2 dir in directions)
         {
-            // Instantiate a new laser object
             GameObject newLaser = new GameObject("SplitLaser");
             LineRenderer newLaserLineRenderer = newLaser.AddComponent<LineRenderer>();
 
-            // Copy settings from the original LineRenderer
             newLaserLineRenderer.material = tempLine.sharedMaterial;
             newLaserLineRenderer.startWidth = tempLine.startWidth;
             newLaserLineRenderer.endWidth = tempLine.endWidth;
             newLaserLineRenderer.startColor = tempLine.startColor;
             newLaserLineRenderer.endColor = tempLine.endColor;
-
-            // Set the sorting layer and order explicitly
             newLaserLineRenderer.sortingLayerName = tempLine.sortingLayerName;
             newLaserLineRenderer.sortingOrder = tempLine.sortingOrder;
 
-            // Set the start and end positions for the new laser
             newLaserLineRenderer.SetPosition(0, spawnPosition);
 
-            // Raycast to determine the end position of the new laser, ignoring the crystal layer
             int tilemapLayerMask = LayerMask.GetMask("TilemapColliders");
             RaycastHit2D hit = Physics2D.Raycast(spawnPosition, dir, Mathf.Infinity, tilemapLayerMask);
             if (hit.collider != null)
@@ -332,24 +377,21 @@ public class CrystalGuardian : Boss
             }
             else
             {
-                // If nothing is hit, project the laser in the direction indefinitely
-                newLaserLineRenderer.SetPosition(1, spawnPosition + dir * 10.0f); // Max distance of 10 units
+                newLaserLineRenderer.SetPosition(1, spawnPosition + dir * 10.0f);
             }
             newLaser.AddComponent<CrystalLaser>();
 
-            // Instantiate visual effects at the start and end of the new laser
             GameObject startVFXInstance = Instantiate(startVFX, spawnPosition, Quaternion.identity);
             splitLaserStartVFX.Add(startVFXInstance);
 
             GameObject endVFXInstance = Instantiate(endVFX, newLaserLineRenderer.GetPosition(1), Quaternion.identity);
             splitLaserEndVFX.Add(endVFXInstance);
 
-            // Add the new laser to the list for tracking
             splitLasers.Add(newLaser);
         }
 
-        // Restore the crystal's original layer
         crystal.gameObject.layer = originalLayer;
+        crystalAnimationState.PlayEndAnimation();
     }
 
     void FillLists()
@@ -369,5 +411,26 @@ public class CrystalGuardian : Boss
                 particles.Add(ps);
             }
         }
+    }
+
+    public void SetAbilityStates(bool special1, bool special2, bool special3)
+    {
+        isSpecial1 = special1;
+        isSpecial2 = special2;
+        isSpecial3 = special3;
+        crystalAnimationState.UpdateAnimationState();
+    }
+
+    public void ResetAbilityStates()
+    {
+        crystalAnimationState.stateLock = false;
+        isSpawningSpikes = false;
+        DisableLaser();
+        SetAbilityStates(false, false, false);
+        crystalAnimationState.animator.SetBool("specialLoop", false);
+        crystalAnimationState.UpdateAnimationState();
+        isSpecial1Active = false;
+        isSpecial2Active = false;
+        isSpecial3Active = false;
     }
 }

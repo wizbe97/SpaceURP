@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class RangedEnemyController : EnemyController
 {
-    public GameObject bulletPrefab;
+    public Transform firePoint;
+    public EnemyBullet bulletPrefab;
     public Transform[] firePoints;
     public float fireForce = 10f;
     public float shootingRange = 10f;
@@ -29,6 +30,7 @@ public class RangedEnemyController : EnemyController
         // Shoot only if player is in shooting range and enough time has passed since the last shot
         if (IsPlayerInShootingRange() && Time.time >= nextFireTime)
         {
+            // UpdateAnimationState();
             Shoot();
             // Calculate the next allowed time for firing
             nextFireTime = Time.time + 1f / fireRate;
@@ -47,14 +49,17 @@ public class RangedEnemyController : EnemyController
     {
         if (!canMove)
             return;
+
         Vector2 direction = (player.position - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
+        UpdateAnimationState();
 
         // Determine the appropriate fire point based on direction
-        int firePointIndex = GetFirePointIndex(direction);
-        Transform selectedFirePoint = firePoints[firePointIndex];
-
-        GameObject bullet = Instantiate(bulletPrefab, selectedFirePoint.position, Quaternion.Euler(0f, 0f, angle));
+        // int firePointIndex = GetFirePointIndex(direction);
+        // Transform selectedFirePoint = firePoints[firePointIndex];
+        EnemyBullet bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0f, 0f, angle));
+        bullet.objectToAvoid = this.gameObject;
+        // GameObject bullet = Instantiate(bulletPrefab, selectedFirePoint.position, Quaternion.Euler(0f, 0f, angle));
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * fireForce;
         IsMoving = false;
@@ -121,9 +126,8 @@ public class RangedEnemyController : EnemyController
         {
             stateIdentifier = 1;
         }
-        else if (IsPlayerInShootingRange() && Time.time >= nextFireTime)
+        else if (IsPlayerInLineOfSight() && Time.time >= nextFireTime)
         {
-            // Idle
             stateIdentifier = 2;
         }
         else

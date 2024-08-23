@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float stopDrag = 25f;
     [SerializeField] private float dashForce = 10f;
     [SerializeField] private float dashCooldown = 3f;
-    private bool dashOnCooldown = false; 
+    private bool dashOnCooldown = false;
     public bool isMoving = false;
     public bool canMove = true;
 
@@ -37,11 +37,14 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Vector2 moveInput = Vector2.zero;
     [HideInInspector] public bool isDashing;
 
+    private BoxCollider2D boxCollider;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animationState = GetComponent<UpdateAnimationState>();
         action = GetComponent<Action>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void FixedUpdate()
@@ -71,24 +74,31 @@ public class PlayerController : MonoBehaviour
     {
         if (!dashOnCooldown && moveInput.magnitude > 0)
         {
-            GetComponent<BoxCollider2D>().enabled = false;
+            boxCollider.enabled = false;
             Vector2 dashDirection = moveInput.normalized;
             rb.AddForce(dashDirection * dashForce, ForceMode2D.Impulse);
             isDashing = true;
             dashOnCooldown = true;
             animationState.UpdateCharacterAnimationState(moveInput);
             action.DeactivateCurrentItem();
-            StartCoroutine(DashCooldown()); 
+            StartCoroutine(DashCooldown());
         }
     }
 
     public void OnDashEnd()
     {
         isDashing = false;
-        animationState.stateLock = false; 
+        animationState.stateLock = false;
         animationState.UpdateCharacterAnimationState(moveInput);
         action.CurrentItem();
-        GetComponent<BoxCollider2D>().enabled = true;
+        StartCoroutine(ReactivateColliderAfterDelay(1f)); // Start the coroutine with a 1-second delay
+    }
+
+    // Coroutine to reactivate the box collider after a delay
+    private IEnumerator ReactivateColliderAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); 
+        boxCollider.enabled = true;             
     }
 
     private IEnumerator DashCooldown()
