@@ -50,23 +50,23 @@ public abstract class Boss : MonoBehaviour
     // Execute a random ability, ensuring it's not the same as the last used ability
     private void ExecuteRandomAbility()
     {
-        abilities[2]?.Invoke();
-        // if (abilities.Count > 1)
-        // {
-        //     int randomIndex;
-        //     do
-        //     {
-        //         randomIndex = Random.Range(0, abilities.Count);
-        //     } while (randomIndex == lastUsedAbilityIndex);
+        // abilities[2]?.Invoke();
+        if (abilities.Count > 1)
+        {
+            int randomIndex;
+            do
+            {
+                randomIndex = Random.Range(0, abilities.Count);
+            } while (randomIndex == lastUsedAbilityIndex);
 
-        //     abilities[randomIndex]?.Invoke();
-        //     lastUsedAbilityIndex = randomIndex;
-        // }
-        // else if (abilities.Count == 1)
-        // {
-        //     // If there's only one ability, just execute it
-        //     abilities[0]?.Invoke();
-        // }
+            abilities[randomIndex]?.Invoke();
+            lastUsedAbilityIndex = randomIndex;
+        }
+        else if (abilities.Count == 1)
+        {
+            // If there's only one ability, just execute it
+            abilities[0]?.Invoke();
+        }
     }
 
     // Add an ability to the abilities list
