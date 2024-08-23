@@ -75,37 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &2024473557854410085
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2500918925054910457}
-  m_Layer: 7
-  m_Name: LaserFirePointDL
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2500918925054910457
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2024473557854410085}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.65, y: -2.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3871499805083650836}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2954057211681312712
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.06, y: 1.01}
+  m_AnchoredPosition: {x: 0.06, y: 3.14}
   m_SizeDelta: {x: 43.3185, y: 52.5457}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3480157738878387336
@@ -308,7 +277,7 @@ Transform:
   m_GameObject: {fileID: 3229021634085185618}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.36, y: -0.22, z: 0}
+  m_LocalPosition: {x: 2.91, y: 1.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -443,8 +412,8 @@ Transform:
   m_GameObject: {fileID: 5786553491338793297}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15, y: -0.69, z: 0.04514218}
-  m_LocalScale: {x: 1.2576, y: 1.0735999, z: 1}
+  m_LocalPosition: {x: -0.15, y: -2.31, z: 0.04514218}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3871499805083650836}
@@ -501,37 +470,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &6181875389658806088
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8974666996756228266}
-  m_Layer: 7
-  m_Name: LaserFirePointUR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8974666996756228266
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6181875389658806088}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.03, y: 2.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3871499805083650836}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6729629032636210766
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,9 +480,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3871499805083650836}
   - component: {fileID: 8652639526437479724}
+  - component: {fileID: 581543756476649428}
+  - component: {fileID: 4049907442656573645}
+  - component: {fileID: 305321271839378152}
   - component: {fileID: 6428413849856375183}
   - component: {fileID: 1144759644208558593}
   - component: {fileID: 2422866230445213122}
+  - component: {fileID: 2863439123500038556}
   - component: {fileID: 8973525378384885923}
   m_Layer: 7
   m_Name: CrystalGuardian
@@ -570,9 +512,6 @@ Transform:
   - {fileID: 3520322310558337650}
   - {fileID: 8038071470839557284}
   - {fileID: 1612580575459306423}
-  - {fileID: 2500918925054910457}
-  - {fileID: 8974666996756228266}
-  - {fileID: 4466732580768164976}
   - {fileID: 7042748921084691647}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -617,17 +556,67 @@ SpriteRenderer:
   m_SortingLayerID: -1400585243
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1599415332, guid: e80a3d7e88c283d47b4c808195f02e0f, type: 3}
+  m_Sprite: {fileID: 2042562372, guid: ec14c5059c90b274ab328ce627c39fbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.375, y: 1.625}
+  m_Size: {x: 6, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &581543756476649428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6729629032636210766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c002d9952fdb3c54d83159a609a75688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 5
+  attackCooldown: 3
+  attackRange: 5
+  isAttacking: 0
+--- !u!114 &4049907442656573645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6729629032636210766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee36d1c0982a5a84ebd129827c22e5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 25
+  moveSpeed: 1500
+  moveDrag: 15
+  stopDrag: 25
+  canMove: 1
+  player: {fileID: 0}
+  isMoving: 0
+--- !u!114 &305321271839378152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6729629032636210766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcd06195a9af1346b4047b84ee6b922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  currentStateValue: 0
+  stateLock: 0
 --- !u!114 &6428413849856375183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,25 +629,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3e65f0f1e934e10a700e308aba0501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityCooldown: 10
+  abilityCooldown: 7
   crystalSpikes: {fileID: 3428491626935570964, guid: df28cbe0ac5319e4f994259d73133742, type: 3}
-  spawnGap: 1.5
+  spawnGap: 0.75
   minNumberOfSpikes: 5
-  maxNumberOfSpikes: 5
-  crystalSpikeDuration: 6
+  maxNumberOfSpikes: 10
+  crystalSpikeDuration: 5
   lineRenderer: {fileID: 4131324309765433761, guid: 16f3d4c41e37f7740b3e72a65470ae15, type: 3}
-  firePointDownLeft: {fileID: 0}
-  firePointDownRight: {fileID: 0}
-  firePointUpLeft: {fileID: 0}
-  firePointUpRight: {fileID: 0}
+  firePointLaser: {fileID: 1612580575459306423}
   startVFX: {fileID: 1962749615213639815, guid: 6692c09a1b62a4741b42187db07e3ac5, type: 3}
   endVFX: {fileID: 4264508999995766664, guid: 586f295a8a3b94b2db4c2ada7678be32, type: 3}
   splitLaserSpawnDelay: 0.5
-  laserTime: 5
+  laserTime: 2.5
   rockFallTime: 5
   isSpecial1: 0
   isSpecial2: 0
   isSpecial3: 0
+  isSpecial1Active: 0
+  isSpecial2Active: 0
+  isSpecial3Active: 0
 --- !u!114 &1144759644208558593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,6 +697,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!95 &2863439123500038556
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6729629032636210766}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40b95ff94d097a14eb372c42ee8e2b34, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &8973525378384885923
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -740,8 +750,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003191352, y: -0.028565407}
-  m_Size: {x: 1.423261, y: 1.9929414}
+  m_Offset: {x: -0.07085991, y: -0.096233845}
+  m_Size: {x: 3.5074487, y: 5.159824}
   m_Direction: 0
 --- !u!1 &7434720720350409779
 GameObject:
@@ -833,37 +843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e11bc736ed33494bbb5d83b3b1a0b8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7577375125319596317
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4466732580768164976}
-  m_Layer: 7
-  m_Name: LaserFirePointUL
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4466732580768164976
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7577375125319596317}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.87, y: 2.08, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3871499805083650836}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7901927465235682635
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,8 +869,8 @@ Transform:
   m_GameObject: {fileID: 7901927465235682635}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.12, y: -0.16, z: 0.04514218}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.12424, y: -1.27, z: 0.04514218}
+  m_LocalScale: {x: 1.9, y: 2.4189062, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3871499805083650836}

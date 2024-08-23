@@ -27843,11 +27843,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1612580575459306423, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.65
+      value: 2.91
       objectReference: {fileID: 0}
     - target: {fileID: 1612580575459306423, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.09
+      value: 1.96
       objectReference: {fileID: 0}
     - target: {fileID: 2699074339570983340, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_AnchorMax.x
@@ -27859,7 +27859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3229021634085185618, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_Name
-      value: LaserFirePointDR
+      value: LaserFirePoint
       objectReference: {fileID: 0}
     - target: {fileID: 3520322310558337650, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -27925,6 +27925,10 @@ PrefabInstance:
       propertyPath: rockFallTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
+      propertyPath: firePointLaser
+      value: 
+      objectReference: {fileID: 1912052403}
     - target: {fileID: 6428413849856375183, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: abilityCooldown
       value: 7

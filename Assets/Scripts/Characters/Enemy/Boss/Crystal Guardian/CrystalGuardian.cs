@@ -5,9 +5,6 @@ using UnityEngine.Events;
 
 public class CrystalGuardian : Boss
 {
-    // Add a class-level variable for the fire point
-    private Transform firePoint;
-
     // Existing variables...
     [Header("Crystal Spikes Ability")]
     [SerializeField] private GameObject crystalSpikes;
@@ -18,11 +15,7 @@ public class CrystalGuardian : Boss
 
     [Header("Crystal Laser Ability")]
     [SerializeField] private LineRenderer lineRenderer;
-    [SerializeField] private Transform firePointDownLeft;
-    [SerializeField] private Transform firePointDownRight;
-    [SerializeField] private Transform firePointUpLeft;
-    [SerializeField] private Transform firePointUpRight;
-    private Transform[] firePoints;
+    [SerializeField] private Transform firePointLaser;
 
     private GameObject[] crystals;
     private Transform crystal;
@@ -74,8 +67,6 @@ public class CrystalGuardian : Boss
         {
             Debug.LogError("Player GameObject not found. Please ensure it is tagged 'Player'.");
         }
-
-        firePoints = new Transform[] { firePointDownLeft, firePointDownRight, firePointUpLeft, firePointUpRight };
 
         cgController = GetComponent<CrystalGuardianMovementController>();
         crystalAnimationState = GetComponent<CrystalAnimationState>();
@@ -129,7 +120,6 @@ public class CrystalGuardian : Boss
     {
         isSpecial3 = true;
         crystal = GetClosestCrystal();
-        firePoint = GetClosestFirePoint();
         crystalAnimationState.SetEnemyDirection();
         crystalAnimationState.UpdateAnimationState();
         Debug.Log("USED Special Ability 3!");
@@ -201,7 +191,6 @@ public class CrystalGuardian : Boss
     private void EnableLaser()
     {
         crystal = GetClosestCrystal();
-        firePoint = GetClosestFirePoint();
         crystalAnimationState.SetEnemyDirection();
 
         if (tempLine == null)
@@ -239,25 +228,6 @@ public class CrystalGuardian : Boss
     public Transform Crystal
     {
         get { return crystal; }
-    }
-
-    private Transform GetClosestFirePoint()
-    {
-        Transform closestFirePoint = null;
-        float minDistance = Mathf.Infinity;
-        if (crystal != null)
-        {
-            foreach (Transform fp in firePoints)
-            {
-                float distance = Vector3.Distance(fp.position, crystal.position);
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    closestFirePoint = fp;
-                }
-            }
-        }
-        return closestFirePoint;
     }
 
     private void DisableLaser()
@@ -312,10 +282,10 @@ public class CrystalGuardian : Boss
 
     private void UpdateLaser()
     {
-        if (crystal == null || firePoint == null) return;
+        if (crystal == null || firePointLaser == null) return;
 
         // Update the positions of the line renderer
-        tempLine.SetPosition(0, firePoint.position);
+        tempLine.SetPosition(0, firePointLaser.position);
         tempLine.SetPosition(1, crystal.position);
 
         // Instantiate and update VFX
@@ -327,16 +297,16 @@ public class CrystalGuardian : Boss
         {
             Destroy(tempEndVFX);
         }
-        tempStartVFX = Instantiate(startVFX, firePoint.position, Quaternion.identity);
+        tempStartVFX = Instantiate(startVFX, firePointLaser.position, Quaternion.identity);
         tempEndVFX = Instantiate(endVFX, crystal.position, Quaternion.identity);
 
         // Update the direction and check for hits
-        Vector2 direction = (Vector2)crystal.position - (Vector2)firePoint.position;
+        Vector2 direction = (Vector2)crystal.position - (Vector2)firePointLaser.position;
         float distance = direction.magnitude;
         direction.Normalize();
 
         int laserMask = LayerMask.GetMask("TilemapColliders", "IgnoreCrystal");
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, distance, laserMask);
+        RaycastHit2D hit = Physics2D.Raycast(firePointLaser.position, direction, distance, laserMask);
 
         if (hit.collider != null)
         {
