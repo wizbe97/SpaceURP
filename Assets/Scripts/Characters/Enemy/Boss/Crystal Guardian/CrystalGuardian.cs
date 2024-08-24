@@ -8,7 +8,7 @@ public class CrystalGuardian : Boss
     // Existing variables...
     [Header("Crystal Spikes Ability")]
     [SerializeField] private GameObject crystalSpikes;
-    [SerializeField] private float spawnGap = 2.0f;
+    [SerializeField] private float crystalSpikeSpawnGap = 2.0f;
     [SerializeField] private int minNumberOfSpikes = 3;
     [SerializeField] private int maxNumberOfSpikes = 10;
     [SerializeField] private float crystalSpikeDuration = 3.0f;
@@ -24,8 +24,17 @@ public class CrystalGuardian : Boss
     [SerializeField] private float splitLaserSpawnDelay = 0.5f;
     [SerializeField] private float laserTime = 5.0f;
 
-    [Header("Rock Fall Ability")]
-    [SerializeField] private float rockFallTime = 5.0f;
+    [Header("Stalactite Fall Ability")]
+    [SerializeField] private GameObject stalactitePrefab;
+    [SerializeField] private GameObject shadowPrefab;
+    [SerializeField] private float stalactiteSpawnGap = 2.0f;
+
+    [SerializeField] private int minNumberOfstalactites = 3;
+    [SerializeField] private int maxNumberOfstalactites = 10;
+    [SerializeField] private float stalactiteDuration = 3.0f;
+    [SerializeField] private float fallSpeed = 2.0f;
+
+
 
     private readonly List<ParticleSystem> particles = new();
     private Transform player;
@@ -39,16 +48,17 @@ public class CrystalGuardian : Boss
     private GameObject tempStartVFX;
     private GameObject tempEndVFX;
 
-    public bool isSpecial1 = false;
-    public bool isSpecial2 = false;
-    public bool isSpecial3 = false;
+    [HideInInspector] public bool isSpecial1 = false;
+    [HideInInspector] public bool isSpecial2 = false;
+    [HideInInspector] public bool isSpecial3 = false;
 
-    public bool isSpecial1Active = false;
-    public bool isSpecial2Active = false;
-    public bool isSpecial3Active = false;
+    [HideInInspector] public bool isSpecial1Active = false;
+    [HideInInspector] public bool isSpecial2Active = false;
+    [HideInInspector] public bool isSpecial3Active = false;
 
     private CrystalGuardianMovementController cgController;
     private CrystalAnimationState crystalAnimationState;
+    private CrystalGuardianStalactite crystalGuardianStalactite;
 
     protected override void Start()
     {
@@ -70,20 +80,21 @@ public class CrystalGuardian : Boss
 
         cgController = GetComponent<CrystalGuardianMovementController>();
         crystalAnimationState = GetComponent<CrystalAnimationState>();
+        crystalGuardianStalactite = GetComponent<CrystalGuardianStalactite>();
     }
 
     protected override void Update()
     {
-        if(isSpecial1 || isSpecial2 || isSpecial3) return;
-        
+        if (isSpecial1 || isSpecial2 || isSpecial3) return;
+
         base.Update();
     }
 
     protected override void SetupAbilities()
     {
-        AddAbility(SpecialAbility1);
+        // AddAbility(SpecialAbility1);
         AddAbility(SpecialAbility2);
-        AddAbility(SpecialAbility3);
+        // AddAbility(SpecialAbility3);
     }
 
     private void SpecialAbility1()
@@ -155,7 +166,7 @@ public class CrystalGuardian : Boss
                 GameObject spawnedSpike = Instantiate(crystalSpikes, player.position, Quaternion.identity);
                 Destroy(spawnedSpike, crystalSpikeDuration);
             }
-            yield return new WaitForSeconds(spawnGap);
+            yield return new WaitForSeconds(crystalSpikeSpawnGap);
         }
 
         isSpawningSpikes = false;
@@ -182,10 +193,61 @@ public class CrystalGuardian : Boss
         isSpecial2Active = true;
         cgController.canMove = false;
         crystalAnimationState.stateLock = true;
-        yield return new WaitForSeconds(rockFallTime);
+
+        int numberOfstalactites = Random.Range(minNumberOfstalactites, maxNumberOfstalactites + 1);
+
+        // This list will hold references to the instantiated shadows and stalactites
+        List<GameObject> shadows = new List<GameObject>();
+        List<GameObject> stalactites = new List<GameObject>();
+
+        for (int i = 0; i < numberOfstalactites; i++)
+        {
+            if (stalactitePrefab != null && player != null)
+            {
+                // Spawn the shadow at the player's position
+                GameObject spawnedShadow = Instantiate(shadowPrefab, player.position, Quaternion.identity);
+                shadows.Add(spawnedShadow);
+
+                // Spawn the stalactite off-screen (above the play area)
+                Vector3 offScreenPosition = new Vector3(player.position.x, player.position.y + 15.0f, player.position.z);
+                GameObject spawnedStalactite = Instantiate(stalactitePrefab, offScreenPosition, Quaternion.identity);
+                stalactites.Add(spawnedStalactite);
+
+                // Assuming the stalactite needs to fall to the shadow's position
+                StartCoroutine(MoveStalactiteToShadow(spawnedStalactite, spawnedShadow.transform.position));
+
+                // Destroy the shadow after the duration
+                Destroy(spawnedShadow, stalactiteDuration);
+                Destroy(spawnedStalactite, stalactiteDuration);
+            }
+            yield return new WaitForSeconds(stalactiteSpawnGap);
+        }
+
+        // Optionally, wait for all stalactites to finish falling (if needed)
+        // yield return new WaitUntil(() => stalactites.All(st => !st.activeSelf));
+
         crystalAnimationState.PlayEndAnimation();
         cgController.canMove = true;
         ResetAbilityStates();
+    }
+
+    // Coroutine to move stalactite to the shadow's position
+    private IEnumerator MoveStalactiteToShadow(GameObject stalactite, Vector3 targetPosition)
+    {
+        float elapsedTime = 0f;
+
+        Vector3 startPosition = stalactite.transform.position;
+
+        while (elapsedTime < fallSpeed)
+        {
+            float t = elapsedTime / fallSpeed;
+            stalactite.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the stalactite ends up exactly at the target position
+        stalactite.transform.position = targetPosition;
     }
 
     private void EnableLaser()
