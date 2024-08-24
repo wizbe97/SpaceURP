@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
+    [SerializeField] private int waveValue;  // Shows the total budget for the current wave
+    [SerializeField] private int remainingBudget;  // Shows the remaining budget during enemy generation
+
     public List<Enemy> enemies = new List<Enemy>();
     public int currWave;
-    private int waveValue;
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
 
     public Transform[] spawnLocation;
@@ -27,27 +29,47 @@ public class WaveSpawner : MonoBehaviour
         startNextWave = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (spawnedEnemies.Count <= 0 && waveTimer <= 0)
         {
-            // Increment the wave number to start the next wave
             currWave++;
             GenerateWave();
         }
-
     }
 
     public void GenerateWave()
     {
         waveValue = currWave * difficulty;
+        remainingBudget = waveValue;  // Set remaining budget to the initial wave value
         GenerateEnemies();
 
-        spawnInterval = waveDuration / enemiesToSpawn.Count; // gives a fixed time between each enemies
-        waveTimer = waveDuration; // wave duration is read only
+        spawnInterval = waveDuration / enemiesToSpawn.Count;
+        waveTimer = waveDuration;
 
         StartCoroutine(SpawnEnemiesWithDelay());
+    }
+
+    public void GenerateEnemies()
+    {
+        List<GameObject> generatedEnemies = new List<GameObject>();
+        while (remainingBudget > 0 || generatedEnemies.Count < 50)
+        {
+            int randEnemyId = Random.Range(0, enemies.Count);
+            int randEnemyCost = enemies[randEnemyId].cost;
+
+            if (remainingBudget - randEnemyCost >= 0)
+            {
+                generatedEnemies.Add(enemies[randEnemyId].enemyPrefab);
+                remainingBudget -= randEnemyCost;  // Update remaining budget after each enemy is added
+            }
+            else if (remainingBudget <= 0)
+            {
+                break;
+            }
+        }
+        enemiesToSpawn.Clear();
+        enemiesToSpawn = generatedEnemies;
     }
 
     IEnumerator SpawnEnemiesWithDelay()
@@ -57,33 +79,10 @@ public class WaveSpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, spawnLocation[spawnIndex].position, Quaternion.identity);
             spawnedEnemies.Add(enemy);
 
-            // Update spawnIndex for next spawn
             spawnIndex = (spawnIndex + 1) % spawnLocation.Length;
 
-            yield return new WaitForSeconds(spawnDelay); // Use the explicit spawn delay
+            yield return new WaitForSeconds(spawnDelay);
         }
-    }
-
-    public void GenerateEnemies()
-    {
-        List<GameObject> generatedEnemies = new List<GameObject>();
-        while (waveValue > 0 || generatedEnemies.Count < 50)
-        {
-            int randEnemyId = Random.Range(0, enemies.Count);
-            int randEnemyCost = enemies[randEnemyId].cost;
-
-            if (waveValue - randEnemyCost >= 0)
-            {
-                generatedEnemies.Add(enemies[randEnemyId].enemyPrefab);
-                waveValue -= randEnemyCost;
-            }
-            else if (waveValue <= 0)
-            {
-                break;
-            }
-        }
-        enemiesToSpawn.Clear();
-        enemiesToSpawn = generatedEnemies;
     }
 }
 

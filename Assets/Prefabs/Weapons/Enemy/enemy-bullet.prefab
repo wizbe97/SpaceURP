@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4685262873413292785}
   - component: {fileID: -8574081465401563823}
   - component: {fileID: -1339579937504900439}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: enemy-bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,6 +167,7 @@ MonoBehaviour:
   minimumBulletDamage: 5
   maximumBulletDamage: 12
   spawnPosition: {x: 0, y: 0, z: 0}
+  objectToAvoid: {fileID: 0}
 --- !u!95 &-1339579937504900439
 Animator:
   serializedVersion: 5

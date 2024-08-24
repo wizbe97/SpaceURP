@@ -3,7 +3,7 @@ using UnityEngine;
 public class MeleeEnemyController : EnemyController
 {
     private bool isAttacking = false;
-    private int damage = 15;
+    [SerializeField] private int damage = 15;
     private Coroutine damageCoroutine;
 
     public override void Update()
