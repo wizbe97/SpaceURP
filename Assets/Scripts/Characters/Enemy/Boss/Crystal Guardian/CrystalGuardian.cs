@@ -58,6 +58,7 @@ public class CrystalGuardian : Boss
 
     private CrystalGuardianMovementController cgController;
     private CrystalAnimationState crystalAnimationState;
+    private CrystalGuardianStalactite crystalGuardianStalactite;
 
     protected override void Start()
     {
@@ -79,6 +80,7 @@ public class CrystalGuardian : Boss
 
         cgController = GetComponent<CrystalGuardianMovementController>();
         crystalAnimationState = GetComponent<CrystalAnimationState>();
+        crystalGuardianStalactite = GetComponent<CrystalGuardianStalactite>();
     }
 
     protected override void Update()

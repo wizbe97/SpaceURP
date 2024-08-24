@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - WaveSpawner
   - LaserHitTarget
+  - StalactiteShadow
   layers:
   - Default
   - TransparentFX
