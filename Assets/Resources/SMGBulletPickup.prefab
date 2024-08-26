@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1123155054007245774}
-  - component: {fileID: 5186986767455655777}
   - component: {fileID: 1048287888794741107}
   - component: {fileID: 4392355263316547409}
   - component: {fileID: 2767799432181496599}
   m_Layer: 13
-  m_Name: GemPickup
+  m_Name: SMGBulletPickup
   m_TagString: CanBePickedUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,33 +28,12 @@ Transform:
   m_GameObject: {fileID: 1832815390222109534}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1254379, y: 0.3731341, z: -0.01001972}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 16.803154, y: 3.6518154, z: -0.01001972}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5186986767455655777
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1832815390222109534}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ef35a3affba31af4e9e90fb9c44d0800, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1048287888794741107
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -97,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -1400585243
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2039444798, guid: 5185a6d72843e3d4796d1434cca13539, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d2b50fd78ac269d40b33d75553261bb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -120,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1152150e0233ddc4091ce0cb3b15492f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 733b50ffa985caf44b17f961a8cd94c5, type: 2}
+  item: {fileID: 11400000, guid: f74e804f53c7ef34ab92f5961715825d, type: 2}
   ID: 
 --- !u!61 &2767799432181496599
 BoxCollider2D:
@@ -158,7 +136,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.625, y: 0.9375}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.625, y: 0.9375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
