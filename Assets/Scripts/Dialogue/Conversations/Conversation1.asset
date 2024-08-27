@@ -12,18 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538a2041bad52604ba76c8de7d60de28, type: 3}
   m_Name: Conversation1
   m_EditorClassIdentifier: 
-  actors: 01000000000000000100000003000000
-  randomActorName: 
+  actors: 010000000000000002000000000000000100000002000000010000000100000003000000
+  randomActorName: Amanda
   randomActorPortrait: {fileID: 0}
   dialogue:
-  - Hey
-  - 'It''s been a while since I''ve seen you.
+  - Hey. I hear your girlfriend is a super hot and sexy girl from Uganda
+  - 'That''s right, she''s gorgeous. I love her to bits, she''s called Amandings
 
 '
-  - What you been up to?
+  - 'Did somebody say my namings? Helloings '
+  - Hi gorgeous I want to stick it in your bum
+  - ...
+  - ...
+  - Nathan you should go now
+  - Amanda do you want to go to sleep now?
   optionText:
-  - Not much really
-  - I couldn't begin to tell you...
+  - No
+  - Yes
   option0: {fileID: 11400000, guid: e309e3d2201d3d1498e56c68df9d35c9, type: 2}
   option1: {fileID: 11400000, guid: 14084d6d01edd034b9c521f5c743b89a, type: 2}
   option2: {fileID: 0}

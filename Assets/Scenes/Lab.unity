@@ -28474,6 +28474,11 @@ MonoBehaviour:
   actorSO:
   - {fileID: 11400000, guid: 635beb7546f9720458b5fe8840da4884, type: 2}
   - {fileID: 11400000, guid: 84903b80683f3874793ffec8e45a7784, type: 2}
+  optionButton:
+  - {fileID: 1658029787}
+  - {fileID: 431597309}
+  - {fileID: 348231364}
+  - {fileID: 1147866154}
 --- !u!4 &2137053925
 Transform:
   m_ObjectHideFlags: 0

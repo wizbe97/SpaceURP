@@ -23,18 +23,17 @@ public class DialogueManager : MonoBehaviour
     public ActorSO[] actorSO;
 
     // Button References
-    private GameObject[] optionButton;
+    [SerializeField] private GameObject[] optionButton;
     private TMP_Text[] optionButtonText;
     private GameObject optionsPanel;
 
     private void Start()
     {
         // Find Buttons
-        optionButton = GameObject.FindGameObjectsWithTag("DialogueOptionButton");
         optionsPanel = GameObject.Find("OptionsPanel");
         optionsPanel.SetActive(false);
 
-        // Find the TMP Text on the Buttons
+        // // Find the TMP Text on the Buttons
         optionButtonText = new TMP_Text[optionButton.Length];
         for (int i = 0; i < optionButton.Length; i++)
         {
@@ -171,6 +170,7 @@ public class DialogueManager : MonoBehaviour
             currentConversation = currentConversation.option3;
         }
         stepNum = 0;
+        PlayDialogue();
 
     }
 
@@ -190,8 +190,8 @@ public class DialogueManager : MonoBehaviour
         stepNum = 0;
         Debug.Log("Ended conversation");
         dialogueActivated = false;
-        dialogueCanvas.SetActive(false);
         optionsPanel.SetActive(false);
+        dialogueCanvas.SetActive(false);
     }
 }
 
