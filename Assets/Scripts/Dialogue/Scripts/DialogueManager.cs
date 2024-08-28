@@ -27,6 +27,11 @@ public class DialogueManager : MonoBehaviour
     private TMP_Text[] optionButtonText;
     private GameObject optionsPanel;
 
+    // Typewriter Effect
+    [SerializeField] private float typingSpeed = 0.02f;
+    private Coroutine typeWriterRoutine;
+    private bool canContinueText = true;
+
     private void Start()
     {
         // Find Buttons
@@ -57,7 +62,7 @@ public class DialogueManager : MonoBehaviour
     private void Update()
     {
         // Only allow "F" key input if all option buttons are deactivated
-        if (dialogueActivated && Input.GetKeyDown(KeyCode.F) && AllOptionButtonsDeactivated())
+        if (dialogueActivated && Input.GetKeyDown(KeyCode.F) && canContinueText && AllOptionButtonsDeactivated())
         {
             if (stepNum >= currentConversation.actors.Length)
             {
@@ -108,9 +113,15 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        // Keep the routine from running multiple times at the same time
+        if (typeWriterRoutine != null)
+        {
+            StopCoroutine(typeWriterRoutine);
+        }
+
         if (stepNum < currentConversation.dialogue.Length)
         {
-            dialogueText.text = currentConversation.dialogue[stepNum];
+            typeWriterRoutine = StartCoroutine(TypeWriterEffect(dialogueText.text = currentConversation.dialogue[stepNum]));
         }
         else
         {
@@ -183,8 +194,43 @@ public class DialogueManager : MonoBehaviour
         stepNum = 0;
         PlayDialogue();
     }
-    
 
+
+    private IEnumerator TypeWriterEffect(string line)
+    {
+        dialogueText.text = "";
+        canContinueText = false;
+        bool addingRichTextTag = false;
+
+        yield return new WaitForSeconds(.5f);
+        foreach (char letter in line.ToCharArray())
+        {
+            if (Input.GetKey(KeyCode.F))
+            {
+                dialogueText.text = line;
+                break;
+            }
+
+            // Check to see if we are working with a rich text tag
+            if (letter == '<' || addingRichTextTag)
+            {
+                addingRichTextTag = true;
+                dialogueText.text += letter;
+                if (letter == '>')
+                {
+                    addingRichTextTag = false;
+                }
+            }
+            
+            else
+            {
+                dialogueText.text += letter;
+                yield return new WaitForSeconds(typingSpeed);
+            }
+
+        }
+        canContinueText = true;
+    }
 
     public void InitiateDialogue(NPCDialogue nPCDialogue)
     {

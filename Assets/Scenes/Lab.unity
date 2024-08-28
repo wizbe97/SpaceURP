@@ -28479,6 +28479,7 @@ MonoBehaviour:
   - {fileID: 431597309}
   - {fileID: 348231364}
   - {fileID: 1147866154}
+  typingSpeed: 0.02
 --- !u!4 &2137053925
 Transform:
   m_ObjectHideFlags: 0

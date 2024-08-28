@@ -16,10 +16,9 @@ MonoBehaviour:
   randomActorName: Amanda
   randomActorPortrait: {fileID: 0}
   dialogue:
-  - "Hello\t"
-  - 'Hey there
-
-'
+  - Hello mate. How are you?
+  - "Hey there. I'm doing okay thanks. Just need to type some stuff so I can see
+    how many letters are going in and can skip succesfully \n"
   - What's up?
   optionText:
   - Unreal amounts
