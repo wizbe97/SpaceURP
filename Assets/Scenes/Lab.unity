@@ -626,9 +626,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 185612495}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Furniture
-  m_TagString: Untagged
+  m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1440,18 +1440,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 185612495}
     m_Modifications:
-    - target: {fileID: 4720883834884235634, guid: 1aa926c867ee80e46bb173d4db7f3375, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720883834884235634, guid: 1aa926c867ee80e46bb173d4db7f3375, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720883834884235634, guid: 1aa926c867ee80e46bb173d4db7f3375, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -998861251
-      objectReference: {fileID: 0}
     - target: {fileID: 5084716659371816400, guid: 1aa926c867ee80e46bb173d4db7f3375, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.674532
@@ -2421,10 +2409,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interior Pod
       objectReference: {fileID: 0}
-    - target: {fileID: 288311250152280558, guid: da32ffb5e248b25468d409bc5d2a9bf5, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8431451873826254745, guid: da32ffb5e248b25468d409bc5d2a9bf5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2479,9 +2463,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1193259090}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Tables
-  m_TagString: Untagged
+  m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3095,7 +3079,7 @@ GameObject:
   - component: {fileID: 1500325681}
   m_Layer: 0
   m_Name: Tilemaps
-  m_TagString: Untagged
+  m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3125,9 +3109,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1513685656}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Ventilation Pipes
-  m_TagString: Untagged
+  m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3158,9 +3142,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522669950}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Right Bookcase
-  m_TagString: Untagged
+  m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3477,9 +3461,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1617272857}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Left Bookcase
-  m_TagString: Untagged
+  m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4324,9 +4308,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1782133722}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Tall Plants
-  m_TagString: Untagged
+  m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4722,7 +4706,7 @@ GameObject:
   - component: {fileID: 2020371194}
   m_Layer: 0
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26877,7 +26861,7 @@ GameObject:
   - component: {fileID: 2114616753}
   m_Layer: 0
   m_Name: Background Collisions
-  m_TagString: Untagged
+  m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

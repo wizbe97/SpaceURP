@@ -12,6 +12,7 @@ TagManager:
   - LaserHitTarget
   - StalactiteShadow
   - DialogueOptionButton
+  - TilemapColliders
   layers:
   - Default
   - TransparentFX
