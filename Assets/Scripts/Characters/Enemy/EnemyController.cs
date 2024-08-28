@@ -169,7 +169,7 @@ public abstract class EnemyController : MonoBehaviour
         }
         else
         {
-            Vector2 direction = rb.velocity.normalized; // Assuming rb is the Rigidbody2D component
+            Vector2 direction = rb.velocity.normalized;
             animator.SetFloat("xMove", direction.x);
             animator.SetFloat("yMove", direction.y);
         }

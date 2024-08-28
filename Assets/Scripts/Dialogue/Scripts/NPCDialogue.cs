@@ -7,9 +7,17 @@ public class NPCDialogue : MonoBehaviour
     private SpriteRenderer speechBubbleRenderer;
     public DialogueSO[] conversation;
     private DialogueManager dialogueManager;
-    [HideInInspector] public bool dialogueInitiated;
+    private NPCController npcController;
+    private NPCAnimationState npcAnimationState;
+    public bool dialogueInitiated;
+    public float detectionRadius = 2.0f; // Set this to the desired interaction radius
+    public LayerMask playerLayer; // Ensure the Player is on this layer
+    public Vector2 detectionOffset = new Vector2(0, -1); // Offset to move detection range down
+
     void Start()
     {
+        npcAnimationState = GetComponentInParent<NPCAnimationState>();
+        npcController = GetComponentInParent<NPCController>();
         speechBubbleRenderer = GetComponent<SpriteRenderer>();
         speechBubbleRenderer.enabled = false;
         dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
@@ -18,26 +26,44 @@ public class NPCDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && !dialogueInitiated)
+        CheckIfPlayerInRange();
+        if (dialogueInitiated)
         {
-            speechBubbleRenderer.enabled = true;
-            dialogueManager.InitiateDialogue(this);
-            dialogueInitiated = true;
+            npcController.canMove = false;
+            npcAnimationState.UpdateAnimationState();
+
+        }
+        else
+        {
+            npcController.canMove = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void CheckIfPlayerInRange()
     {
-        if (other.CompareTag("Player"))
+        Vector2 detectionCenter = (Vector2)transform.position + detectionOffset;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(detectionCenter, detectionRadius, playerLayer);
+
+        if (hits.Length > 0 && !dialogueInitiated)
+        {
+            foreach (Collider2D hit in hits)
+            {
+                if (hit.CompareTag("Player"))
+                {
+                    speechBubbleRenderer.enabled = true;
+                    dialogueManager.InitiateDialogue(this, 0);
+                    dialogueInitiated = true;
+                    break;
+                }
+            }
+        }
+        else if (dialogueInitiated && hits.Length == 0)
         {
             speechBubbleRenderer.enabled = false;
             dialogueManager.TurnOffDialogue();
             dialogueInitiated = false;
         }
     }
+
+
 }

@@ -157,8 +157,6 @@ public class DialogueManager : MonoBehaviour
 
     private void SetActorInfo(bool recurringCharacter)
     {
-        Debug.Log("Current character = " + currentSpeaker);
-        Debug.Log("Current portrait = " + currentPortrait);
         if (recurringCharacter)
         {
             for (int i = 0; i < actorSO.Length; i++)
@@ -242,10 +240,10 @@ public class DialogueManager : MonoBehaviour
         canContinueText = true;
     }
 
-    public void InitiateDialogue(NPCDialogue nPCDialogue)
+    public void InitiateDialogue(NPCDialogue nPCDialogue, int dialogueIndex)
     {
         // read the array we are currently stepping through
-        currentConversation = nPCDialogue.conversation[0];
+        currentConversation = nPCDialogue.conversation[dialogueIndex];
         dialogueActivated = true;
 
     }
@@ -255,6 +253,7 @@ public class DialogueManager : MonoBehaviour
         // reset the current conversation
         stepNum = 0;
         dialogueActivated = false;
+        npcDialogue.dialogueInitiated = false;
         optionsPanel.SetActive(false);
         dialogueCanvas.SetActive(false);
         GameManager.Instance.inventoryManager.gameObject.SetActive(true);

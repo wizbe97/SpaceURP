@@ -191,6 +191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Papers (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8759825038347510300, guid: 1251aaabc9c55c147bd6291316fdd516, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -325,6 +329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laptop
       objectReference: {fileID: 0}
+    - target: {fileID: 7498522976892493282, guid: 15f350f1eff7cc646a6cca65ebde67f8, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -341,6 +349,10 @@ PrefabInstance:
     - target: {fileID: 382385405572719096, guid: 72a31e30397c1f74fbf69611aa70dc3c, type: 3}
       propertyPath: m_Name
       value: Red Glass Vial
+      objectReference: {fileID: 0}
+    - target: {fileID: 382385405572719096, guid: 72a31e30397c1f74fbf69611aa70dc3c, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4139718410390529594, guid: 72a31e30397c1f74fbf69611aa70dc3c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -398,7 +410,7 @@ GameObject:
   - component: {fileID: 87027759}
   - component: {fileID: 87027761}
   - component: {fileID: 87027760}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,6 +545,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Empty Bookcase
       objectReference: {fileID: 0}
+    - target: {fileID: 2357574076037200949, guid: 27012fa4b28d2ac449be75d8faa8b0b2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5084995789399150852, guid: 27012fa4b28d2ac449be75d8faa8b0b2, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -666,6 +682,10 @@ PrefabInstance:
     - target: {fileID: 2463779243182495947, guid: 1cfa32caa3ce88b42ab0c9cb826666a7, type: 3}
       propertyPath: m_Name
       value: Blue Glass Vial
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463779243182495947, guid: 1cfa32caa3ce88b42ab0c9cb826666a7, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7643228384442162620, guid: 1cfa32caa3ce88b42ab0c9cb826666a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -817,7 +837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8574471372477719642, guid: 615716f15f5344794bbed54e76d58666, type: 3}
       propertyPath: orthographic size
-      value: 16.875
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -836,7 +856,7 @@ GameObject:
   - component: {fileID: 348231368}
   - component: {fileID: 348231367}
   - component: {fileID: 348231366}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Option 2
   m_TagString: DialogueOptionButton
   m_Icon: {fileID: 0}
@@ -973,7 +993,7 @@ GameObject:
   - component: {fileID: 392221674}
   - component: {fileID: 392221676}
   - component: {fileID: 392221675}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1109,7 +1129,7 @@ GameObject:
   - component: {fileID: 403158067}
   - component: {fileID: 403158066}
   - component: {fileID: 403158065}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: OptionsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1229,7 +1249,7 @@ GameObject:
   - component: {fileID: 431597313}
   - component: {fileID: 431597312}
   - component: {fileID: 431597311}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Option 1
   m_TagString: DialogueOptionButton
   m_Icon: {fileID: 0}
@@ -1422,6 +1442,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table Vertical (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7344398885386495085, guid: cfcef0b8bdc095744a0efe8ba157f12f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344398885386495085, guid: cfcef0b8bdc095744a0efe8ba157f12f, type: 3}
+      propertyPath: m_TagString
+      value: TilemapColliders
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1561,6 +1589,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pipe_Tube
       objectReference: {fileID: 0}
+    - target: {fileID: 7173910050478515402, guid: eeeeba31ca620c84181cfb005652dbc5, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1597,6 +1629,10 @@ PrefabInstance:
     - target: {fileID: 5739197891514062897, guid: 2590cafe30276bf42bb5521118d265ae, type: 3}
       propertyPath: m_Name
       value: Tall Plant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739197891514062897, guid: 2590cafe30276bf42bb5521118d265ae, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7955517058608642761, guid: 2590cafe30276bf42bb5521118d265ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1660,6 +1696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Glass Vial (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2463779243182495947, guid: 1cfa32caa3ce88b42ab0c9cb826666a7, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7643228384442162620, guid: 1cfa32caa3ce88b42ab0c9cb826666a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.81601334
@@ -1722,6 +1762,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Glass Vial (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 382385405572719096, guid: 72a31e30397c1f74fbf69611aa70dc3c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4139718410390529594, guid: 72a31e30397c1f74fbf69611aa70dc3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.0263863
@@ -1778,7 +1822,7 @@ GameObject:
   - component: {fileID: 897090687}
   - component: {fileID: 897090689}
   - component: {fileID: 897090688}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: NamePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1854,7 +1898,7 @@ GameObject:
   - component: {fileID: 956003264}
   - component: {fileID: 956003266}
   - component: {fileID: 956003265}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1994,6 +2038,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yellow Pot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 673940107086631401, guid: d91666250223f464fb665ae24609d3fd, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3512581687628988722, guid: d91666250223f464fb665ae24609d3fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.31564713
@@ -2050,6 +2098,10 @@ PrefabInstance:
     - target: {fileID: 673940107086631401, guid: d91666250223f464fb665ae24609d3fd, type: 3}
       propertyPath: m_Name
       value: Yellow Pot
+      objectReference: {fileID: 0}
+    - target: {fileID: 673940107086631401, guid: d91666250223f464fb665ae24609d3fd, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3512581687628988722, guid: d91666250223f464fb665ae24609d3fd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2190,7 +2242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7812763513479847737, guid: e5754c45c3b692e45a3564c9e97309b8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2213,6 +2265,10 @@ PrefabInstance:
     - target: {fileID: 737025155362773718, guid: bd9e01f794ef1e44ab77abdc861b1e4a, type: 3}
       propertyPath: m_Name
       value: Small Plant
+      objectReference: {fileID: 0}
+    - target: {fileID: 737025155362773718, guid: bd9e01f794ef1e44ab77abdc861b1e4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3512650353930612513, guid: bd9e01f794ef1e44ab77abdc861b1e4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2276,7 +2332,7 @@ GameObject:
   - component: {fileID: 1147866158}
   - component: {fileID: 1147866157}
   - component: {fileID: 1147866156}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Option 3
   m_TagString: DialogueOptionButton
   m_Icon: {fileID: 0}
@@ -2409,6 +2465,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interior Pod
       objectReference: {fileID: 0}
+    - target: {fileID: 288311250152280558, guid: da32ffb5e248b25468d409bc5d2a9bf5, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8431451873826254745, guid: da32ffb5e248b25468d409bc5d2a9bf5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2507,6 +2567,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Glass Vial (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 382385405572719096, guid: 72a31e30397c1f74fbf69611aa70dc3c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4139718410390529594, guid: 72a31e30397c1f74fbf69611aa70dc3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.7697687
@@ -2563,6 +2627,10 @@ PrefabInstance:
     - target: {fileID: 5739197891514062897, guid: 2590cafe30276bf42bb5521118d265ae, type: 3}
       propertyPath: m_Name
       value: Tall Plant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739197891514062897, guid: 2590cafe30276bf42bb5521118d265ae, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7955517058608642761, guid: 2590cafe30276bf42bb5521118d265ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2661,6 +2729,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Microscope
       objectReference: {fileID: 0}
+    - target: {fileID: 8992674159129161267, guid: 1ed87d44a64838e4ea0c2d545e42cf96, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2728,6 +2800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Microscope (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8992674159129161267, guid: 1ed87d44a64838e4ea0c2d545e42cf96, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2744,7 +2820,7 @@ GameObject:
   - component: {fileID: 1289578397}
   - component: {fileID: 1289578399}
   - component: {fileID: 1289578398}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: DialogueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2909,6 +2985,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yellow Pots
       objectReference: {fileID: 0}
+    - target: {fileID: 673940107086631401, guid: 970ffd05009028b47877db7ce9f802b4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3512581687628988722, guid: 970ffd05009028b47877db7ce9f802b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.9068389
@@ -2966,9 +3046,9 @@ GameObject:
   - component: {fileID: 1476623519}
   - component: {fileID: 1476623518}
   - component: {fileID: 1476623517}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: DialogueCanvas
-  m_TagString: Untagged
+  m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3109,7 +3189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1513685656}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ventilation Pipes
   m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
@@ -3142,7 +3222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522669950}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Bookcase
   m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
@@ -3176,7 +3256,7 @@ GameObject:
   - component: {fileID: 1549552175}
   - component: {fileID: 1549552177}
   - component: {fileID: 1549552176}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: DialoguePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3294,6 +3374,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table Vertical
       objectReference: {fileID: 0}
+    - target: {fileID: 7344398885386495085, guid: cfcef0b8bdc095744a0efe8ba157f12f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344398885386495085, guid: cfcef0b8bdc095744a0efe8ba157f12f, type: 3}
+      propertyPath: m_TagString
+      value: TilemapColliders
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3325,6 +3413,10 @@ PrefabInstance:
     - target: {fileID: 2357574076037200949, guid: 27012fa4b28d2ac449be75d8faa8b0b2, type: 3}
       propertyPath: m_Name
       value: Empty Bookcase (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2357574076037200949, guid: 27012fa4b28d2ac449be75d8faa8b0b2, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5084995789399150852, guid: 27012fa4b28d2ac449be75d8faa8b0b2, type: 3}
       propertyPath: m_SortingLayer
@@ -3447,6 +3539,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Tubes 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8293604605433393727, guid: 21a6a289c7e7ba0469ba6d87e5deb0d7, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3461,7 +3557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1617272857}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Bookcase
   m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
@@ -3541,6 +3637,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pipe_Tube (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7173910050478515402, guid: eeeeba31ca620c84181cfb005652dbc5, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3561,7 +3661,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1651876103}
   - component: {fileID: 1651876105}
-  - component: {fileID: 1651876106}
   - component: {fileID: 1651876107}
   m_Layer: 0
   m_Name: DialogueHandler
@@ -3637,51 +3736,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1651876106
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651876102}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.084956765, y: -2.1326354}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.9601228, y: 2.9452724}
-  m_EdgeRadius: 0
 --- !u!114 &1651876107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3697,6 +3751,11 @@ MonoBehaviour:
   conversation:
   - {fileID: 11400000, guid: 55437d910cebe85419432a7963ec9369, type: 2}
   dialogueInitiated: 0
+  detectionRadius: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  detectionOffset: {x: 0, y: -1.81}
 --- !u!1 &1658029787
 GameObject:
   m_ObjectHideFlags: 0
@@ -3709,7 +3768,7 @@ GameObject:
   - component: {fileID: 1658029791}
   - component: {fileID: 1658029790}
   - component: {fileID: 1658029789}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Option 0
   m_TagString: DialogueOptionButton
   m_Icon: {fileID: 0}
@@ -3907,6 +3966,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Papers
       objectReference: {fileID: 0}
+    - target: {fileID: 8759825038347510300, guid: 1251aaabc9c55c147bd6291316fdd516, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3923,6 +3986,10 @@ PrefabInstance:
     - target: {fileID: 5127833323742451564, guid: efe4e2ef3bca26e48b1c1e1cda27d147, type: 3}
       propertyPath: m_Name
       value: Green Tray
+      objectReference: {fileID: 0}
+    - target: {fileID: 5127833323742451564, guid: efe4e2ef3bca26e48b1c1e1cda27d147, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5324720460176463872, guid: efe4e2ef3bca26e48b1c1e1cda27d147, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4021,6 +4088,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table Horizontal
       objectReference: {fileID: 0}
+    - target: {fileID: 3269902904804019216, guid: e79ca921b00a2444c8b742d087cf41a2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269902904804019216, guid: e79ca921b00a2444c8b742d087cf41a2, type: 3}
+      propertyPath: m_TagString
+      value: TilemapColliders
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -4046,6 +4121,10 @@ PrefabInstance:
     - target: {fileID: 872883991902346883, guid: 50174728c53458f4cbf822366dc56977, type: 3}
       propertyPath: m_Name
       value: Computer
+      objectReference: {fileID: 0}
+    - target: {fileID: 872883991902346883, guid: 50174728c53458f4cbf822366dc56977, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4393837319754549401, guid: 50174728c53458f4cbf822366dc56977, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4103,6 +4182,10 @@ PrefabInstance:
     - target: {fileID: 1232014305959462894, guid: 03f6cfa9675d1d44d9b2c669e17c6ac9, type: 3}
       propertyPath: m_Name
       value: Clipboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232014305959462894, guid: 03f6cfa9675d1d44d9b2c669e17c6ac9, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8341850810934069965, guid: 03f6cfa9675d1d44d9b2c669e17c6ac9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4221,6 +4304,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table Vertical (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7344398885386495085, guid: cfcef0b8bdc095744a0efe8ba157f12f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344398885386495085, guid: cfcef0b8bdc095744a0efe8ba157f12f, type: 3}
+      propertyPath: m_TagString
+      value: TilemapColliders
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4278,6 +4369,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table Horizontal (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3269902904804019216, guid: e79ca921b00a2444c8b742d087cf41a2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269902904804019216, guid: e79ca921b00a2444c8b742d087cf41a2, type: 3}
+      propertyPath: m_TagString
+      value: TilemapColliders
+      objectReference: {fileID: 0}
     - target: {fileID: 3774274929311215915, guid: e79ca921b00a2444c8b742d087cf41a2, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -4309,7 +4408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1782133722}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tall Plants
   m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
@@ -4344,7 +4443,7 @@ GameObject:
   - component: {fileID: 1811951606}
   - component: {fileID: 1811951608}
   - component: {fileID: 1811951607}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4419,7 +4518,7 @@ GameObject:
   - component: {fileID: 1834820078}
   - component: {fileID: 1834820080}
   - component: {fileID: 1834820079}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: ActorText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4564,6 +4663,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Green Glass Vial
       objectReference: {fileID: 0}
+    - target: {fileID: 2463779243182495947, guid: 39511f48b77326943b7e1c6b8983c825, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7643228384442162620, guid: 39511f48b77326943b7e1c6b8983c825, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.010000229
@@ -4619,9 +4722,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2009489746}
   - component: {fileID: 2009489745}
-  m_Layer: 0
+  - component: {fileID: 2009489748}
+  - component: {fileID: 2009489751}
+  - component: {fileID: 2009489747}
+  - component: {fileID: 2009489749}
+  - component: {fileID: 2009489750}
+  m_Layer: 13
   m_Name: Scientist
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4687,13 +4795,136 @@ Transform:
   m_GameObject: {fileID: 2009489743}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.77, y: 2.61, z: 0.121659376}
+  m_LocalPosition: {x: 7.48, y: 2.39, z: 0.121659376}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1651876103}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &2009489747
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009489743}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!114 &2009489748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009489743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f58985898c1d44c8d6ee03aeb2db36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  changeDirectionTime: 5
+  detectionDistance: 2.25
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  maxAttempts: 10
+  canMove: 1
+  minPauseTime: 1
+  maxPauseTime: 3
+  pauseChance: 0.3
+  isMoving: 0
+  rb: {fileID: 0}
+--- !u!70 &2009489749
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009489743}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.004961069, y: -1.0410422}
+  m_Size: {x: 1.0024372, y: 0.28284886}
+  m_Direction: 1
+--- !u!95 &2009489750
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009489743}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9bc9deba3a2202c489fce625648e48b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2009489751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009489743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b714ca46d6724034397942d517f2e49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2009489750}
+  rb: {fileID: 2009489747}
+  currentStateValue: 0
 --- !u!1 &2020371192
 GameObject:
   m_ObjectHideFlags: 0
@@ -26610,6 +26841,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Glass Vial (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 382385405572719096, guid: 72a31e30397c1f74fbf69611aa70dc3c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4139718410390529594, guid: 72a31e30397c1f74fbf69611aa70dc3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5864706
@@ -26707,6 +26942,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Tubes 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8293604605433393727, guid: 611d9c96589a51e49a89b5c771e99b58, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26723,7 +26962,7 @@ GameObject:
   - component: {fileID: 2059163903}
   - component: {fileID: 2059163905}
   - component: {fileID: 2059163904}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26860,7 +27099,7 @@ GameObject:
   - component: {fileID: 2114616755}
   - component: {fileID: 2114616754}
   - component: {fileID: 2114616753}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Background Collisions
   m_TagString: TilemapColliders
   m_Icon: {fileID: 0}
