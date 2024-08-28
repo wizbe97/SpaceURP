@@ -56,7 +56,8 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if (dialogueActivated && Input.GetKeyDown(KeyCode.F))
+        // Only allow "F" key input if all option buttons are deactivated
+        if (dialogueActivated && Input.GetKeyDown(KeyCode.F) && AllOptionButtonsDeactivated())
         {
             if (stepNum >= currentConversation.actors.Length)
             {
@@ -76,7 +77,6 @@ public class DialogueManager : MonoBehaviour
         {
             SetActorInfo(false);
         }
-
         // If it's a recurring character
         else
         {
@@ -87,7 +87,7 @@ public class DialogueManager : MonoBehaviour
         actor.text = currentSpeaker;
         portrait.sprite = currentPortrait;
 
-        //If there is an options branch..
+        // If there is an options branch..
         if (currentConversation.actors[stepNum] == DialogueActors.Branch)
         {
             optionsPanel.SetActive(true);
@@ -102,10 +102,10 @@ public class DialogueManager : MonoBehaviour
                     optionButtonText[i].text = currentConversation.optionText[i];
                     optionButton[i].SetActive(true);
                 }
-                // Set the first button to be auto-selected
-                optionButton[0].GetComponent<Button>().Select();
             }
 
+            // Stop the dialogue from progressing automatically
+            return;
         }
 
         if (stepNum < currentConversation.dialogue.Length)
@@ -121,7 +121,18 @@ public class DialogueManager : MonoBehaviour
         stepNum += 1;
     }
 
-
+    // Helper method to check if all option buttons are deactivated
+    private bool AllOptionButtonsDeactivated()
+    {
+        foreach (GameObject button in optionButton)
+        {
+            if (button.activeSelf)
+            {
+                return false; // If any button is active, return false
+            }
+        }
+        return true; // All buttons are inactive, return true
+    }
 
     private void SetActorInfo(bool recurringCharacter)
     {
@@ -171,8 +182,8 @@ public class DialogueManager : MonoBehaviour
         }
         stepNum = 0;
         PlayDialogue();
-
     }
+    
 
 
     public void InitiateDialogue(NPCDialogue nPCDialogue)
