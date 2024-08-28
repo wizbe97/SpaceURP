@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+
+    private PlayerController playerController;
     // The NPC Dialogue we are currently stepping through
     private DialogueSO currentConversation;
     private int stepNum;
@@ -34,6 +36,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        playerController = FindObjectOfType<PlayerController>();
         // Find Buttons
         optionsPanel = GameObject.Find("OptionsPanel");
         optionsPanel.SetActive(false);
@@ -129,6 +132,11 @@ public class DialogueManager : MonoBehaviour
         }
 
         dialogueCanvas.SetActive(true);
+
+        GameManager.Instance.inventoryManager.gameObject.SetActive(false);
+        GameManager.Instance.healthBarManager.gameObject.SetActive(false);
+        playerController.canMove = false;
+
         stepNum += 1;
     }
 
@@ -221,7 +229,7 @@ public class DialogueManager : MonoBehaviour
                     addingRichTextTag = false;
                 }
             }
-            
+
             else
             {
                 dialogueText.text += letter;
@@ -249,6 +257,9 @@ public class DialogueManager : MonoBehaviour
         dialogueActivated = false;
         optionsPanel.SetActive(false);
         dialogueCanvas.SetActive(false);
+        GameManager.Instance.inventoryManager.gameObject.SetActive(true);
+        GameManager.Instance.healthBarManager.gameObject.SetActive(true);
+        playerController.canMove = true;
     }
 }
 
