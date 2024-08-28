@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 538a2041bad52604ba76c8de7d60de28, type: 3}
-  m_Name: No I dont
+  m_Name: Not much
   m_EditorClassIdentifier: 
   actors: 00000000
   randomActorName: 
   randomActorPortrait: {fileID: 0}
   dialogue:
-  - 'No I am enjoying Pokemon too much '
+  - Not much man
   optionText: []
   option0: {fileID: 0}
   option1: {fileID: 0}
