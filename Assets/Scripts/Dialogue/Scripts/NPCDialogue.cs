@@ -7,7 +7,7 @@ public class NPCDialogue : MonoBehaviour
     private SpriteRenderer speechBubbleRenderer;
     public DialogueSO[] conversation;
     private DialogueManager dialogueManager;
-    private bool dialogueInitiated;
+    [HideInInspector] public bool dialogueInitiated;
     void Start()
     {
         speechBubbleRenderer = GetComponent<SpriteRenderer>();

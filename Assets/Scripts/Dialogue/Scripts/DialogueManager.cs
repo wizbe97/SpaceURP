@@ -9,6 +9,8 @@ public class DialogueManager : MonoBehaviour
 {
 
     private PlayerController playerController;
+
+    private NPCDialogue npcDialogue;
     // The NPC Dialogue we are currently stepping through
     private DialogueSO currentConversation;
     private int stepNum;
@@ -36,6 +38,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        npcDialogue = FindObjectOfType<NPCDialogue>();
         playerController = FindObjectOfType<PlayerController>();
         // Find Buttons
         optionsPanel = GameObject.Find("OptionsPanel");
@@ -62,9 +65,8 @@ public class DialogueManager : MonoBehaviour
         dialogueCanvas.SetActive(false);
     }
 
-    private void Update()
+    public void StartDialogue()
     {
-        // Only allow "F" key input if all option buttons are deactivated
         if (dialogueActivated && Input.GetKeyDown(KeyCode.F) && canContinueText && AllOptionButtonsDeactivated())
         {
             if (stepNum >= currentConversation.actors.Length)
@@ -244,7 +246,6 @@ public class DialogueManager : MonoBehaviour
     {
         // read the array we are currently stepping through
         currentConversation = nPCDialogue.conversation[0];
-        Debug.Log("Started conversation");
         dialogueActivated = true;
 
     }
@@ -253,7 +254,6 @@ public class DialogueManager : MonoBehaviour
     {
         // reset the current conversation
         stepNum = 0;
-        Debug.Log("Ended conversation");
         dialogueActivated = false;
         optionsPanel.SetActive(false);
         dialogueCanvas.SetActive(false);

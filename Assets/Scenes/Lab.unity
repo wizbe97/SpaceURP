@@ -3696,6 +3696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conversation:
   - {fileID: 11400000, guid: 55437d910cebe85419432a7963ec9369, type: 2}
+  dialogueInitiated: 0
 --- !u!1 &1658029787
 GameObject:
   m_ObjectHideFlags: 0
