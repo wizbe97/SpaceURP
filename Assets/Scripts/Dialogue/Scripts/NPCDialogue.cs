@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCDialogue : MonoBehaviour
 {
-    private SpriteRenderer speechBubbleRenderer;
+    [HideInInspector] public SpriteRenderer speechBubbleRenderer;
     public DialogueSO[] conversation;
     private DialogueManager dialogueManager;
     private NPCController npcController;
@@ -30,12 +30,14 @@ public class NPCDialogue : MonoBehaviour
         if (dialogueInitiated)
         {
             npcController.canMove = false;
+            npcController.isMoving = false;
             npcAnimationState.UpdateAnimationState();
 
         }
         else
         {
             npcController.canMove = true;
+            npcController.isMoving = true;
         }
     }
 

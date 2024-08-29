@@ -9,6 +9,7 @@ public class NPCAnimationState : MonoBehaviour
     [HideInInspector] private Transform player;
 
     private NPCController npcController;
+    private NPCDialogue npcDialogue;  // Reference to NPCDialogue script
     public NPCStates currentStateValue;
 
     public enum NPCStates
@@ -41,6 +42,7 @@ public class NPCAnimationState : MonoBehaviour
     private void Start()
     {
         npcController = GetComponent<NPCController>();
+        npcDialogue = GetComponentInChildren<NPCDialogue>();  // Find NPCDialogue script in children
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
@@ -64,7 +66,13 @@ public class NPCAnimationState : MonoBehaviour
         {
             case 1:
                 CurrentState = NPCStates.IDLE;
-                SetAnimationDirection((player.position - transform.position).normalized);
+
+                // Use ternary operator to determine the direction based on speechBubbleRenderer state
+                Vector2 direction = npcDialogue.speechBubbleRenderer.enabled ? 
+                                    (player.position - transform.position).normalized : 
+                                    rb.velocity.normalized;
+
+                SetAnimationDirection(direction);
                 break;
 
             case 2:
@@ -80,5 +88,4 @@ public class NPCAnimationState : MonoBehaviour
         animator.SetFloat("xMove", direction.x);
         animator.SetFloat("yMove", direction.y);
     }
-
 }
