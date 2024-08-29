@@ -101,7 +101,7 @@ MonoBehaviour:
   conversation:
   - {fileID: 11400000, guid: 55437d910cebe85419432a7963ec9369, type: 2}
   dialogueInitiated: 0
-  detectionRadius: 2
+  detectionRadius: 0.35
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
