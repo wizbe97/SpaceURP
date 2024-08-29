@@ -9,11 +9,13 @@ public class NPCDialogue : MonoBehaviour
     private NPCMovementController npcController;
     private NPCAnimationState npcAnimationState;
     public bool dialogueInitiated;
-    public float detectionRadius = 2.0f; // Set this to the desired interaction radius
-    public LayerMask playerLayer; // Ensure the Player is on this layer
-    public Vector2 detectionOffset = new Vector2(0, -1); // Offset to move detection range down
+    public float detectionRadius = 2.0f;
+    public LayerMask playerLayer;
+    public Vector2 detectionOffset = new Vector2(0, -1);
 
     private Coroutine movementDelayCoroutine;
+    private Coroutine checkInRangeCoroutine;
+    private bool playerInTrigger;
 
     void Start()
     {
@@ -24,55 +26,107 @@ public class NPCDialogue : MonoBehaviour
         dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
     }
 
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        CheckIfPlayerInRange();
-        if (dialogueInitiated)
+        if (other.CompareTag("Player"))
         {
-            npcController.canMove = false;
-            npcController.isMoving = false;
-            npcAnimationState.UpdateAnimationState();
+            Debug.Log("Player entered trigger.");
+            playerInTrigger = true;
+            if (checkInRangeCoroutine == null)
+            {
+                checkInRangeCoroutine = StartCoroutine(CheckPlayerInRangeCoroutine(0.1f)); // Start checking every 0.2 seconds
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player exited trigger.");
+            playerInTrigger = false;
+            if (checkInRangeCoroutine != null)
+            {
+                StopCoroutine(checkInRangeCoroutine);
+                checkInRangeCoroutine = null;
+            }
+
+            if (dialogueInitiated)
+            {
+                EndDialogue();
+            }
+        }
+    }
+
+    private IEnumerator CheckPlayerInRangeCoroutine(float interval)
+    {
+        while (playerInTrigger)
+        {
+            Debug.Log("Checking if player is in range.");
+            CheckIfPlayerInRange();
+            yield return new WaitForSeconds(interval);
         }
     }
 
     private void CheckIfPlayerInRange()
     {
         Vector2 detectionCenter = (Vector2)transform.position + detectionOffset;
-        Collider2D[] hits = Physics2D.OverlapCircleAll(detectionCenter, detectionRadius, playerLayer);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(detectionCenter, new Vector2(detectionRadius, detectionRadius), 0, playerLayer);
 
-        if (hits.Length > 0 && !dialogueInitiated)
+        if (hits.Length > 0)
         {
             foreach (Collider2D hit in hits)
             {
                 if (hit.CompareTag("Player"))
                 {
+                    Debug.Log("Player detected within range.");
                     speechBubbleRenderer.enabled = true;
-                    dialogueManager.InitiateDialogue(this, 0);
-                    dialogueInitiated = true;
-
-                    if (movementDelayCoroutine != null)
+                    npcAnimationState.UpdateAnimationState();
+                    if (!dialogueInitiated)
                     {
-                        StopCoroutine(movementDelayCoroutine);
+                        StartDialogue();
                     }
-
-                    npcController.canMove = false;
                     break;
                 }
             }
         }
-        else if (dialogueInitiated && hits.Length == 0)
+        else
         {
-            speechBubbleRenderer.enabled = false;
-            dialogueManager.TurnOffDialogue();
-            dialogueInitiated = false;
-
-            if (movementDelayCoroutine != null)
+            if (dialogueInitiated)
             {
-                StopCoroutine(movementDelayCoroutine);
+                Debug.Log("Player left range.");
+                EndDialogue();
             }
-
-            movementDelayCoroutine = StartCoroutine(EnableMovementAfterDelay());
         }
+    }
+
+    private void StartDialogue()
+    {
+        Debug.Log("Starting dialogue.");
+        dialogueManager.InitiateDialogue(this, 0);
+        dialogueInitiated = true;
+
+        if (movementDelayCoroutine != null)
+        {
+            StopCoroutine(movementDelayCoroutine);
+        }
+
+        npcController.canMove = false;
+    }
+
+    private void EndDialogue()
+    {
+        Debug.Log("Ending dialogue.");
+        speechBubbleRenderer.enabled = false;
+        dialogueManager.TurnOffDialogue();
+        dialogueInitiated = false;
+
+        if (movementDelayCoroutine != null)
+        {
+            StopCoroutine(movementDelayCoroutine);
+        }
+
+        movementDelayCoroutine = StartCoroutine(EnableMovementAfterDelay());
     }
 
     private IEnumerator EnableMovementAfterDelay()
