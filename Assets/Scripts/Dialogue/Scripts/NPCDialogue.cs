@@ -6,7 +6,7 @@ public class NPCDialogue : MonoBehaviour
     [HideInInspector] public SpriteRenderer speechBubbleRenderer;
     public DialogueSO[] conversation;
     private DialogueManager dialogueManager;
-    private NPCController npcController;
+    private NPCMovementController npcController;
     private NPCAnimationState npcAnimationState;
     public bool dialogueInitiated;
     public float detectionRadius = 2.0f; // Set this to the desired interaction radius
@@ -18,7 +18,7 @@ public class NPCDialogue : MonoBehaviour
     void Start()
     {
         npcAnimationState = GetComponentInParent<NPCAnimationState>();
-        npcController = GetComponentInParent<NPCController>();
+        npcController = GetComponentInParent<NPCMovementController>();
         speechBubbleRenderer = GetComponent<SpriteRenderer>();
         speechBubbleRenderer.enabled = false;
         dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();

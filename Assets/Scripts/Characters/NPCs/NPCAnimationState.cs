@@ -8,7 +8,7 @@ public class NPCAnimationState : MonoBehaviour
     [SerializeField] public Rigidbody2D rb;
     [HideInInspector] private Transform player;
 
-    private NPCController npcController;
+    private NPCMovementController npcController;
     private NPCDialogue npcDialogue;  // Reference to NPCDialogue script
     public NPCStates currentStateValue;
 
@@ -41,7 +41,7 @@ public class NPCAnimationState : MonoBehaviour
 
     private void Start()
     {
-        npcController = GetComponent<NPCController>();
+        npcController = GetComponent<NPCMovementController>();
         npcDialogue = GetComponentInChildren<NPCDialogue>();  // Find NPCDialogue script in children
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)

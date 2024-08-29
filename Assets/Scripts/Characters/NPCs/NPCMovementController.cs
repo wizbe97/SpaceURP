@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NPCController : MonoBehaviour
+public class NPCMovementController : MonoBehaviour
 {
     public float moveSpeed = 3000f; // Speed for wandering
     public float wanderTime = 5f; // Time interval for changing wander direction
