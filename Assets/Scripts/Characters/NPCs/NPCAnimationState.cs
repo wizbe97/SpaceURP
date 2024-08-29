@@ -5,9 +5,8 @@ using UnityEngine;
 public class NPCAnimationState : MonoBehaviour
 {
     [SerializeField] Animator animator;
-    [SerializeField] Rigidbody2D rb;
-    private NPCDialogue npcDialogue;
-    private Transform player;
+    [SerializeField] public Rigidbody2D rb;
+    [HideInInspector] private Transform player;
 
     private NPCController npcController;
     public NPCStates currentStateValue;
@@ -47,7 +46,6 @@ public class NPCAnimationState : MonoBehaviour
         {
             player = playerObject.transform;
         }
-        npcDialogue = GetComponentInChildren<NPCDialogue>();
     }
 
     public void UpdateAnimationState()
@@ -66,26 +64,21 @@ public class NPCAnimationState : MonoBehaviour
         {
             case 1:
                 CurrentState = NPCStates.IDLE;
-                SetAnimationDirection();
+                SetAnimationDirection((player.position - transform.position).normalized);
                 break;
 
             case 2:
                 CurrentState = NPCStates.WALK;
-                SetAnimationDirection();
+                SetAnimationDirection(rb.velocity.normalized);
                 break;
         }
     }
 
-    private void SetAnimationDirection()
+    public void SetAnimationDirection(Vector2 direction)
     {
-        Vector2 direction;
-        direction = rb.velocity.normalized;
-
         // Update animator parameters
         animator.SetFloat("xMove", direction.x);
         animator.SetFloat("yMove", direction.y);
     }
-
-
 
 }

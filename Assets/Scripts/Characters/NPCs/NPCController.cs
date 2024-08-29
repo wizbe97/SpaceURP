@@ -2,124 +2,182 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    public float speed = 2f;
-    public float changeDirectionTime = 3f;
-    public float detectionDistance = 1f;
-    public LayerMask obstacleLayer;
+    public float moveSpeed = 10000f; // Speed for wandering
+    public float wanderTime = 5f; // Time interval for changing wander direction
+    public float detectionDistance = 1f; // Distance to detect obstacles
+    public LayerMask obstacleLayer; // LayerMask to specify the obstacle layer
+
+    public float moveDrag = 15f;
+    public float stopDrag = 25f;
+
     public int maxAttempts = 10;
     public bool canMove = true;  // Public variable to control whether the NPC can move
 
-    public float minPauseTime = 1f;  // Minimum time the NPC will pause
-    public float maxPauseTime = 3f;  // Maximum time the NPC will pause
-    public float pauseChance = 0.3f; // Chance the NPC will pause instead of moving
+    private Rigidbody2D rb;
+    private Vector2 wanderDirection;
+    private float nextWanderTime;
+    private bool isPaused = false; // State to check if the NPC is currently paused
+    private float nextPauseTime; // Time for the next pause
+    private float pauseDuration; // Duration of the current pause
 
-    public bool isMoving; // Public read-only property to check if the NPC is moving
-
-    private Vector2 direction;
-    [HideInInspector] public Rigidbody2D rb;
-    private float timer;
-    private bool isPausing = false;
-    private float pauseTimer = 0f;
+    private float nextRandomPauseTime; // When to take the next random pause
+    private float randomPauseDuration; // How long the random pause will last
 
     private NPCAnimationState npcAnimationState;
 
+    public bool isMoving; // Internal variable to track moving state
+    public bool IsMoving
+    {
+        get { return isMoving; }
+        set
+        {
+            isMoving = value;
+            npcAnimationState.UpdateAnimationState();
+
+            if (isMoving)
+            {
+                rb.drag = moveDrag;
+            }
+            else
+            {
+                rb.drag = stopDrag;
+            }
+        }
+    }
+
     void Start()
     {
+        
         rb = GetComponent<Rigidbody2D>();
         npcAnimationState = GetComponent<NPCAnimationState>();
-        ChooseNewDirection();
+        wanderDirection = Random.insideUnitCircle.normalized; // Initialize with a random direction
+        nextWanderTime = Time.time + wanderTime;
+
+        SetNextRandomPause();
     }
 
     void Update()
     {
-        if (!canMove)
+        if (canMove)
         {
-            rb.velocity = Vector2.zero;  // Stop movement if canMove is false
-            isMoving = false;            // NPC is not moving
-            return;  // Exit Update if movement is disabled
-        }
-
-        if (isPausing)
-        {
-            pauseTimer -= Time.deltaTime;
-            if (pauseTimer <= 0f)
+            if (isPaused)
             {
-                isPausing = false;
-                timer = 0f; // Reset the timer to immediately choose a new direction
+                if (Time.time > nextPauseTime)
+                {
+                    isPaused = false;
+                    IsMoving = true;
+                    SetNextRandomPause();
+                    nextWanderTime = Time.time + wanderTime;
+                }
             }
             else
             {
-                rb.velocity = Vector2.zero;  // Stop movement during pause
-                isMoving = false;            // NPC is not moving during pause
-                return;
+                Wander();
+                HandleRandomPause();
             }
         }
-
-        timer += Time.deltaTime;
-        if (timer >= changeDirectionTime)
-        {
-            ChooseNewDirection();
-            timer = 0f;
-        }
-
-        // Move the NPC
-        rb.velocity = direction * speed;
-        isMoving = direction != Vector2.zero; // Update isMoving based on direction
-        npcAnimationState.UpdateAnimationState();
-
-
-        // Check for obstacles in the direction of movement
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectionDistance, obstacleLayer);
-        if (hit.collider != null)
-        {
-            ChooseNewDirection();  // Choose a new direction if an obstacle is detected
-        }
-
     }
 
-    void ChooseNewDirection()
+    private void Wander()
     {
-        if (Random.value < pauseChance)
+        if (Time.time > nextWanderTime)
         {
-            isPausing = true;
-            pauseTimer = Random.Range(minPauseTime, maxPauseTime);
-            isMoving = false; // NPC is not moving during pause
-            npcAnimationState.UpdateAnimationState();
-            return;  // Exit without setting a new direction
+            // Switch to pausing after wandering for a while
+            isPaused = true;
+            pauseDuration = GetRandomPauseLength();
+            nextPauseTime = Time.time + pauseDuration;
+            IsMoving = false;
+            return;
         }
 
-        int attempts = 0;
-        bool validDirection = false;
-
-        while (attempts < maxAttempts && !validDirection)
+        // Check for obstacles in the current wander direction
+        if (IsObstacleDetected())
         {
-            // Pick a random angle in radians
-            float angle = Random.Range(0f, 2f * Mathf.PI);
-            direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            HandleCollisionPause();
+            return;
+        }
 
-            // Check if the chosen direction is free of obstacles
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectionDistance, obstacleLayer);
-            if (hit.collider == null)
-            {
-                validDirection = true;  // Valid direction found
-                npcAnimationState.UpdateAnimationState();
+        // Move with the current direction
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, moveSpeed).normalized;
+        rb.AddForce(moveSpeed * Time.deltaTime * wanderDirection, ForceMode2D.Force);
+        IsMoving = true;
+    }
 
-            }
+    private bool IsObstacleDetected()
+    {
+        // Cast a ray in the direction the NPC is moving to detect obstacles on the specified layer
+        RaycastHit2D hit = Physics2D.Raycast(rb.position, wanderDirection, detectionDistance, obstacleLayer);
+        return hit.collider != null;
+    }
 
+    private void HandleCollisionPause()
+    {
+        // When an obstacle is detected, pause for a random duration and find a new direction
+        isPaused = true;
+        pauseDuration = GetRandomPauseLength();
+        nextPauseTime = Time.time + pauseDuration;
+        IsMoving = false;
+
+        FindNewWanderDirection();
+    }
+
+    private void FindNewWanderDirection()
+    {
+        // Generate a new random direction
+        Vector2 newDirection = Random.insideUnitCircle.normalized;
+        int attempts = 0;
+
+        while (IsObstacleDetected() && attempts < maxAttempts)
+        {
+            newDirection = Random.insideUnitCircle.normalized;
             attempts++;
         }
 
-        if (!validDirection)
+        wanderDirection = newDirection;
+
+        // Update the wander time to prevent immediate direction changes
+        nextWanderTime = Time.time + wanderTime;
+    }
+
+    private void HandleRandomPause()
+    {
+        // Check if it's time to take a random pause
+        if (Time.time > nextRandomPauseTime)
         {
-            // If no valid direction was found after maxAttempts, stop or reverse direction
-            direction = -direction; // Alternatively, you could stop the NPC by setting direction to Vector2.zero
-            npcAnimationState.UpdateAnimationState();
-
+            isPaused = true;
+            randomPauseDuration = GetRandomPauseLength();
+            nextPauseTime = Time.time + randomPauseDuration;
+            IsMoving = false;
+            SetNextRandomPause();
         }
+    }
 
-        isMoving = direction != Vector2.zero; // Update isMoving based on the final direction chosen
-        npcAnimationState.UpdateAnimationState();
+    private void SetNextRandomPause()
+    {
+        // Set when the next random pause will happen
+        nextRandomPauseTime = Time.time + GetRandomPauseTime();
+    }
 
+    private float GetRandomPauseTime()
+    {
+        // Return a random pause interval between 3 and 10 seconds
+        return Random.Range(3f, 10f);
+    }
+
+    private float GetRandomPauseLength()
+    {
+        // Return a random pause length between 2 and 8 seconds
+        return Random.Range(2f, 8f);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Ensure that rb is not null before accessing it
+        if (rb != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(rb.position, rb.position + wanderDirection * detectionDistance);
+        }
     }
 
 }
