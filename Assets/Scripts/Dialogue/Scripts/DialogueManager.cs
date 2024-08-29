@@ -250,16 +250,31 @@ public class DialogueManager : MonoBehaviour
 
     public void TurnOffDialogue()
     {
-        // reset the current conversation
+        // Reset the current conversation
         stepNum = 0;
         dialogueActivated = false;
         npcDialogue.dialogueInitiated = false;
         optionsPanel.SetActive(false);
         dialogueCanvas.SetActive(false);
-        GameManager.Instance.inventoryManager.gameObject.SetActive(true);
-        GameManager.Instance.healthBarManager.gameObject.SetActive(true);
+
+        // Safely check if inventoryManager and healthBarManager are not null before accessing them
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.inventoryManager != null)
+            {
+                GameManager.Instance.inventoryManager.gameObject.SetActive(true);
+            }
+
+            if (GameManager.Instance.healthBarManager != null)
+            {
+                GameManager.Instance.healthBarManager.gameObject.SetActive(true);
+            }
+        }
+
         playerController.canMove = true;
     }
+
+
 }
 
 public enum DialogueActors

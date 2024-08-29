@@ -30,7 +30,6 @@ public class NPCDialogue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player entered trigger.");
             playerInTrigger = true;
             if (checkInRangeCoroutine == null)
             {

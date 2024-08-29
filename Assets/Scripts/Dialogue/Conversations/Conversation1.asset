@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Conversation1
   m_EditorClassIdentifier: 
   actors: 01000000000000000100000003000000
-  randomActorName: Amanda
+  randomActorName: 
   randomActorPortrait: {fileID: 0}
   dialogue:
   - Hello mate. How are you?

@@ -39,7 +39,7 @@ public class NPCAnimationState : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         npcController = GetComponent<NPCMovementController>();
         npcDialogue = GetComponentInChildren<NPCDialogue>();  // Find NPCDialogue script in children
