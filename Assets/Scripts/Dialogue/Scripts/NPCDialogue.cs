@@ -42,7 +42,6 @@ public class NPCDialogue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player exited trigger.");
             playerInTrigger = false;
             if (checkInRangeCoroutine != null)
             {
@@ -61,7 +60,6 @@ public class NPCDialogue : MonoBehaviour
     {
         while (playerInTrigger)
         {
-            Debug.Log("Checking if player is in range.");
             CheckIfPlayerInRange();
             yield return new WaitForSeconds(interval);
         }
@@ -78,7 +76,6 @@ public class NPCDialogue : MonoBehaviour
             {
                 if (hit.CompareTag("Player"))
                 {
-                    Debug.Log("Player detected within range.");
                     speechBubbleRenderer.enabled = true;
                     npcAnimationState.UpdateAnimationState();
                     if (!dialogueInitiated)
@@ -93,7 +90,6 @@ public class NPCDialogue : MonoBehaviour
         {
             if (dialogueInitiated)
             {
-                Debug.Log("Player left range.");
                 EndDialogue();
             }
         }
@@ -101,7 +97,6 @@ public class NPCDialogue : MonoBehaviour
 
     private void StartDialogue()
     {
-        Debug.Log("Starting dialogue.");
         dialogueManager.InitiateDialogue(this, 0);
         dialogueInitiated = true;
 
@@ -115,7 +110,6 @@ public class NPCDialogue : MonoBehaviour
 
     private void EndDialogue()
     {
-        Debug.Log("Ending dialogue.");
         speechBubbleRenderer.enabled = false;
         dialogueManager.TurnOffDialogue();
         dialogueInitiated = false;
