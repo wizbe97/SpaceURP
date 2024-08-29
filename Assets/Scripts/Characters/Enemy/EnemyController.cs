@@ -138,7 +138,7 @@ public abstract class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("MapCollisions"))
+        if (collision.gameObject.CompareTag("TilemapColliders"))
         {
             // If collided with a wall, find a new direction
             FindNewWanderDirection();
@@ -169,7 +169,7 @@ public abstract class EnemyController : MonoBehaviour
         }
         else
         {
-            Vector2 direction = rb.velocity.normalized; // Assuming rb is the Rigidbody2D component
+            Vector2 direction = rb.velocity.normalized;
             animator.SetFloat("xMove", direction.x);
             animator.SetFloat("yMove", direction.y);
         }

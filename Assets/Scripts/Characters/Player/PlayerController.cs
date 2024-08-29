@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     private UpdateAnimationState animationState;
+    private DialogueManager dialogueManager;
     private Action action;
     private Rigidbody2D rb;
     [SerializeField] private float moveDrag = 15f;
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
         animationState = GetComponent<UpdateAnimationState>();
         action = GetComponent<Action>();
         boxCollider = GetComponent<BoxCollider2D>();
+        dialogueManager = FindObjectOfType<DialogueManager>();
     }
 
     private void FixedUpdate()
@@ -97,8 +99,8 @@ public class PlayerController : MonoBehaviour
     // Coroutine to reactivate the box collider after a delay
     private IEnumerator ReactivateColliderAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay); 
-        boxCollider.enabled = true;             
+        yield return new WaitForSeconds(delay);
+        boxCollider.enabled = true;
     }
 
     private IEnumerator DashCooldown()
@@ -114,5 +116,10 @@ public class PlayerController : MonoBehaviour
         GameObject backpack = inventory.transform.Find("Backpack").gameObject;
 
         backpack.SetActive(!backpack.activeSelf);
+    }
+
+    private void OnInteract()
+    {
+        dialogueManager.StartDialogue();
     }
 }

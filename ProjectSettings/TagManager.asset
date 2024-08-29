@@ -11,6 +11,9 @@ TagManager:
   - WaveSpawner
   - LaserHitTarget
   - StalactiteShadow
+  - DialogueOptionButton
+  - TilemapColliders
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -25,8 +28,8 @@ TagManager:
   - TilemapColliders
   - IgnoreCrystal
   - EnemyProjectiles
-  - 
-  - 
+  - NPCs
+  - NPCCollisions
   - 
   - 
   - 
