@@ -3748,6 +3748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c766cfa08b695b14cb4b4b02b670c88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speechBubbleRenderer: {fileID: 0}
   conversation:
   - {fileID: 11400000, guid: 55437d910cebe85419432a7963ec9369, type: 2}
   dialogueInitiated: 0
@@ -4852,6 +4853,7 @@ MonoBehaviour:
   stopDrag: 25
   maxAttempts: 10
   canMove: 1
+  moveAfterConversationDelay: 3
   isMoving: 0
 --- !u!70 &2009489749
 CapsuleCollider2D:

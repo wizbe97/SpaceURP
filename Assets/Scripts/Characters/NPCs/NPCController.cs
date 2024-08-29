@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    public float moveSpeed = 10000f; // Speed for wandering
+    public float moveSpeed = 3000f; // Speed for wandering
     public float wanderTime = 5f; // Time interval for changing wander direction
     public float detectionDistance = 1f; // Distance to detect obstacles
     public LayerMask obstacleLayer; // LayerMask to specify the obstacle layer
@@ -12,6 +12,7 @@ public class NPCController : MonoBehaviour
 
     public int maxAttempts = 10;
     public bool canMove = true;  // Public variable to control whether the NPC can move
+    public float moveAfterConversationDelay = 1.0f; // Delay before NPC starts moving again
 
     private Rigidbody2D rb;
     private Vector2 wanderDirection;
@@ -47,7 +48,6 @@ public class NPCController : MonoBehaviour
 
     void Start()
     {
-        
         rb = GetComponent<Rigidbody2D>();
         npcAnimationState = GetComponent<NPCAnimationState>();
         wanderDirection = Random.insideUnitCircle.normalized; // Initialize with a random direction
@@ -179,5 +179,4 @@ public class NPCController : MonoBehaviour
             Gizmos.DrawLine(rb.position, rb.position + wanderDirection * detectionDistance);
         }
     }
-
 }

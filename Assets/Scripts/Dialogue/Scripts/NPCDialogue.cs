@@ -14,7 +14,6 @@ public class NPCDialogue : MonoBehaviour
     public Vector2 detectionOffset = new Vector2(0, -1); // Offset to move detection range down
 
     private Coroutine movementDelayCoroutine;
-    public float delayBeforeMovement = 1.0f; // Delay before NPC starts moving again
 
     void Start()
     {
@@ -78,7 +77,7 @@ public class NPCDialogue : MonoBehaviour
 
     private IEnumerator EnableMovementAfterDelay()
     {
-        yield return new WaitForSeconds(delayBeforeMovement);
+        yield return new WaitForSeconds(npcController.moveAfterConversationDelay);
         npcController.canMove = true;
     }
 }
