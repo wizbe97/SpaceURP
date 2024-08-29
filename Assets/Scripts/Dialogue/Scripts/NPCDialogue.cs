@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCDialogue : MonoBehaviour
@@ -14,6 +13,9 @@ public class NPCDialogue : MonoBehaviour
     public LayerMask playerLayer; // Ensure the Player is on this layer
     public Vector2 detectionOffset = new Vector2(0, -1); // Offset to move detection range down
 
+    private Coroutine movementDelayCoroutine;
+    public float delayBeforeMovement = 1.0f; // Delay before NPC starts moving again
+
     void Start()
     {
         npcAnimationState = GetComponentInParent<NPCAnimationState>();
@@ -23,7 +25,6 @@ public class NPCDialogue : MonoBehaviour
         dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckIfPlayerInRange();
@@ -32,12 +33,6 @@ public class NPCDialogue : MonoBehaviour
             npcController.canMove = false;
             npcController.isMoving = false;
             npcAnimationState.UpdateAnimationState();
-
-        }
-        else
-        {
-            npcController.canMove = true;
-            npcController.isMoving = true;
         }
     }
 
@@ -55,6 +50,13 @@ public class NPCDialogue : MonoBehaviour
                     speechBubbleRenderer.enabled = true;
                     dialogueManager.InitiateDialogue(this, 0);
                     dialogueInitiated = true;
+
+                    if (movementDelayCoroutine != null)
+                    {
+                        StopCoroutine(movementDelayCoroutine);
+                    }
+
+                    npcController.canMove = false;
                     break;
                 }
             }
@@ -64,7 +66,19 @@ public class NPCDialogue : MonoBehaviour
             speechBubbleRenderer.enabled = false;
             dialogueManager.TurnOffDialogue();
             dialogueInitiated = false;
+
+            if (movementDelayCoroutine != null)
+            {
+                StopCoroutine(movementDelayCoroutine);
+            }
+
+            movementDelayCoroutine = StartCoroutine(EnableMovementAfterDelay());
         }
     }
 
+    private IEnumerator EnableMovementAfterDelay()
+    {
+        yield return new WaitForSeconds(delayBeforeMovement);
+        npcController.canMove = true;
+    }
 }
