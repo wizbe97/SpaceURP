@@ -209,16 +209,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3000
-  wanderTime: 5
-  detectionDistance: 2.5
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 1024
   moveDrag: 15
   stopDrag: 25
-  maxAttempts: 10
+  wanderTime: 5
+  detectionDistance: 2.5
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 17408
   canMove: 1
   moveAfterConversationDelay: 3
+  minTimeBeforeNextPause: 3
+  maxTimeBeforeNextPause: 10
+  minTimeToPauseFor: 2
+  maxTimeToPauseFor: 8
   isMoving: 0
 --- !u!114 &7609006643109962016
 MonoBehaviour:

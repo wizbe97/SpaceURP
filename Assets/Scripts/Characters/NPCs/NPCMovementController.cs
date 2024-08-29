@@ -2,31 +2,82 @@ using UnityEngine;
 
 public class NPCMovementController : MonoBehaviour
 {
-    public float moveSpeed = 3000f; // Speed for wandering
-    public float wanderTime = 5f; // Time interval for changing wander direction
-    public float detectionDistance = 1f; // Distance to detect obstacles
-    public LayerMask obstacleLayer; // LayerMask to specify the obstacle layer
-
-    public float moveDrag = 15f;
-    public float stopDrag = 25f;
-
-    public int maxAttempts = 10;
-    public bool canMove = true;  // Public variable to control whether the NPC can move
-    public float moveAfterConversationDelay = 1.0f; // Delay before NPC starts moving again
-
+    // External Components
+    [Header("External Components")]
+    [Tooltip("Reference to the NPC's Rigidbody2D component.")]
     private Rigidbody2D rb;
-    private Vector2 wanderDirection;
-    private float nextWanderTime;
-    private bool isPaused = false; // State to check if the NPC is currently paused
-    private float nextPauseTime; // Time for the next pause
-    private float pauseDuration; // Duration of the current pause
-
-    private float nextRandomPauseTime; // When to take the next random pause
-    private float randomPauseDuration; // How long the random pause will last
-
+    
+    [Tooltip("Reference to the NPC's animation state controller.")]
     private NPCAnimationState npcAnimationState;
 
-    public bool isMoving; // Internal variable to track moving state
+    // Movement Parameters
+    [Header("Movement Parameters")]
+    [Tooltip("Speed at which the NPC moves.")]
+    public float moveSpeed = 3000f;
+    
+    [Tooltip("Drag applied when the NPC is moving.")]
+    public float moveDrag = 15f;
+    
+    [Tooltip("Drag applied when the NPC stops moving.")]
+    public float stopDrag = 25f;
+    
+    [Tooltip("Time interval for changing the NPC's wander direction.")]
+    public float wanderTime = 5f;
+    
+    [Tooltip("Distance used to detect obstacles in the NPC's path.")]
+    public float detectionDistance = 1f;
+    
+    [Tooltip("LayerMask to specify which layers are considered obstacles. Multiple layers can be selected.")]
+    public LayerMask obstacleLayers;
+
+    // Movement Control
+    [Header("Movement Control")]
+    [Tooltip("Controls whether the NPC can move.")]
+    public bool canMove = true;
+    
+    [Tooltip("Delay before NPC starts moving again after a conversation.")]
+    public float moveAfterConversationDelay = 1.0f;
+
+    // Pausing Parameters
+    [Header("Pausing Parameters")]
+    [Tooltip("Minimum time before the NPC takes the next random pause.")]
+    [SerializeField] private float minTimeBeforeNextPause = 3f;
+    
+    [Tooltip("Maximum time before the NPC takes the next random pause.")]
+    [SerializeField] private float maxTimeBeforeNextPause = 10f;
+    
+    [Tooltip("Minimum duration for a random pause.")]
+    [SerializeField] private float minTimeToPauseFor = 2f;
+    
+    [Tooltip("Maximum duration for a random pause.")]
+    [SerializeField] private float maxTimeToPauseFor = 8f;
+
+    // Internal State
+    [Header("Internal State (Do Not Modify)")]
+    [Tooltip("Current direction the NPC is wandering.")]
+    private Vector2 wanderDirection;
+    
+    [Tooltip("Time when the NPC will change its wander direction.")]
+    private float nextWanderTime;
+    
+    [Tooltip("Indicates if the NPC is currently paused.")]
+    private bool isPaused = false;
+    
+    [Tooltip("Time when the NPC will stop pausing and resume movement.")]
+    private float nextPauseTime;
+    
+    [Tooltip("Duration of the current pause.")]
+    private float pauseDuration;
+    
+    [Tooltip("Time for the next random pause.")]
+    private float nextRandomPauseTime;
+    
+    [Tooltip("Duration of the current random pause.")]
+    private float randomPauseDuration;
+    
+    [Tooltip("Tracks if the NPC is currently moving.")]
+    public bool isMoving;
+
     public bool IsMoving
     {
         get { return isMoving; }
@@ -91,7 +142,7 @@ public class NPCMovementController : MonoBehaviour
         }
 
         // Check for obstacles in the current wander direction
-        if (IsObstacleDetected())
+        if (IsObstacleDetectedInDirection(wanderDirection))
         {
             HandleCollisionPause();
             return;
@@ -103,10 +154,10 @@ public class NPCMovementController : MonoBehaviour
         IsMoving = true;
     }
 
-    private bool IsObstacleDetected()
+    private bool IsObstacleDetectedInDirection(Vector2 direction)
     {
-        // Cast a ray in the direction the NPC is moving to detect obstacles on the specified layer
-        RaycastHit2D hit = Physics2D.Raycast(rb.position, wanderDirection, detectionDistance, obstacleLayer);
+        // Cast a ray in the specified direction to detect obstacles on the specified layers
+        RaycastHit2D hit = Physics2D.Raycast(rb.position, direction, detectionDistance, obstacleLayers);
         return hit.collider != null;
     }
 
@@ -123,16 +174,16 @@ public class NPCMovementController : MonoBehaviour
 
     private void FindNewWanderDirection()
     {
-        // Generate a new random direction
-        Vector2 newDirection = Random.insideUnitCircle.normalized;
-        int attempts = 0;
-
-        while (IsObstacleDetected() && attempts < maxAttempts)
+        Vector2 newDirection;
+        
+        // Continuously generate a new direction until one is found that is free of obstacles
+        do
         {
             newDirection = Random.insideUnitCircle.normalized;
-            attempts++;
         }
+        while (IsObstacleDetectedInDirection(newDirection));
 
+        // Update the NPC's wander direction
         wanderDirection = newDirection;
 
         // Update the wander time to prevent immediate direction changes
@@ -160,23 +211,13 @@ public class NPCMovementController : MonoBehaviour
 
     private float GetRandomPauseTime()
     {
-        // Return a random pause interval between 3 and 10 seconds
-        return Random.Range(3f, 10f);
+        // Return a random pause interval based on the serialized min and max values
+        return Random.Range(minTimeBeforeNextPause, maxTimeBeforeNextPause);
     }
 
     private float GetRandomPauseLength()
     {
-        // Return a random pause length between 2 and 8 seconds
-        return Random.Range(2f, 8f);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        // Ensure that rb is not null before accessing it
-        if (rb != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(rb.position, rb.position + wanderDirection * detectionDistance);
-        }
+        // Return a random pause length based on the serialized min and max values
+        return Random.Range(minTimeToPauseFor, maxTimeToPauseFor);
     }
 }
