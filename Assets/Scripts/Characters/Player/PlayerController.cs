@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDash()
     {
-        if (!dashOnCooldown && moveInput.magnitude > 0)
+        if (!dashOnCooldown && moveInput.magnitude > 0 && canMove)
         {
             boxCollider.enabled = false;
             Vector2 dashDirection = moveInput.normalized;

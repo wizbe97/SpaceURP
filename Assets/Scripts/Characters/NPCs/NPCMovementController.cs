@@ -171,10 +171,34 @@ public class NPCMovementController : MonoBehaviour
         // Apply the raycast offset to the NPC's position
         Vector2 raycastOrigin = (Vector2)transform.position + raycastOffset;
 
-        // Cast a ray in the specified direction to detect obstacles on the specified layers
-        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, direction, detectionDistance, obstacleLayers);
-        return hit.collider != null;
+        // Cast the main ray in the specified direction to detect obstacles on the specified layers
+        RaycastHit2D mainHit = Physics2D.Raycast(raycastOrigin, direction, detectionDistance, obstacleLayers);
+
+        // Additional raycasts at slight angles from the main direction
+        float angleOffset = 15f; // Adjust this angle for how much the side rays deviate
+
+        Vector2 leftDirection = RotateVector(direction, -angleOffset);
+        RaycastHit2D leftHit = Physics2D.Raycast(raycastOrigin, leftDirection, detectionDistance, obstacleLayers);
+
+        Vector2 rightDirection = RotateVector(direction, angleOffset);
+        RaycastHit2D rightHit = Physics2D.Raycast(raycastOrigin, rightDirection, detectionDistance, obstacleLayers);
+
+        // Return true if any of the raycasts detect an obstacle
+        return mainHit.collider != null || leftHit.collider != null || rightHit.collider != null;
     }
+
+    private Vector2 RotateVector(Vector2 vector, float angle)
+    {
+        float radian = angle * Mathf.Deg2Rad;
+        float cos = Mathf.Cos(radian);
+        float sin = Mathf.Sin(radian);
+
+        return new Vector2(
+            vector.x * cos - vector.y * sin,
+            vector.x * sin + vector.y * cos
+        );
+    }
+
 
 
     private void HandleCollisionPause()
@@ -244,24 +268,26 @@ public class NPCMovementController : MonoBehaviour
             // Apply the raycast offset to the NPC's position
             Vector2 raycastOrigin = (Vector2)transform.position + raycastOffset;
 
-            // Define the direction of the rays
+            // Define the direction of the main ray
             Vector2 rayDirection = rb.velocity.normalized;
 
-            // Set the gizmo color to purple
-            Gizmos.color = new Color(0.5f, 0f, 0.5f, 1f); // RGB (128, 0, 128) in normalized form
+            // Set the gizmo color for the main ray to purple
+            Gizmos.color = new Color(0.5f, 0f, 0.5f, 1f); // Purple
+            Gizmos.DrawLine(raycastOrigin, raycastOrigin + rayDirection * detectionDistance);
 
-            // Draw a chunky line by drawing a series of closely spaced lines
-            // This simulates a thick line by drawing multiple parallel lines
-            float lineThickness = 0.1f; // Adjust this value for the chunkiness
-            Vector2 offset = (Vector2)(Vector3.Cross(rayDirection, Vector3.forward).normalized * lineThickness);
+            // Draw the additional rays with slight angles
+            float angleOffset = 15f;
+            Vector2 leftDirection = RotateVector(rayDirection, -angleOffset);
+            Vector2 rightDirection = RotateVector(rayDirection, angleOffset);
 
-            // Draw two parallel lines to simulate a thick line
-            Gizmos.DrawLine(raycastOrigin - offset, raycastOrigin + rayDirection * detectionDistance - offset);
-            Gizmos.DrawLine(raycastOrigin + offset, raycastOrigin + rayDirection * detectionDistance + offset);
+            // Set the gizmo color for the left ray to red
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(raycastOrigin, raycastOrigin + leftDirection * detectionDistance);
+
+            // Set the gizmo color for the right ray to blue
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(raycastOrigin, raycastOrigin + rightDirection * detectionDistance);
         }
     }
-
-
-
-
 }
+
