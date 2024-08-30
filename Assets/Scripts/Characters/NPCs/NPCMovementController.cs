@@ -30,6 +30,11 @@ public class NPCMovementController : MonoBehaviour
     [Tooltip("LayerMask to specify which layers are considered obstacles. Multiple layers can be selected.")]
     public LayerMask obstacleLayers;
 
+    [Header("Raycast Settings")]
+    [Tooltip("Offset for the raycast origin relative to the NPC's position.")]
+    [SerializeField] private Vector2 raycastOffset = new(0, -0.5f); // Default offset downward
+
+
     // Movement Control
     [Header("Movement Control")]
     [Tooltip("Controls whether the NPC can move.")]
@@ -83,7 +88,14 @@ public class NPCMovementController : MonoBehaviour
         get { return isMoving; }
         set
         {
-            isMoving = value;
+            if (canMove)
+            {
+                isMoving = value;
+            }
+            else
+            {
+                isMoving = false;
+            }
             npcAnimationState.UpdateAnimationState();
 
             if (isMoving)
@@ -97,7 +109,8 @@ public class NPCMovementController : MonoBehaviour
         }
     }
 
-    void Start()
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         npcAnimationState = GetComponent<NPCAnimationState>();
@@ -155,10 +168,14 @@ public class NPCMovementController : MonoBehaviour
 
     private bool IsObstacleDetectedInDirection(Vector2 direction)
     {
+        // Apply the raycast offset to the NPC's position
+        Vector2 raycastOrigin = (Vector2)transform.position + raycastOffset;
+
         // Cast a ray in the specified direction to detect obstacles on the specified layers
-        RaycastHit2D hit = Physics2D.Raycast(rb.position, direction, detectionDistance, obstacleLayers);
+        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, direction, detectionDistance, obstacleLayers);
         return hit.collider != null;
     }
+
 
     private void HandleCollisionPause()
     {
@@ -219,4 +236,32 @@ public class NPCMovementController : MonoBehaviour
         // Return a random pause length based on the serialized min and max values
         return Random.Range(minTimeToPauseFor, maxTimeToPauseFor);
     }
+
+    private void OnDrawGizmos()
+    {
+        if (rb != null)
+        {
+            // Apply the raycast offset to the NPC's position
+            Vector2 raycastOrigin = (Vector2)transform.position + raycastOffset;
+
+            // Define the direction of the rays
+            Vector2 rayDirection = rb.velocity.normalized;
+
+            // Set the gizmo color to purple
+            Gizmos.color = new Color(0.5f, 0f, 0.5f, 1f); // RGB (128, 0, 128) in normalized form
+
+            // Draw a chunky line by drawing a series of closely spaced lines
+            // This simulates a thick line by drawing multiple parallel lines
+            float lineThickness = 0.1f; // Adjust this value for the chunkiness
+            Vector2 offset = (Vector2)(Vector3.Cross(rayDirection, Vector3.forward).normalized * lineThickness);
+
+            // Draw two parallel lines to simulate a thick line
+            Gizmos.DrawLine(raycastOrigin - offset, raycastOrigin + rayDirection * detectionDistance - offset);
+            Gizmos.DrawLine(raycastOrigin + offset, raycastOrigin + rayDirection * detectionDistance + offset);
+        }
+    }
+
+
+
+
 }

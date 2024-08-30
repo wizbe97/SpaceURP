@@ -104,7 +104,7 @@ public class NPCDialogue : MonoBehaviour
         {
             StopCoroutine(movementDelayCoroutine);
         }
-
+        npcController.isMoving = false;
         npcController.canMove = false;
     }
 

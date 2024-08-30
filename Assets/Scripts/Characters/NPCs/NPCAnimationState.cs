@@ -65,11 +65,20 @@ public class NPCAnimationState : MonoBehaviour
         switch (stateIdentifier)
         {
             case 1:
-                CurrentState = NPCStates.IDLE;
+                // If speechBubbleRenderer is enabled, play regular idle
+                if (npcDialogue.speechBubbleRenderer.enabled)
+                {
+                    CurrentState = NPCStates.IDLE;
+                }
+                else
+                {
+                    // 50% chance to either be idle or reading a book if speech bubble is not enabled
+                    CurrentState = (Random.value < 0.5f) ? NPCStates.IDLE : NPCStates.IDLE_BOOK;
+                }
 
                 // Use ternary operator to determine the direction based on speechBubbleRenderer state
-                Vector2 direction = npcDialogue.speechBubbleRenderer.enabled ? 
-                                    (player.position - transform.position).normalized : 
+                Vector2 direction = npcDialogue.speechBubbleRenderer.enabled ?
+                                    (player.position - transform.position).normalized :
                                     rb.velocity.normalized;
 
                 SetAnimationDirection(direction);
@@ -81,6 +90,8 @@ public class NPCAnimationState : MonoBehaviour
                 break;
         }
     }
+
+
 
     public void SetAnimationDirection(Vector2 direction)
     {
