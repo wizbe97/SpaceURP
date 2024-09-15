@@ -378,7 +378,7 @@ TextureImporter:
       name: Background_Cliffs_12
       rect:
         serializedVersion: 2
-        x: 48
+        x: 96
         y: 144
         width: 16
         height: 16
@@ -399,7 +399,7 @@ TextureImporter:
       name: Background_Cliffs_13
       rect:
         serializedVersion: 2
-        x: 64
+        x: 112
         y: 144
         width: 16
         height: 16
@@ -420,8 +420,8 @@ TextureImporter:
       name: Background_Cliffs_14
       rect:
         serializedVersion: 2
-        x: 80
-        y: 144
+        x: 0
+        y: 128
         width: 16
         height: 16
       alignment: 0
@@ -441,8 +441,8 @@ TextureImporter:
       name: Background_Cliffs_15
       rect:
         serializedVersion: 2
-        x: 96
-        y: 144
+        x: 16
+        y: 128
         width: 16
         height: 16
       alignment: 0
@@ -463,7 +463,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 144
+        y: 128
         width: 16
         height: 16
       alignment: 0
@@ -483,7 +483,7 @@ TextureImporter:
       name: Background_Cliffs_17
       rect:
         serializedVersion: 2
-        x: 0
+        x: 128
         y: 128
         width: 16
         height: 16
@@ -504,8 +504,8 @@ TextureImporter:
       name: Background_Cliffs_18
       rect:
         serializedVersion: 2
-        x: 16
-        y: 128
+        x: 0
+        y: 112
         width: 16
         height: 16
       alignment: 0
@@ -525,8 +525,8 @@ TextureImporter:
       name: Background_Cliffs_19
       rect:
         serializedVersion: 2
-        x: 32
-        y: 128
+        x: 16
+        y: 112
         width: 16
         height: 16
       alignment: 0
@@ -546,8 +546,8 @@ TextureImporter:
       name: Background_Cliffs_20
       rect:
         serializedVersion: 2
-        x: 48
-        y: 128
+        x: 112
+        y: 112
         width: 16
         height: 16
       alignment: 0
@@ -567,8 +567,8 @@ TextureImporter:
       name: Background_Cliffs_21
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
+        x: 128
+        y: 112
         width: 16
         height: 16
       alignment: 0
@@ -588,8 +588,8 @@ TextureImporter:
       name: Background_Cliffs_22
       rect:
         serializedVersion: 2
-        x: 80
-        y: 128
+        x: 0
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -609,8 +609,8 @@ TextureImporter:
       name: Background_Cliffs_23
       rect:
         serializedVersion: 2
-        x: 96
-        y: 128
+        x: 16
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -631,7 +631,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 128
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -652,7 +652,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 128
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -673,7 +673,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 112
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -694,7 +694,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 112
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -715,7 +715,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 112
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -735,8 +735,8 @@ TextureImporter:
       name: Background_Cliffs_29
       rect:
         serializedVersion: 2
-        x: 48
-        y: 112
+        x: 96
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -756,8 +756,8 @@ TextureImporter:
       name: Background_Cliffs_30
       rect:
         serializedVersion: 2
-        x: 64
-        y: 112
+        x: 112
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -777,8 +777,8 @@ TextureImporter:
       name: Background_Cliffs_31
       rect:
         serializedVersion: 2
-        x: 80
-        y: 112
+        x: 128
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -798,8 +798,8 @@ TextureImporter:
       name: Background_Cliffs_32
       rect:
         serializedVersion: 2
-        x: 96
-        y: 112
+        x: 0
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -819,8 +819,8 @@ TextureImporter:
       name: Background_Cliffs_33
       rect:
         serializedVersion: 2
-        x: 112
-        y: 112
+        x: 16
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -840,8 +840,8 @@ TextureImporter:
       name: Background_Cliffs_34
       rect:
         serializedVersion: 2
-        x: 128
-        y: 112
+        x: 32
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -861,8 +861,8 @@ TextureImporter:
       name: Background_Cliffs_35
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
+        x: 48
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -882,8 +882,8 @@ TextureImporter:
       name: Background_Cliffs_36
       rect:
         serializedVersion: 2
-        x: 16
-        y: 96
+        x: 64
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -903,8 +903,8 @@ TextureImporter:
       name: Background_Cliffs_37
       rect:
         serializedVersion: 2
-        x: 32
-        y: 96
+        x: 80
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -924,8 +924,8 @@ TextureImporter:
       name: Background_Cliffs_38
       rect:
         serializedVersion: 2
-        x: 48
-        y: 96
+        x: 96
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -945,8 +945,8 @@ TextureImporter:
       name: Background_Cliffs_39
       rect:
         serializedVersion: 2
-        x: 64
-        y: 96
+        x: 112
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -966,8 +966,8 @@ TextureImporter:
       name: Background_Cliffs_40
       rect:
         serializedVersion: 2
-        x: 80
-        y: 96
+        x: 128
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -987,8 +987,8 @@ TextureImporter:
       name: Background_Cliffs_41
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
+        x: 160
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -1008,8 +1008,8 @@ TextureImporter:
       name: Background_Cliffs_42
       rect:
         serializedVersion: 2
-        x: 112
-        y: 96
+        x: 176
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -1029,8 +1029,8 @@ TextureImporter:
       name: Background_Cliffs_43
       rect:
         serializedVersion: 2
-        x: 128
-        y: 96
+        x: 192
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -1051,7 +1051,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1072,7 +1072,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1093,7 +1093,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1114,7 +1114,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1135,7 +1135,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1156,7 +1156,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1177,7 +1177,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1198,7 +1198,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1219,7 +1219,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1239,8 +1239,8 @@ TextureImporter:
       name: Background_Cliffs_53
       rect:
         serializedVersion: 2
-        x: 144
-        y: 80
+        x: 160
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1260,8 +1260,8 @@ TextureImporter:
       name: Background_Cliffs_54
       rect:
         serializedVersion: 2
-        x: 160
-        y: 80
+        x: 176
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1281,8 +1281,8 @@ TextureImporter:
       name: Background_Cliffs_55
       rect:
         serializedVersion: 2
-        x: 176
-        y: 80
+        x: 192
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1303,7 +1303,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1324,7 +1324,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1345,7 +1345,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1366,7 +1366,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1387,7 +1387,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1408,7 +1408,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1429,7 +1429,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1450,7 +1450,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1471,7 +1471,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1491,8 +1491,8 @@ TextureImporter:
       name: Background_Cliffs_65
       rect:
         serializedVersion: 2
-        x: 144
-        y: 64
+        x: 160
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1512,8 +1512,8 @@ TextureImporter:
       name: Background_Cliffs_66
       rect:
         serializedVersion: 2
-        x: 160
-        y: 64
+        x: 176
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1533,8 +1533,8 @@ TextureImporter:
       name: Background_Cliffs_67
       rect:
         serializedVersion: 2
-        x: 176
-        y: 64
+        x: 192
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -1554,8 +1554,8 @@ TextureImporter:
       name: Background_Cliffs_68
       rect:
         serializedVersion: 2
-        x: 0
-        y: 48
+        x: 32
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1575,8 +1575,8 @@ TextureImporter:
       name: Background_Cliffs_69
       rect:
         serializedVersion: 2
-        x: 16
-        y: 48
+        x: 48
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1596,8 +1596,8 @@ TextureImporter:
       name: Background_Cliffs_70
       rect:
         serializedVersion: 2
-        x: 32
-        y: 48
+        x: 64
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1617,8 +1617,8 @@ TextureImporter:
       name: Background_Cliffs_71
       rect:
         serializedVersion: 2
-        x: 48
-        y: 48
+        x: 80
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1638,8 +1638,8 @@ TextureImporter:
       name: Background_Cliffs_72
       rect:
         serializedVersion: 2
-        x: 64
-        y: 48
+        x: 96
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1659,8 +1659,8 @@ TextureImporter:
       name: Background_Cliffs_73
       rect:
         serializedVersion: 2
-        x: 80
-        y: 48
+        x: 160
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1680,8 +1680,8 @@ TextureImporter:
       name: Background_Cliffs_74
       rect:
         serializedVersion: 2
-        x: 96
-        y: 48
+        x: 176
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1701,8 +1701,8 @@ TextureImporter:
       name: Background_Cliffs_75
       rect:
         serializedVersion: 2
-        x: 112
-        y: 48
+        x: 192
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1722,8 +1722,8 @@ TextureImporter:
       name: Background_Cliffs_76
       rect:
         serializedVersion: 2
-        x: 128
-        y: 48
+        x: 48
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -1743,8 +1743,8 @@ TextureImporter:
       name: Background_Cliffs_77
       rect:
         serializedVersion: 2
-        x: 144
-        y: 48
+        x: 64
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -1764,8 +1764,8 @@ TextureImporter:
       name: Background_Cliffs_78
       rect:
         serializedVersion: 2
-        x: 160
-        y: 48
+        x: 80
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -1777,447 +1777,6 @@ TextureImporter:
       bones: []
       spriteID: 70e6a0cc9dad9384cb738d5798827eb6
       internalID: 54866919
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_79
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dcee5caa31f35594593d59bac8eaede2
-      internalID: 1974851319
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_80
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 97b4fe634ebdf9a49aac6c4bf4603948
-      internalID: 1877666907
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_81
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8798f8bc4953fde4288defd75cda110f
-      internalID: 2046452163
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_82
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 111af345a3cb925409b33a0037a88dd8
-      internalID: 1455122908
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_83
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 37a616caaba09ca4c9321136bb26a41d
-      internalID: -883647446
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_84
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 197f3a45f315e354890ea964141d844f
-      internalID: 2035949371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_85
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d15547f36638e04bb58c697769ef9ea
-      internalID: -1140152805
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_86
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d428ee55b1bbbf344b71cb2888f761ed
-      internalID: 1620884462
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_87
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bf26c5198090f1842b7cb4dcfaba15b8
-      internalID: -967791222
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_88
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee611f843d57c9b4cb4ff7e1924e9d61
-      internalID: -1973490256
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_89
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b2ded925edd10948b79152fd4584972
-      internalID: 1096216085
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_90
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9a275c95966ee164dade8ee4b39b519f
-      internalID: 1156115158
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_91
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b3f94a863a467ed4e9c10c6e19b20035
-      internalID: 1674922139
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_92
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2dbfd7f27595c4a4facb5991db83f974
-      internalID: 1938091715
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_93
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5240bdb3f890c3a4d9a6f60234e7c847
-      internalID: 1780810956
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_94
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2afdb1d83b759be49bc9eb4be7c38b4d
-      internalID: -655933150
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_95
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a8611d9c472e50e4c896166b4e5a4307
-      internalID: -576558034
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_96
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db3e72d8f410bbd4fa992cdbb6bfb315
-      internalID: -1467081770
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_97
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8019b0bbea356ab4a9a9f88af0700240
-      internalID: -1312317557
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_98
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 21ec7d22b424f2149b984cf069ea3c36
-      internalID: -464803182
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_Cliffs_99
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a60feb2962001c24780e6a7e14e61988
-      internalID: -1448865898
       vertices: []
       indices: 
       edges: []
@@ -2310,29 +1869,8 @@ TextureImporter:
       Background_Cliffs_76: -1273466945
       Background_Cliffs_77: 1225389142
       Background_Cliffs_78: 54866919
-      Background_Cliffs_79: 1974851319
       Background_Cliffs_8: -862837860
-      Background_Cliffs_80: 1877666907
-      Background_Cliffs_81: 2046452163
-      Background_Cliffs_82: 1455122908
-      Background_Cliffs_83: -883647446
-      Background_Cliffs_84: 2035949371
-      Background_Cliffs_85: -1140152805
-      Background_Cliffs_86: 1620884462
-      Background_Cliffs_87: -967791222
-      Background_Cliffs_88: -1973490256
-      Background_Cliffs_89: 1096216085
       Background_Cliffs_9: 1033556461
-      Background_Cliffs_90: 1156115158
-      Background_Cliffs_91: 1674922139
-      Background_Cliffs_92: 1938091715
-      Background_Cliffs_93: 1780810956
-      Background_Cliffs_94: -655933150
-      Background_Cliffs_95: -576558034
-      Background_Cliffs_96: -1467081770
-      Background_Cliffs_97: -1312317557
-      Background_Cliffs_98: -464803182
-      Background_Cliffs_99: -1448865898
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
