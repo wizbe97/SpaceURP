@@ -67,10 +67,16 @@ public class NPCAnimationState : MonoBehaviour
             case 1:
                 CurrentState = NPCStates.IDLE;
 
-                // Use ternary operator to determine the direction based on speechBubbleRenderer state
-                Vector2 direction = npcDialogue.speechBubbleRenderer.enabled ? 
-                                    (player.position - transform.position).normalized : 
-                                    rb.velocity.normalized;
+                // Check if npcDialogue and speechBubbleRenderer are not null
+                Vector2 direction;
+                if (npcDialogue != null && npcDialogue.speechBubbleRenderer != null && npcDialogue.speechBubbleRenderer.enabled)
+                {
+                    direction = (player.position - transform.position).normalized;
+                }
+                else
+                {
+                    direction = rb.velocity.normalized;
+                }
 
                 SetAnimationDirection(direction);
                 break;
@@ -81,6 +87,7 @@ public class NPCAnimationState : MonoBehaviour
                 break;
         }
     }
+
 
     public void SetAnimationDirection(Vector2 direction)
     {

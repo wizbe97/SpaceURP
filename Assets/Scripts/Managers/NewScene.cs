@@ -6,8 +6,17 @@ public class NewScene : MonoBehaviour
 {
     public string sceneName;
     public Animator transition;
+
+    private ConfinerManager confinerManager;
+    [SerializeField] private int cameraConfinerIndex;
+    public static int cameraConfinerIndexToPass; // Static variable to persist across scenes
     public float transitionTime = 1f;
-    public Transform spawnPoint; // Reference to the spawn point Transform
+    public Transform spawnPoint;
+
+    private void Awake()
+    {
+        confinerManager = FindObjectOfType<ConfinerManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -21,12 +30,11 @@ public class NewScene : MonoBehaviour
     {
         GameManager.Instance.scenePlayerSpawnPosition = spawnPoint.position;
         GameManager.Instance.SaveAllData(isLocal: true);
-        // // Send a message to PlayerManager with spawn point information
-        // PlayerManager.Instance.SendMessage("SetSpawnPoint", spawnPoint.position);
 
-        // Load the new scene
+        // Store the index to pass to the new scene
+        cameraConfinerIndexToPass = cameraConfinerIndex;
+
         StartCoroutine(LoadLevel());
-
     }
 
     IEnumerator LoadLevel()
@@ -40,6 +48,5 @@ public class NewScene : MonoBehaviour
         // Load scene
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         FindAnyObjectByType<PlayerController>().canMove = true;
-
     }
 }

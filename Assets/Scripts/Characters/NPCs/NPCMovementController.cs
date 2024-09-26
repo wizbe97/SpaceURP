@@ -126,6 +126,9 @@ public class NPCMovementController : MonoBehaviour
                 HandleRandomPause();
             }
         }
+        else {
+            IsMoving = false;
+        }
     }
 
     private void Wander()
