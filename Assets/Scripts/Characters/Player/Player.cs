@@ -21,6 +21,27 @@ public class Player : Character
         inventory = GameManager.Instance.inventoryManager;
         healthBar.character = this;
         hitPoints.value = startingHitPoints;
+        AttachMinimapCamera();
+    }
+
+    private void AttachMinimapCamera()
+    {
+        // Find the "Minimap Camera" in the scene
+        GameObject minimapCamera = GameObject.Find("Minimap Camera");
+        if (minimapCamera != null)
+        {
+            // Set the camera as a child of the player
+            minimapCamera.transform.SetParent(this.transform);
+
+            // Set the camera's local position to the desired offset
+            minimapCamera.transform.localPosition = new Vector3(0, 5, -20);
+            minimapCamera.transform.localEulerAngles = new Vector3(15, 0, 0);
+
+        }
+        else
+        {
+            Debug.LogWarning("Minimap Camera not found in the scene.");
+        }
     }
 
     public void SavePlayerData(int slot)
