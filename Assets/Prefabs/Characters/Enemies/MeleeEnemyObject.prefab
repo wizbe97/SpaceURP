@@ -346,7 +346,7 @@ MonoBehaviour:
   maxHitPoints: 150
   characterCategory: 2
   attackCooldown: 1.5
-  damage: 15
+  damage: 1
   floatingHealthBar: {fileID: 4153698874951894766}
   shadow: {fileID: 1193015334430439287}
   collisionsCapsule: {fileID: 6233723867239113009}
