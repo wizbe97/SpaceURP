@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6db8b461ed0f14386e23feb3bac7e6, type: 3}
+  m_Name: Spear
+  m_EditorClassIdentifier: 
+  itemName: Spear
+  droppedItem: {fileID: 5895550283864259508, guid: 106e3a0d8f45a31438975269f3fe0577, type: 3}
+  instantiatedPrefab: {fileID: 6601246038333148960, guid: 5d84b1a69a7a7dd439a3ac2b9628927d, type: 3}
+  inventoryImage: {fileID: 21300000, guid: d8828fc3d74fb8341ba4347d35accf67, type: 3}
+  quantity: 1
+  stackable: 0
+  dropChance: 0
+  bullet: {fileID: 0}
+  holdable: 1
+  itemType: 3

@@ -99,7 +99,7 @@ public class UpdateAnimationState : MonoBehaviour
         }
         else if (playerController.isMoving)
         {
-            if (action.isHoldingGun)
+            if (action.isHoldingWeapon)
             {
                 stateIdentifier = playerController.movementSpeed >= 2000 ? 1 : 2;
             }
@@ -110,7 +110,7 @@ public class UpdateAnimationState : MonoBehaviour
         }
         else
         {
-            stateIdentifier = action.isHoldingGun ? 5 : 6;
+            stateIdentifier = action.isHoldingWeapon ? 5 : 6;
         }
 
         switch (stateIdentifier)

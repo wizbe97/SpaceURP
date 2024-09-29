@@ -6,7 +6,7 @@ public class Action : MonoBehaviour
 {
     private Inventory inventory;
     private PlayerAttack playerAttack;
-    public bool isHoldingGun = false;
+    public bool isHoldingWeapon = false;
     [HideInInspector] public GameObject instantiatedCurrentItem;
     public Item currentItem;
     private bool overUI;
@@ -50,7 +50,7 @@ public class Action : MonoBehaviour
 
             // Calculate drop direction based on the mouse position if holding a gun
             Vector3 dropDirection;
-            if (isHoldingGun)
+            if (isHoldingWeapon)
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 dropDirection = (mousePosition - transform.position).normalized;
@@ -100,16 +100,11 @@ public class Action : MonoBehaviour
             return;
         }
 
-        if (currentItem.itemType == Item.ItemType.GUN)
+        if (currentItem.itemType == Item.ItemType.GUN || currentItem.itemType == Item.ItemType.MELEE_WEAPON)
         {
-            isHoldingGun = true;
+            isHoldingWeapon = true;
 
-            Transform existingItemTransform = transform.Find(currentItem.itemName);
-            instantiatedCurrentItem = existingItemTransform != null ? existingItemTransform.gameObject :
-                                  Instantiate(currentItem.instantiatedPrefab, transform.position, Quaternion.identity);
-            instantiatedCurrentItem.name = currentItem.itemName;
-            instantiatedCurrentItem.transform.parent = transform;
-            instantiatedCurrentItem.SetActive(true);
+            ActivateCurrentItem();
         }
         else
         {
@@ -117,11 +112,20 @@ public class Action : MonoBehaviour
         }
     }
 
+    public void ActivateCurrentItem()
+    {
+        Transform existingItemTransform = transform.Find(currentItem.itemName);
+        instantiatedCurrentItem = existingItemTransform != null ? existingItemTransform.gameObject :
+                              Instantiate(currentItem.instantiatedPrefab, transform.position, Quaternion.identity);
+        instantiatedCurrentItem.name = currentItem.itemName;
+        instantiatedCurrentItem.transform.parent = transform;
+        instantiatedCurrentItem.SetActive(true);
+    }
     public void DeactivateCurrentItem()
     {
         if (instantiatedCurrentItem != null)
         {
-            isHoldingGun = false;
+            isHoldingWeapon = false;
             instantiatedCurrentItem.SetActive(false);
         }
     }

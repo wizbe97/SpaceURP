@@ -16,23 +16,13 @@ public class PlayerGun : MonoBehaviour
     public float fireRate = 0.5f; // Adjust this value to control fire rate
     private float nextFireTime = 0f; // Tracks the next allowed time to fire
 
-    private Transform playerTransform;
-    private SpriteRenderer gunSpriteRenderer;
-    private int playerSortingOrder;
-
 
 
     private void Start()
     {
         action = FindObjectOfType<Action>();
         audioSource = GetComponent<AudioSource>();
-        playerTransform = transform.parent;
-        gunSpriteRenderer = GetComponent<SpriteRenderer>();
 
-        playerSortingOrder = playerTransform.GetComponent<SpriteRenderer>().sortingOrder;
-
-        // Adjust the Y position of the gun by 2 units
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 0.23f, transform.localPosition.z);
     }
 
 
@@ -66,8 +56,6 @@ public class PlayerGun : MonoBehaviour
             holdStartTime = 0f;
         }
 
-        RotateGunTowardsMouse();
-        AdjustSortingOrder();
     }
 
     public void Shoot()
@@ -117,48 +105,5 @@ public class PlayerGun : MonoBehaviour
             }
         }
         return false;
-    }
-    void RotateGunTowardsMouse()
-    {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mousePosition - playerTransform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // Rotate the gun
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        if (angle > 90 || angle < -90)
-        {
-            gunSpriteRenderer.flipY = true;
-        }
-        else
-        {
-            gunSpriteRenderer.flipY = false;
-        }
-    }
-
-    void AdjustSortingOrder()
-    {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mousePosition - playerTransform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        int sortingOrder = playerSortingOrder; // Start with player's sorting order
-
-        // Adjust sorting order based on angle
-        switch (Mathf.RoundToInt(angle / 45f))
-        {
-            case 1: // 45 degrees
-            case 2: // 90 degrees
-            case 3: // 135 degrees
-                sortingOrder -= 1;
-                break;
-            default:
-                sortingOrder += 1;
-                break;
-        }
-
-        // Apply the adjusted sorting order to the gun sprite renderer
-        gunSpriteRenderer.sortingOrder = sortingOrder;
     }
 }
