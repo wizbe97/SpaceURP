@@ -4,33 +4,39 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
-    PlayerController playerController;
     private Inventory inventory;
     private PlayerGun playerGun;
     private Action action;
-
-
+    private SpearAttack spearAttack;
 
     public float lastAttackTime;
-    private Vector2 attackDirection;
+    public float spearCooldown = 1f; // Cooldown duration in seconds
 
     void Start()
     {
         action = GetComponent<Action>();
-        playerController = GetComponent<PlayerController>();
         inventory = FindObjectOfType<Inventory>();
-
     }
+
     public void Attack()
     {
         if (action.currentItem.itemType == Item.ItemType.MELEE_WEAPON)
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            attackDirection = (mousePosition - transform.position).normalized;
+            if (Time.time - lastAttackTime < spearCooldown)
+            {
+                return; // Exit if cooldown is still active
+            }
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
 
             if (action.currentItem.itemName == "Spear")
             {
-                // wrench.Attack(attackDirection);
+                spearAttack = GetComponentInChildren<SpearAttack>();
+                if (spearAttack != null)
+                {
+                    spearAttack.Attack(playerToMouse.x, playerToMouse.y);
+                    lastAttackTime = Time.time; // Update the last attack time
+                }
             }
         }
 
@@ -44,7 +50,6 @@ public class PlayerAttack : MonoBehaviour
                     playerGun = GetComponentInChildren<PlayerGun>();
                     if (playerGun != null && !PlayerGun.IsAnyGunShooting())
                     {
-                        // Allow shooting only when the left mouse button is pressed down
                         playerGun.Shoot();
                     }
                 }
