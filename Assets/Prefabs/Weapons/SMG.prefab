@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6064246225989084949}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 535924184211490659}
   - component: {fileID: 7040097925054766565}
   - component: {fileID: 433782340179184001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SMG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1967825719
+  m_SortingLayerID: -1400585243
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: -1156777680, guid: 7a470f29a955c8243a0d7095c3e1b388, type: 3}

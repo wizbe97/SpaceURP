@@ -5,15 +5,16 @@ using UnityEngine.EventSystems;
 public class Action : MonoBehaviour
 {
     private Inventory inventory;
+    private PlayerAttack playerAttack;
     public bool isHoldingGun = false;
     [HideInInspector] public GameObject instantiatedCurrentItem;
     public Item currentItem;
-    private PlayerGun playerGun;
     private bool overUI;
 
     void Start()
     {
         inventory = FindAnyObjectByType<Inventory>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -34,21 +35,9 @@ public class Action : MonoBehaviour
         if (overUI || currentItem == null)
             return;
 
-        if (currentItem.itemType == Item.ItemType.GUN)
+        if (currentItem.itemType == Item.ItemType.GUN || currentItem.itemType == Item.ItemType.MELEE_WEAPON)
         {
-            if (currentItem.bullet != null)
-            {
-                // Check if the inventory has the required bullet type for this gun
-                if (inventory.HasItem(currentItem.bullet))
-                {
-                    playerGun = FindObjectOfType<PlayerGun>();
-                    if (playerGun != null && !PlayerGun.IsAnyGunShooting())
-                    {
-                        // Allow shooting only when the left mouse button is pressed down
-                        playerGun.Shoot();
-                    }
-                }
-            }
+            playerAttack.Attack();
         }
     }
 
