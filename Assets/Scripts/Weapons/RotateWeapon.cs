@@ -7,10 +7,10 @@ public class RotateWeapon : MonoBehaviour
     private SpriteRenderer weaponSpriteRenderer;
     private Transform playerTransform;
     private int playerSortingOrder;
-    
+
     [SerializeField] private float xPos = 0f;
     [SerializeField] private float yPos = 0.23f;
-    
+
 
     [SerializeField] private bool weaponFlip = true;
 
@@ -76,8 +76,28 @@ public class RotateWeapon : MonoBehaviour
         if (angle >= 65f && angle <= 115f)
         {
             // Set the new position (newXPos, newYPos) when angle is between 65° and 115°
-            transform.localPosition = new Vector3(xPos, yPos, transform.localPosition.z);
+            transform.localPosition = new Vector3(xPos, 0.1f, transform.localPosition.z);
         }
+        else if (angle >= -117f && angle < -64f)
+        {
+            // Set the new position (newXPos, newYPos) when angle is between -64° and -117°
+            transform.localPosition = new Vector3(-0.32f, 0.32f, transform.localPosition.z);
+        }
+        else if (angle >= -63 && angle < -25)
+        {
+            // Set the new position (newXPos, newYPos) when angle is between -25° and -63°
+            transform.localPosition = new Vector3(-0.19f, 0.23f, transform.localPosition.z);
+        }
+        else if (angle >= -25 && angle < 25)
+        {
+            transform.localPosition = new Vector3(-0.14f, 0.13f, transform.localPosition.z);
+
+        }
+        else if (angle >= 116f && angle <= 153f)
+        {
+            transform.localPosition = new Vector3(-0.3f, 0.28f, transform.localPosition.z);
+        }
+
         else
         {
             // Set back to the original position (originalXPos, originalYPos)
