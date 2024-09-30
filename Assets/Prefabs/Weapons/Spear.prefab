@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3715619253286845914}
   - component: {fileID: 717067344795621030}
+  - component: {fileID: 3038175550282902212}
   m_Layer: 6
   m_Name: Hitbox
   m_TagString: Untagged
@@ -86,6 +87,18 @@ PolygonCollider2D:
       - {x: 2.2798986, y: 0.31969053}
       - {x: 1.3174418, y: 0.3620605}
   m_UseDelaunayMesh: 0
+--- !u!114 &3038175550282902212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728015680397525171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcab79206c218b74d8353480b7db21ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6601246038333148960
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +113,6 @@ GameObject:
   - component: {fileID: 4655981490594817086}
   - component: {fileID: 6171377329340351653}
   - component: {fileID: 7459133092526910381}
-  - component: {fileID: 1174692919890209243}
   m_Layer: 6
   m_Name: Spear
   m_TagString: Untagged
@@ -209,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0991555ef37ad42a4b729c14ea0e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 500
+  knockbackForce: 30
   damage: 25
 --- !u!114 &6171377329340351653
 MonoBehaviour:
@@ -233,17 +245,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aca21aac045936f418bbcf3d13c853a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1174692919890209243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6601246038333148960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcab79206c218b74d8353480b7db21ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

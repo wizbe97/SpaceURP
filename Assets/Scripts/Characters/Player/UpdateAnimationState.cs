@@ -8,6 +8,7 @@ public class UpdateAnimationState : MonoBehaviour
     public Animator animator;
     private PlayerController playerController;
     private Action action;
+    private PlayerAttack playerAttack;
     private Player player;
     public PlayerStates currentStateValue;
     public enum PlayerStates
@@ -20,6 +21,7 @@ public class UpdateAnimationState : MonoBehaviour
         RUN_HOLDING_GUN,
         DASH,
         ATTACK,
+        SPEAR_ATTACK,
         DIE
     }
 
@@ -29,6 +31,7 @@ public class UpdateAnimationState : MonoBehaviour
         animator = GetComponent<Animator>();
         action = GetComponent<Action>();
         player = GetComponent<Player>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     public PlayerStates currentState
@@ -75,6 +78,11 @@ public class UpdateAnimationState : MonoBehaviour
                         playerController.isDashing = false;
                         stateLock = true;
                         break;
+                    case PlayerStates.SPEAR_ATTACK:
+                        animator.Play("Spear_Attack");
+                        playerController.isDashing = false;
+                        stateLock = true;
+                        break;
                     case PlayerStates.DASH:
                         animator.Play("Dash");
                         playerController.isDashing = true;
@@ -93,13 +101,19 @@ public class UpdateAnimationState : MonoBehaviour
     public void UpdateCharacterAnimationState(Vector2 moveInput)
     {
         int stateIdentifier;
+
         if (playerController.isDashing)
         {
             stateIdentifier = 7;
         }
+        // Check if action and currentItem are not null
+        else if (action != null && action.currentItem != null && action.currentItem.itemName == "Spear" && playerAttack.isAttacking == true)
+        {
+            stateIdentifier = 8;
+        }
         else if (playerController.isMoving)
         {
-            if (action.isHoldingWeapon)
+            if (action != null && action.isHoldingWeapon)
             {
                 stateIdentifier = playerController.movementSpeed >= 2000 ? 1 : 2;
             }
@@ -110,7 +124,7 @@ public class UpdateAnimationState : MonoBehaviour
         }
         else
         {
-            stateIdentifier = action.isHoldingWeapon ? 5 : 6;
+            stateIdentifier = (action != null && action.isHoldingWeapon) ? 5 : 6;
         }
 
         switch (stateIdentifier)
@@ -141,6 +155,10 @@ public class UpdateAnimationState : MonoBehaviour
             case 7:
                 PlayerFaceMovementDirection();
                 currentState = PlayerStates.DASH;
+                break;
+            case 8:
+                PlayerFollowMouse();
+                currentState = PlayerStates.SPEAR_ATTACK;
                 break;
         }
 

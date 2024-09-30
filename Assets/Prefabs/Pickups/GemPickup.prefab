@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1048287888794741107}
   - component: {fileID: 4392355263316547409}
   - component: {fileID: 2767799432181496599}
-  m_Layer: 13
+  m_Layer: 16
   m_Name: GemPickup
   m_TagString: CanBePickedUp
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1967825719
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2039444798, guid: 5185a6d72843e3d4796d1434cca13539, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 733b50ffa985caf44b17f961a8cd94c5, type: 2}
+  ID: 
 --- !u!61 &2767799432181496599
 BoxCollider2D:
   m_ObjectHideFlags: 0

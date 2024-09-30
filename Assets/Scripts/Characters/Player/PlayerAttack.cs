@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public bool isAttacking = false;
     private Inventory inventory;
     private PlayerGun playerGun;
     private Action action;
@@ -26,6 +27,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 return; // Exit if cooldown is still active
             }
+            isAttacking = true;
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3974523491025016341}
   - component: {fileID: 4965440420544347677}
   - component: {fileID: 3550801089547599143}
-  m_Layer: 13
+  m_Layer: 16
   m_Name: HeartPickup
   m_TagString: CanBePickedUp
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1967825719
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -443841175, guid: 83dfc663a4585984fa5e603087fcc470, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: a05b0b96d13108d4b8fb567b7d297981, type: 2}
+  ID: 
 --- !u!61 &3550801089547599143
 BoxCollider2D:
   m_ObjectHideFlags: 0

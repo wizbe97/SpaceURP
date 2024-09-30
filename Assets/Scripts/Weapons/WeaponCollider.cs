@@ -8,7 +8,7 @@ public class WeaponCollider : MonoBehaviour
     private WeaponInfo weaponInfo;
 
     private void Start() {
-        weaponInfo = GetComponent<WeaponInfo>();
+        weaponInfo = GetComponentInParent<WeaponInfo>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

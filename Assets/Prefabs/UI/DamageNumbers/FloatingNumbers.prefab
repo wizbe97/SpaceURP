@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1771895408597033696}
   - component: {fileID: 3953323910627805761}
   - component: {fileID: 3668782288683398909}
+  - component: {fileID: 948264920814700650}
   m_Layer: 5
   m_Name: FloatingNumbers
   m_TagString: Untagged
@@ -76,7 +77,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1059150131
+  m_SortingLayerID: 1748805253
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
@@ -193,3 +194,11 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1771895408597033696}
   m_maskType: 0
+--- !u!33 &948264920814700650
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935307851839207253}
+  m_Mesh: {fileID: 0}
