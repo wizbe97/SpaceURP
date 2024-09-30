@@ -7,6 +7,12 @@ public class RotateWeapon : MonoBehaviour
     private SpriteRenderer weaponSpriteRenderer;
     private Transform playerTransform;
     private int playerSortingOrder;
+    
+    [SerializeField] private float xPos = 0f;
+    [SerializeField] private float yPos = 0.23f;
+    
+
+    [SerializeField] private bool weaponFlip = true;
 
     private void Start()
     {
@@ -15,16 +21,17 @@ public class RotateWeapon : MonoBehaviour
 
         playerSortingOrder = playerTransform.GetComponent<SpriteRenderer>().sortingOrder;
 
-        // Adjust the Y position of the weapon by 2 units
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 0.23f, transform.localPosition.z);
+        // Set initial position to the original position
+        transform.localPosition = new Vector3(xPos, yPos, transform.localPosition.z);
     }
 
     private void Update()
     {
-        RotateGunTowardsMouse();
-        AdjustSortingOrder();
+        RotateWeaponTowardsMouse();
+        AdjustSortingOrderAndPosition();
     }
-    void RotateGunTowardsMouse()
+
+    void RotateWeaponTowardsMouse()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePosition - playerTransform.position;
@@ -33,7 +40,8 @@ public class RotateWeapon : MonoBehaviour
         // Rotate the weapon
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        if (angle > 90 || angle < -90)
+        // Flip the weapon sprite if needed
+        if ((angle > 90 || angle < -90) && weaponFlip)
         {
             weaponSpriteRenderer.flipY = true;
         }
@@ -43,7 +51,7 @@ public class RotateWeapon : MonoBehaviour
         }
     }
 
-    void AdjustSortingOrder()
+    void AdjustSortingOrderAndPosition()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePosition - playerTransform.position;
@@ -64,7 +72,19 @@ public class RotateWeapon : MonoBehaviour
                 break;
         }
 
-        // Apply the adjusted sorting order to the gun sprite renderer
+        // Adjust X and Y positions based on angle (Z rotation)
+        if (angle >= 65f && angle <= 115f)
+        {
+            // Set the new position (newXPos, newYPos) when angle is between 65° and 115°
+            transform.localPosition = new Vector3(xPos, yPos, transform.localPosition.z);
+        }
+        else
+        {
+            // Set back to the original position (originalXPos, originalYPos)
+            transform.localPosition = new Vector3(xPos, yPos, transform.localPosition.z);
+        }
+
+        // Apply the adjusted sorting order to the weapon sprite renderer
         weaponSpriteRenderer.sortingOrder = sortingOrder;
     }
 }

@@ -47,46 +47,55 @@ public class UpdateAnimationState : MonoBehaviour
                         animator.Play("Idle");
                         playerController.isDashing = false;
                         stateLock = false;
+                        playerController.canMove = true;
                         break;
                     case PlayerStates.IDLE_HOLDING_GUN:
                         animator.Play("Idle_Holding_Gun");
                         playerController.isDashing = false;
                         stateLock = false;
+                        playerController.canMove = true;
                         break;
                     case PlayerStates.WALK:
                         animator.Play("Walk");
                         playerController.isDashing = false;
                         stateLock = false;
+                        playerController.canMove = true;
                         break;
                     case PlayerStates.WALK_HOLDING_GUN:
                         animator.Play("Walk_Holding_Gun");
                         playerController.isDashing = false;
                         stateLock = false;
+                        playerController.canMove = true;
                         break;
                     case PlayerStates.RUN:
                         animator.Play("Run");
                         playerController.isDashing = false;
                         stateLock = false;
+                        playerController.canMove = true;
                         break;
                     case PlayerStates.RUN_HOLDING_GUN:
                         animator.Play("Run_Holding_Gun");
                         playerController.isDashing = false;
                         stateLock = false;
+                        playerController.canMove = true;
                         break;
                     case PlayerStates.ATTACK:
                         animator.Play("Attack");
                         playerController.isDashing = false;
                         stateLock = true;
+                        playerController.canMove = true;
                         break;
                     case PlayerStates.SPEAR_ATTACK:
                         animator.Play("Spear_Attack");
                         playerController.isDashing = false;
                         stateLock = true;
+                        playerController.canMove = false;
                         break;
                     case PlayerStates.DASH:
                         animator.Play("Dash");
                         playerController.isDashing = true;
                         stateLock = true;
+                        playerController.canMove = true;
                         break;
                     case PlayerStates.DIE:
                         animator.Play("Die");
