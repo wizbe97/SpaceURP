@@ -100,10 +100,14 @@ public class Action : MonoBehaviour
             return;
         }
 
-        if (currentItem.itemType == Item.ItemType.GUN || currentItem.itemType == Item.ItemType.MELEE_WEAPON)
+        if (currentItem.itemType == Item.ItemType.GUN)
         {
             isHoldingWeapon = true;
 
+            ActivateCurrentItem();
+        }
+        else if (currentItem.itemType == Item.ItemType.MELEE_WEAPON)
+        {
             ActivateCurrentItem();
         }
         else

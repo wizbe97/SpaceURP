@@ -90,9 +90,9 @@ public class PlayerController : MonoBehaviour
     public void OnDashEnd()
     {
         isDashing = false;
-        animationState.stateLock = false;
         animationState.UpdateCharacterAnimationState(moveInput);
         action.CurrentItem();
+        animationState.stateLock = false;
         StartCoroutine(ReactivateColliderAfterDelay(1f)); // Start the coroutine with a 1-second delay
     }
 

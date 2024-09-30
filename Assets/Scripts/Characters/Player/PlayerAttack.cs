@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
 {
     public bool isAttacking = false;
     private Inventory inventory;
+    private UpdateAnimationState animationState;
     private PlayerGun playerGun;
     private Action action;
     private SpearAttack spearAttack;
@@ -17,10 +19,14 @@ public class PlayerAttack : MonoBehaviour
     {
         action = GetComponent<Action>();
         inventory = FindObjectOfType<Inventory>();
+        animationState = GetComponent<UpdateAnimationState>();
     }
 
     public void Attack()
     {
+        if (animationState.stateLock == true)
+            return;
+
         if (action.currentItem.itemType == Item.ItemType.MELEE_WEAPON)
         {
             if (Time.time - lastAttackTime < spearCooldown)
