@@ -10,6 +10,7 @@ public class WeaponAnimations : MonoBehaviour
     public WeaponStates currentStateValue;
     private PlayerController playerController;
     private PlayerAttack playerAttack;
+    public bool stateLock = false;
 
     public enum WeaponStates
     {
@@ -28,15 +29,19 @@ public class WeaponAnimations : MonoBehaviour
             {
                 case WeaponStates.IDLE:
                     animator.Play("Idle");
+                    stateLock = false;
                     break;
                 case WeaponStates.WALK:
                     animator.Play("Walk");
+                    stateLock = false;
                     break;
                 case WeaponStates.RUN:
                     animator.Play("Run");
+                    stateLock = false;
                     break;
                 case WeaponStates.ATTACK:
                     animator.Play("Attack");
+                    stateLock = true;
                     break;
             }
         }
@@ -58,8 +63,8 @@ public class WeaponAnimations : MonoBehaviour
     {
         if (playerAttack.isAttacking)
         {
-            CurrentState = WeaponStates.ATTACK;
             WeaponFollowMouse();
+            CurrentState = WeaponStates.ATTACK;
         }
         else if (playerController.moveInput != Vector2.zero && playerController.movementSpeed > 2000)
         {
@@ -87,6 +92,8 @@ public class WeaponAnimations : MonoBehaviour
 
     public void WeaponFollowMouse()
     {
+        if (stateLock == true)
+            return;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
         animator.SetFloat("xMove", playerToMouse.x);

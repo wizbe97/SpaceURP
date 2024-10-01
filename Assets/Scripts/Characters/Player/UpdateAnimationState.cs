@@ -239,6 +239,8 @@ public class UpdateAnimationState : MonoBehaviour
 
         void PlayerFollowMouse()
         {
+            if (stateLock == true)
+                return;
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
             animator.SetFloat("mouseX", playerToMouse.x);

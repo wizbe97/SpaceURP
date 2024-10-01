@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class SpearAttack : MonoBehaviour
 {
-    private Animator animator;
     [SerializeField] private GameObject colliderObject;
     private UpdateAnimationState animationState;
+    WeaponAnimations weaponAnimations;
     private PlayerController playerController;
     private PlayerAttack playerAttack;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
         animationState = GetComponentInParent<UpdateAnimationState>();
         playerController = GetComponentInParent<PlayerController>();
         playerAttack = GetComponentInParent<PlayerAttack>();
+        weaponAnimations = GetComponent<WeaponAnimations>();
     }
 
     public void Attack()
@@ -53,5 +53,6 @@ public class SpearAttack : MonoBehaviour
         animationState.stateLock = false;
         animationState.UpdateCharacterAnimationState(playerController.moveInput);
         playerController.canMove = true;
+        weaponAnimations.stateLock = false;
     }
 }
