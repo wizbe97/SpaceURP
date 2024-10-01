@@ -84,12 +84,12 @@ public class PlayerController : MonoBehaviour
         if (!dashOnCooldown && moveInput.magnitude > 0)
         {
             boxCollider.enabled = false;
+            action.DeactivateCurrentItem();
             Vector2 dashDirection = moveInput.normalized;
             rb.AddForce(dashDirection * dashForce, ForceMode2D.Impulse);
             isDashing = true;
             dashOnCooldown = true;
             animationState.UpdateCharacterAnimationState(moveInput);
-            action.DeactivateCurrentItem();
             StartCoroutine(DashCooldown());
         }
     }
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         animationState.UpdateCharacterAnimationState(moveInput);
         action.CurrentItem();
         animationState.stateLock = false;
-        StartCoroutine(ReactivateColliderAfterDelay(1f)); // Start the coroutine with a 1-second delay
+        StartCoroutine(ReactivateColliderAfterDelay(0.5f)); // Start the coroutine with a 1-second delay
     }
 
     // Coroutine to reactivate the box collider after a delay

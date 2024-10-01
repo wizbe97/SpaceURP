@@ -132,5 +132,8 @@ public class Action : MonoBehaviour
             isHoldingWeapon = false;
             instantiatedCurrentItem.SetActive(false);
         }
+        else {
+            Debug.LogWarning("No item to deactivate!");
+        }
     }
 }

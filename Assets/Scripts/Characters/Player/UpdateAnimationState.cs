@@ -130,7 +130,6 @@ public class UpdateAnimationState : MonoBehaviour
 
     public void UpdateCharacterAnimationState(Vector2 moveInput)
     {
-        action.CurrentItem();
         int stateIdentifier = 1;
 
         if (playerController.isDashing) // DASHING
