@@ -148,7 +148,7 @@ public class UpdateAnimationState : MonoBehaviour
                 stateIdentifier = 12; // ATTACK
             }
         }
-        else if (playerController.isMoving) // WAL OR RUN
+        else if (playerController.isMoving) // WALK OR RUN
         {
             if (action != null && action.currentItem != null)
             {
