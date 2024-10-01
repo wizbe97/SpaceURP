@@ -5,6 +5,27 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private UpdateAnimationState animationState;
+    private PlayerAttack playerAttack;
+    private DialogueManager dialogueManager;
+    private Action action;
+    private Rigidbody2D rb;
+    [SerializeField] private float moveDrag = 15f;
+    [SerializeField] private float stopDrag = 25f;
+    [SerializeField] private float dashForce = 10f;
+    [SerializeField] private float dashCooldown = 3f;
+    private bool dashOnCooldown = false;
+    public bool isMoving = false;
+    public bool canMove = true;
+    [HideInInspector] public Vector2 lastMoveDirection;
+
+
+    public float movementSpeed = 1250f;
+    [HideInInspector] public Vector2 moveInput = Vector2.zero;
+    [HideInInspector] public bool isDashing;
+
+    private BoxCollider2D boxCollider;
+
     bool IsMoving
     {
         set
@@ -22,23 +43,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private UpdateAnimationState animationState;
-    private DialogueManager dialogueManager;
-    private Action action;
-    private Rigidbody2D rb;
-    [SerializeField] private float moveDrag = 15f;
-    [SerializeField] private float stopDrag = 25f;
-    [SerializeField] private float dashForce = 10f;
-    [SerializeField] private float dashCooldown = 3f;
-    private bool dashOnCooldown = false;
-    public bool isMoving = false;
-    public bool canMove = true;
-
-    public float movementSpeed = 1250f;
-    [HideInInspector] public Vector2 moveInput = Vector2.zero;
-    [HideInInspector] public bool isDashing;
-
-    private BoxCollider2D boxCollider;
 
     private void Awake()
     {
@@ -47,6 +51,7 @@ public class PlayerController : MonoBehaviour
         action = GetComponent<Action>();
         boxCollider = GetComponent<BoxCollider2D>();
         dialogueManager = FindObjectOfType<DialogueManager>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     private void FixedUpdate()
@@ -61,15 +66,18 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCharacter()
     {
-        if (canMove == true && moveInput != Vector2.zero)
+        if (canMove && moveInput != Vector2.zero)
         {
             rb.AddForce(movementSpeed * Time.fixedDeltaTime * moveInput, ForceMode2D.Force);
+            lastMoveDirection = moveInput;  // Store the last movement direction
             IsMoving = true;
+            playerAttack.hasRecentlyAttacked = false;
         }
         else
         {
             IsMoving = false;
         }
+
     }
 
     private void OnDash()

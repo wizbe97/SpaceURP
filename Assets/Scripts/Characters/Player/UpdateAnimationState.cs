@@ -15,6 +15,7 @@ public class UpdateAnimationState : MonoBehaviour
     {
         IDLE,
         IDLE_HOLDING_GUN,
+        IDLE_HOLDING_MELEE,
         WALK,
         WALK_HOLDING_GUN,
         RUN,
@@ -51,6 +52,12 @@ public class UpdateAnimationState : MonoBehaviour
                         break;
                     case PlayerStates.IDLE_HOLDING_GUN:
                         animator.Play("Idle_Holding_Gun");
+                        playerController.isDashing = false;
+                        stateLock = false;
+                        playerController.canMove = true;
+                        break;
+                    case PlayerStates.IDLE_HOLDING_MELEE:
+                        animator.Play("Idle_Holding_Melee");
                         playerController.isDashing = false;
                         stateLock = false;
                         playerController.canMove = true;
@@ -131,9 +138,36 @@ public class UpdateAnimationState : MonoBehaviour
                 stateIdentifier = playerController.movementSpeed >= 2000 ? 3 : 4;
             }
         }
+        else if (action != null && action.isHoldingWeapon && playerAttack.isAttacking == false)
+        {
+            action.CurrentItem();
+
+            if (action.currentItem.itemType == Item.ItemType.GUN)
+            {
+                stateIdentifier = 5; // IDLE_HOLDING_GUN
+            }
+
+            else
+            {
+                stateIdentifier = 6; // IDLE
+            }
+        }
+        else if (action != null && playerAttack.isAttacking == false)
+        {
+            action.CurrentItem();
+
+            if (action.currentItem == null)
+            {
+                stateIdentifier = 6; // IDLE
+            }
+            else
+            {
+                stateIdentifier = 9; // IDLE_HOLDING_MELEE
+            }
+        }
         else
         {
-            stateIdentifier = (action != null && action.isHoldingWeapon) ? 5 : 6;
+            stateIdentifier = 6;
         }
 
         switch (stateIdentifier)
@@ -159,6 +193,7 @@ public class UpdateAnimationState : MonoBehaviour
                 currentState = PlayerStates.IDLE_HOLDING_GUN;
                 break;
             case 6:
+                PlayerFaceMovementDirection();
                 currentState = PlayerStates.IDLE;
                 break;
             case 7:
@@ -168,6 +203,10 @@ public class UpdateAnimationState : MonoBehaviour
             case 8:
                 PlayerFollowMouse();
                 currentState = PlayerStates.SPEAR_ATTACK;
+                break;
+            case 9:
+                PlayerFaceMovementDirection();
+                currentState = PlayerStates.IDLE_HOLDING_MELEE;
                 break;
         }
 
@@ -181,8 +220,17 @@ public class UpdateAnimationState : MonoBehaviour
 
         void PlayerFaceMovementDirection()
         {
-            animator.SetFloat("xMove", playerController.moveInput.x);
-            animator.SetFloat("yMove", playerController.moveInput.y);
+            Vector2 directionToUse;
+
+            if (playerAttack.hasRecentlyAttacked == true)
+                directionToUse = playerAttack.GetAttackDirection();
+            else if (playerAttack.hasRecentlyAttacked == false && playerController.moveInput != Vector2.zero)
+                directionToUse = playerController.moveInput;
+            else
+                directionToUse = playerController.lastMoveDirection;
+
+            animator.SetFloat("xMove", directionToUse.x);
+            animator.SetFloat("yMove", directionToUse.y);
         }
     }
 }

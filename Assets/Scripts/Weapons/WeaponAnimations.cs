@@ -10,10 +10,12 @@ public class WeaponAnimations : MonoBehaviour
     public WeaponStates currentStateValue;
     private PlayerController playerController;
     private PlayerAttack playerAttack;
+
     public enum WeaponStates
     {
         IDLE,
-        ATTACK
+        ATTACK,
+        RUN
     }
 
     public WeaponStates CurrentState
@@ -25,6 +27,9 @@ public class WeaponAnimations : MonoBehaviour
             {
                 case WeaponStates.IDLE:
                     animator.Play("Idle");
+                    break;
+                case WeaponStates.RUN:
+                    animator.Play("Run");
                     break;
                 case WeaponStates.ATTACK:
                     animator.Play("Attack");
@@ -47,19 +52,30 @@ public class WeaponAnimations : MonoBehaviour
     }
     void UpdateAnimationWeapon()
     {
-        if (playerAttack.isAttacking == true)
+        if (playerAttack.isAttacking)
         {
             CurrentState = WeaponStates.ATTACK;
             WeaponFollowMouse();
         }
+        else if (playerController.moveInput != Vector2.zero && playerController.movementSpeed >= 2000)
+        {
+            // Update the last move direction when the player is moving
+            CurrentState = WeaponStates.RUN;
+            WeaponFaceMovementDirection(playerController.moveInput);
+        }
         else
         {
+            // When idling, use the last move direction to keep the weapon facing the correct direction
             CurrentState = WeaponStates.IDLE;
-            WeaponFollowMouse();
+            if (playerAttack.hasRecentlyAttacked == false)
+                WeaponFaceMovementDirection(playerController.lastMoveDirection);
+            else
+                WeaponFaceMovementDirection(playerAttack.GetAttackDirection());
         }
     }
 
-    void WeaponFollowMouse()
+
+    public void WeaponFollowMouse()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
@@ -67,9 +83,10 @@ public class WeaponAnimations : MonoBehaviour
         animator.SetFloat("yMove", playerToMouse.y);
     }
 
-    void WeaponFaceMovementDirection()
+    void WeaponFaceMovementDirection(Vector2 direction)
     {
-        animator.SetFloat("xMove", playerController.moveInput.x);
-        animator.SetFloat("yMove", playerController.moveInput.y);
+        animator.SetFloat("xMove", direction.x);
+        animator.SetFloat("yMove", direction.y);
     }
+
 }

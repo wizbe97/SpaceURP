@@ -1,7 +1,4 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -14,6 +11,10 @@ public class PlayerAttack : MonoBehaviour
 
     public float lastAttackTime;
     public float spearCooldown = 1f; // Cooldown duration in seconds
+
+    // Store the attack direction and whether the player has recently attacked
+    private Vector2 attackDirection;
+    public bool hasRecentlyAttacked = false; // New flag for tracking recent attack
 
     void Start()
     {
@@ -34,15 +35,18 @@ public class PlayerAttack : MonoBehaviour
                 return; // Exit if cooldown is still active
             }
             isAttacking = true;
+            hasRecentlyAttacked = true; // Mark that the player has recently attacked
+
+            // Store the attack direction (based on the mouse position)
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
+            attackDirection = (mousePosition - (Vector2)transform.position).normalized;
 
             if (action.currentItem.itemName == "Spear")
             {
                 spearAttack = GetComponentInChildren<SpearAttack>();
                 if (spearAttack != null)
                 {
-                    spearAttack.Attack(playerToMouse.x, playerToMouse.y);
+                    spearAttack.Attack();
                     lastAttackTime = Time.time; // Update the last attack time
                 }
             }
@@ -64,4 +68,10 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+
+    public Vector2 GetAttackDirection()
+    {
+        return attackDirection;
+    }
+
 }

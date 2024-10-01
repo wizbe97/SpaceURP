@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpearAttack : MonoBehaviour
 {
     private Animator animator;
-    private PolygonCollider2D polygonCollider;
+    [SerializeField] private GameObject colliderObject;
     private UpdateAnimationState animationState;
     private PlayerController playerController;
     private PlayerAttack playerAttack;
@@ -13,31 +13,43 @@ public class SpearAttack : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        polygonCollider = GetComponentInChildren<PolygonCollider2D>();
         animationState = GetComponentInParent<UpdateAnimationState>();
         playerController = GetComponentInParent<PlayerController>();
         playerAttack = GetComponentInParent<PlayerAttack>();
     }
 
-    public void Attack(float attackDirectionX, float attackDirectionY)
+    public void Attack()
     {
         Debug.Log("Attacking with spear");
-        StartCoroutine(EnableColliderAfterDelay(0.15f));  // Start coroutine with 0.5s delay
-        animator.SetBool("isAttacking", true);
-        animator.SetFloat("mouseX", attackDirectionX);
-        animator.SetFloat("mouseY", attackDirectionY);
+        RotateColliderToMouse(); // Rotate the collider towards the mouse
+        StartCoroutine(EnableColliderAfterDelay(0.15f));  // Start coroutine with 0.15s delay
+    }
+
+    private void RotateColliderToMouse()
+    {
+        // Get the mouse position in world coordinates
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+
+        // Calculate the direction from the spear to the mouse
+        Vector3 direction = (mousePosition - colliderObject.transform.position).normalized;
+
+        // Calculate the angle in radians
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Rotate the colliderObject to face the mouse position
+        colliderObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     private IEnumerator EnableColliderAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);  // Wait for 0.15 seconds
-        polygonCollider.enabled = true;          // Enable the collider after delay
+        yield return new WaitForSeconds(delay);  // Wait for the specified delay
+        colliderObject.SetActive(true);           // Enable the collider after delay
     }
 
     public void AttackEnd()
     {
-        animator.SetBool("isAttacking", false);
-        polygonCollider.enabled = false;
+        colliderObject.SetActive(false);
         playerAttack.isAttacking = false;
         animationState.stateLock = false;
         animationState.UpdateCharacterAnimationState(playerController.moveInput);

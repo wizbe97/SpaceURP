@@ -40,7 +40,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728015680397525171}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -77,15 +77,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.012730181, y: 0.29275414}
-      - {x: -0.408018, y: 0.1940897}
-      - {x: -0.38036248, y: -0.31705293}
-      - {x: 1.230714, y: -0.3139457}
-      - {x: 2.2929773, y: -0.3437844}
-      - {x: 2.7941632, y: -0.2523471}
+    - - {x: 0.06161064, y: 0.4626105}
+      - {x: -0.39739788, y: 0.48072237}
+      - {x: -0.41222283, y: -0.4762933}
+      - {x: 1.2413341, y: -0.4944182}
+      - {x: 2.2884607, y: -0.5031258}
+      - {x: 2.9711652, y: -0.5090638}
       - {x: 3.8965883, y: -0.04872781}
-      - {x: 2.2798986, y: 0.31969053}
-      - {x: 1.3174418, y: 0.3620605}
+      - {x: 2.9984045, y: 0.44001117}
+      - {x: 1.3572367, y: 0.45058346}
   m_UseDelaunayMesh: 0
 --- !u!114 &3038175550282902212
 MonoBehaviour:
@@ -111,9 +111,9 @@ GameObject:
   - component: {fileID: 5707971894388275387}
   - component: {fileID: -2822319440538414711}
   - component: {fileID: 4655981490594817086}
-  - component: {fileID: 6171377329340351653}
   - component: {fileID: 7459133092526910381}
   - component: {fileID: 1591344476063836949}
+  - component: {fileID: -186912199354710122}
   m_Layer: 6
   m_Name: Spear
   m_TagString: Untagged
@@ -131,7 +131,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3715619253286845914}
@@ -199,7 +199,7 @@ Animator:
   m_GameObject: {fileID: 6601246038333148960}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 155bd0fee1899ed43b3272e2c7a646e3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 98d74d19451a83240a6c58a943d44ec5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -224,21 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackForce: 30
   damage: 25
---- !u!114 &6171377329340351653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6601246038333148960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b1e655b77eba2a4980cb132f4408e21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPos: 0.3
-  yPos: 0.23
-  weaponFlip: 1
 --- !u!114 &7459133092526910381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca21aac045936f418bbcf3d13c853a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderObject: {fileID: 728015680397525171}
 --- !u!114 &1591344476063836949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,3 +249,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcab79206c218b74d8353480b7db21ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-186912199354710122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6601246038333148960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed81b4cbb4b49e4a85222419f15a1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStateValue: 0
