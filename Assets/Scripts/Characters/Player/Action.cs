@@ -127,6 +127,9 @@ public class Action : MonoBehaviour
     }
     public void DeactivateCurrentItem()
     {
+        if (currentItem == null)
+            return;
+        
         if (instantiatedCurrentItem != null)
         {
             isHoldingWeapon = false;

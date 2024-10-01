@@ -20,7 +20,6 @@ public class SpearAttack : MonoBehaviour
 
     public void Attack()
     {
-        Debug.Log("Attacking with spear");
         RotateColliderToMouse(); // Rotate the collider towards the mouse
         StartCoroutine(EnableColliderAfterDelay(0.15f));  // Start coroutine with 0.15s delay
     }
