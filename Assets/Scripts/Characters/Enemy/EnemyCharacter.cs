@@ -5,7 +5,7 @@ using TMPro;
 public class EnemyCharacter : Character
 {
     public float attackCooldown = 3f;
-    public int damage = 15;
+    [HideInInspector] public int damage = 15;
     public GameObject floatingHealthBar;
     public GameObject shadow;
     private EnemyController enemyController;

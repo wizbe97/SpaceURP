@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2289560234112058132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,8 @@ GameObject:
   - component: {fileID: -2822319440538414711}
   - component: {fileID: -5732262065423193280}
   - component: {fileID: 4160471982219836962}
-  m_Layer: 0
+  - component: {fileID: 2873928052677138227}
+  m_Layer: 6
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +108,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1967825719
+  m_SortingLayerID: -1400585243
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 1670146019, guid: 00ad0c418f83379498eb8ee895108b20, type: 3}
@@ -258,6 +259,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2873928052677138227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6601246038333148960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1e655b77eba2a4980cb132f4408e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6713888473970511660
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5593825063538871715}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7758434227606111248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

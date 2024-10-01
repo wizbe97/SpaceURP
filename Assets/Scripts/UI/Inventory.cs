@@ -69,7 +69,7 @@ public class Inventory : MonoBehaviour
             {
                 // Deactivate existing current item
                 action.DeactivateCurrentItem();
-                action.isHoldingGun = false;
+                action.isHoldingWeapon = false;
                 inventorySlots[selectedSlot].Deselect();
             }
             // Find the slot with the specified index in the parent's list of children

@@ -30,8 +30,8 @@ TagManager:
   - EnemyProjectiles
   - NPCs
   - NPCCollisions
-  - 
-  - 
+  - PlayerProjectiles
+  - Pickups
   - 
   - 
   - 

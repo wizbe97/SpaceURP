@@ -85,6 +85,7 @@ public class Player : Character
                     case Item.ItemType.COIN:
                     case Item.ItemType.BULLET:
                     case Item.ItemType.GUN:
+                    case Item.ItemType.MELEE_WEAPON:
                         inventory.CollectItem(collision.gameObject);
                         shouldDisappear = AddItemToInventory(hitObject, hitObject.quantity);
                         action.CurrentItem();

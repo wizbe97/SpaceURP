@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -2822319440538414711}
   - component: {fileID: -5732262065423193280}
   - component: {fileID: 4160471982219836962}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RPG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1967825719
+  m_SortingLayerID: -1400585243
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 1752837777, guid: fb4534efabce2b44cbe17e521b906a20, type: 3}
@@ -234,7 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5593825063538871715}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

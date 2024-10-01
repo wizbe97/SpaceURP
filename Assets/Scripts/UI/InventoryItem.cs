@@ -125,7 +125,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
             // Destroy the placeholder object
             Destroy(placeholder);
-            action.DeactivateCurrentItem(); action.CurrentItem();
+            action.DeactivateCurrentItem(); 
+            action.CurrentItem();
         }
     }
 

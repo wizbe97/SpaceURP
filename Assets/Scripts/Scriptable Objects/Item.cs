@@ -19,6 +19,7 @@ public class Item : ScriptableObject
         COIN,
         HEALTH,
         GUN,
+        MELEE_WEAPON,
         BULLET
     }
     public ItemType itemType;

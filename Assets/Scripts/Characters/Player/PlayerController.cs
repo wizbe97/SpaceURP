@@ -5,6 +5,27 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private UpdateAnimationState animationState;
+    private PlayerAttack playerAttack;
+    private DialogueManager dialogueManager;
+    private Action action;
+    private Rigidbody2D rb;
+    [SerializeField] private float moveDrag = 15f;
+    [SerializeField] private float stopDrag = 25f;
+    [SerializeField] private float dashForce = 10f;
+    [SerializeField] private float dashCooldown = 3f;
+    private bool dashOnCooldown = false;
+    public bool isMoving = false;
+    public bool canMove = true;
+    [HideInInspector] public Vector2 lastMoveDirection;
+
+
+    public float movementSpeed = 1250f;
+    [HideInInspector] public Vector2 moveInput = Vector2.zero;
+    [HideInInspector] public bool isDashing;
+
+    private BoxCollider2D boxCollider;
+
     bool IsMoving
     {
         set
@@ -22,23 +43,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private UpdateAnimationState animationState;
-    private DialogueManager dialogueManager;
-    private Action action;
-    private Rigidbody2D rb;
-    [SerializeField] private float moveDrag = 15f;
-    [SerializeField] private float stopDrag = 25f;
-    [SerializeField] private float dashForce = 10f;
-    [SerializeField] private float dashCooldown = 3f;
-    private bool dashOnCooldown = false;
-    public bool isMoving = false;
-    public bool canMove = true;
-
-    public float movementSpeed = 1250f;
-    [HideInInspector] public Vector2 moveInput = Vector2.zero;
-    [HideInInspector] public bool isDashing;
-
-    private BoxCollider2D boxCollider;
 
     private void Awake()
     {
@@ -47,6 +51,7 @@ public class PlayerController : MonoBehaviour
         action = GetComponent<Action>();
         boxCollider = GetComponent<BoxCollider2D>();
         dialogueManager = FindObjectOfType<DialogueManager>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     private void FixedUpdate()
@@ -61,10 +66,12 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCharacter()
     {
-        if (canMove == true && moveInput != Vector2.zero)
+        if (canMove && moveInput != Vector2.zero)
         {
             rb.AddForce(movementSpeed * Time.fixedDeltaTime * moveInput, ForceMode2D.Force);
+            lastMoveDirection = moveInput;  // Store the last movement direction
             IsMoving = true;
+            playerAttack.hasRecentlyAttacked = false;
         }
         else
         {
@@ -77,12 +84,12 @@ public class PlayerController : MonoBehaviour
         if (!dashOnCooldown && moveInput.magnitude > 0)
         {
             boxCollider.enabled = false;
+            action.DeactivateCurrentItem();
             Vector2 dashDirection = moveInput.normalized;
             rb.AddForce(dashDirection * dashForce, ForceMode2D.Impulse);
             isDashing = true;
             dashOnCooldown = true;
             animationState.UpdateCharacterAnimationState(moveInput);
-            action.DeactivateCurrentItem();
             StartCoroutine(DashCooldown());
         }
     }
@@ -90,10 +97,10 @@ public class PlayerController : MonoBehaviour
     public void OnDashEnd()
     {
         isDashing = false;
-        animationState.stateLock = false;
         animationState.UpdateCharacterAnimationState(moveInput);
         action.CurrentItem();
-        StartCoroutine(ReactivateColliderAfterDelay(1f)); // Start the coroutine with a 1-second delay
+        animationState.stateLock = false;
+        StartCoroutine(ReactivateColliderAfterDelay(0.5f)); // Start the coroutine with a 1-second delay
     }
 
     // Coroutine to reactivate the box collider after a delay

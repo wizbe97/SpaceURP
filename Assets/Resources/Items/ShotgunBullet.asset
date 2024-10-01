@@ -21,4 +21,4 @@ MonoBehaviour:
   dropChance: 1
   bullet: {fileID: 0}
   holdable: 0
-  itemType: 3
+  itemType: 4

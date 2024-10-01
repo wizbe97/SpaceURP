@@ -5,15 +5,16 @@ using UnityEngine.EventSystems;
 public class Action : MonoBehaviour
 {
     private Inventory inventory;
-    public bool isHoldingGun = false;
+    private PlayerAttack playerAttack;
+    public bool isHoldingWeapon = false;
     [HideInInspector] public GameObject instantiatedCurrentItem;
     public Item currentItem;
-    private PlayerGun playerGun;
     private bool overUI;
 
     void Start()
     {
         inventory = FindAnyObjectByType<Inventory>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -34,21 +35,9 @@ public class Action : MonoBehaviour
         if (overUI || currentItem == null)
             return;
 
-        if (currentItem.itemType == Item.ItemType.GUN)
+        if (currentItem.itemType == Item.ItemType.GUN || currentItem.itemType == Item.ItemType.MELEE_WEAPON)
         {
-            if (currentItem.bullet != null)
-            {
-                // Check if the inventory has the required bullet type for this gun
-                if (inventory.HasItem(currentItem.bullet))
-                {
-                    playerGun = FindObjectOfType<PlayerGun>();
-                    if (playerGun != null && !PlayerGun.IsAnyGunShooting())
-                    {
-                        // Allow shooting only when the left mouse button is pressed down
-                        playerGun.Shoot();
-                    }
-                }
-            }
+            playerAttack.Attack();
         }
     }
 
@@ -61,7 +50,7 @@ public class Action : MonoBehaviour
 
             // Calculate drop direction based on the mouse position if holding a gun
             Vector3 dropDirection;
-            if (isHoldingGun)
+            if (isHoldingWeapon)
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 dropDirection = (mousePosition - transform.position).normalized;
@@ -113,14 +102,13 @@ public class Action : MonoBehaviour
 
         if (currentItem.itemType == Item.ItemType.GUN)
         {
-            isHoldingGun = true;
+            isHoldingWeapon = true;
 
-            Transform existingItemTransform = transform.Find(currentItem.itemName);
-            instantiatedCurrentItem = existingItemTransform != null ? existingItemTransform.gameObject :
-                                  Instantiate(currentItem.instantiatedPrefab, transform.position, Quaternion.identity);
-            instantiatedCurrentItem.name = currentItem.itemName;
-            instantiatedCurrentItem.transform.parent = transform;
-            instantiatedCurrentItem.SetActive(true);
+            ActivateCurrentItem();
+        }
+        else if (currentItem.itemType == Item.ItemType.MELEE_WEAPON)
+        {
+            ActivateCurrentItem();
         }
         else
         {
@@ -128,12 +116,27 @@ public class Action : MonoBehaviour
         }
     }
 
+    public void ActivateCurrentItem()
+    {
+        Transform existingItemTransform = transform.Find(currentItem.itemName);
+        instantiatedCurrentItem = existingItemTransform != null ? existingItemTransform.gameObject :
+                              Instantiate(currentItem.instantiatedPrefab, transform.position, Quaternion.identity);
+        instantiatedCurrentItem.name = currentItem.itemName;
+        instantiatedCurrentItem.transform.parent = transform;
+        instantiatedCurrentItem.SetActive(true);
+    }
     public void DeactivateCurrentItem()
     {
+        if (currentItem == null)
+            return;
+        
         if (instantiatedCurrentItem != null)
         {
-            isHoldingGun = false;
+            isHoldingWeapon = false;
             instantiatedCurrentItem.SetActive(false);
+        }
+        else {
+            Debug.LogWarning("No item to deactivate!");
         }
     }
 }
