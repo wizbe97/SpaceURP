@@ -77,7 +77,6 @@ public class PlayerController : MonoBehaviour
         {
             IsMoving = false;
         }
-
     }
 
     private void OnDash()

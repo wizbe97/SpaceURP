@@ -154,16 +154,16 @@ public class UpdateAnimationState : MonoBehaviour
             {
                 if (action.currentItem.itemType == Item.ItemType.MELEE_WEAPON)
                 {
-                    stateIdentifier = playerController.movementSpeed >= 2000 ? 9 : 6; // RUN_HOLDING_MELEE : WALK_HOLDING_MELEE
+                    stateIdentifier = playerController.movementSpeed > 2000 ? 9 : 4; // RUN_HOLDING_MELEE : WALK_HOLDING_MELEE
                 }
                 else if (action.currentItem.itemType == Item.ItemType.GUN)
                 {
-                    stateIdentifier = playerController.movementSpeed >= 2000 ? 8 : 5; // RUN_HOLDING_GUN : WALK_HOLDING_GUN
+                    stateIdentifier = playerController.movementSpeed > 2000 ? 8 : 5; // RUN_HOLDING_GUN : WALK_HOLDING_GUN
                 }
             }
             else // No item is held
             {
-                stateIdentifier = playerController.movementSpeed >= 2000 ? 7 : 4; // RUN : WALK
+                stateIdentifier = playerController.movementSpeed > 2000 ? 7 : 4; // RUN : WALK
             }
         }
 
@@ -197,7 +197,7 @@ public class UpdateAnimationState : MonoBehaviour
                 currentState = PlayerStates.IDLE_HOLDING_GUN;
                 break;
             case 3:
-                PlayerFollowMouse();
+                PlayerFaceMovementDirection();
                 currentState = PlayerStates.IDLE_HOLDING_MELEE;
                 break;
             case 4:
@@ -261,5 +261,4 @@ public class UpdateAnimationState : MonoBehaviour
             animator.SetFloat("yMove", directionToUse.y);
         }
     }
-
 }

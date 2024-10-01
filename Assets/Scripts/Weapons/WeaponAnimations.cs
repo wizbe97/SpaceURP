@@ -14,8 +14,9 @@ public class WeaponAnimations : MonoBehaviour
     public enum WeaponStates
     {
         IDLE,
+        WALK,
+        RUN,
         ATTACK,
-        RUN
     }
 
     public WeaponStates CurrentState
@@ -27,6 +28,9 @@ public class WeaponAnimations : MonoBehaviour
             {
                 case WeaponStates.IDLE:
                     animator.Play("Idle");
+                    break;
+                case WeaponStates.WALK:
+                    animator.Play("Walk");
                     break;
                 case WeaponStates.RUN:
                     animator.Play("Run");
@@ -57,10 +61,16 @@ public class WeaponAnimations : MonoBehaviour
             CurrentState = WeaponStates.ATTACK;
             WeaponFollowMouse();
         }
-        else if (playerController.moveInput != Vector2.zero && playerController.movementSpeed >= 2000)
+        else if (playerController.moveInput != Vector2.zero && playerController.movementSpeed > 2000)
         {
             // Update the last move direction when the player is moving
             CurrentState = WeaponStates.RUN;
+            WeaponFaceMovementDirection(playerController.moveInput);
+        }
+
+        else if (playerController.moveInput != Vector2.zero && playerController.movementSpeed <= 2000)
+        {
+            CurrentState = WeaponStates.WALK;
             WeaponFaceMovementDirection(playerController.moveInput);
         }
         else
