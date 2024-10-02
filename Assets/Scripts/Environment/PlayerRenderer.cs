@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 public class PlayerRenderer : MonoBehaviour
 {
     public bool bringToFront = true; // Determines if the player should be rendered in front or behind
-    public string triggerTag = "PlayerCollisions"; // Allows selection between PlayerCollisions or Player tag
+    public string triggerTag = "Player"; // Allows selection between PlayerCollisions or Player tag
 
     private int originalSortingOrder;
     private int originalSortingGroupOrder;
@@ -30,11 +30,6 @@ public class PlayerRenderer : MonoBehaviour
                 // Change the sorting order based on the bringToFront variable
                 parentSpriteRenderer.sortingOrder += orderChange;
 
-                Debug.Log($"SpriteRenderer sorting order changed to: {parentSpriteRenderer.sortingOrder}");
-            }
-            else
-            {
-                Debug.Log("SpriteRenderer not found on parent object.");
             }
 
             if (parentSortingGroup != null)
@@ -45,11 +40,6 @@ public class PlayerRenderer : MonoBehaviour
                 // Change the sorting order based on the bringToFront variable
                 parentSortingGroup.sortingOrder += orderChange;
 
-                Debug.Log($"SortingGroup sorting order changed to: {parentSortingGroup.sortingOrder}");
-            }
-            else
-            {
-                Debug.Log("SortingGroup not found on parent object.");
             }
         }
     }
@@ -63,7 +53,6 @@ public class PlayerRenderer : MonoBehaviour
             {
                 // Reset to the original sorting order
                 parentSpriteRenderer.sortingOrder = originalSortingOrder;
-                Debug.Log($"SpriteRenderer sorting order reset to: {originalSortingOrder}");
                 // Clear the reference to avoid potential issues
                 parentSpriteRenderer = null;
             }
@@ -73,7 +62,6 @@ public class PlayerRenderer : MonoBehaviour
             {
                 // Reset to the original sorting order
                 parentSortingGroup.sortingOrder = originalSortingGroupOrder;
-                Debug.Log($"SortingGroup sorting order reset to: {originalSortingGroupOrder}");
                 // Clear the reference to avoid potential issues
                 parentSortingGroup = null;
             }

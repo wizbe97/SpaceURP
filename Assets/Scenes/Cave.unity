@@ -6259,6 +6259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fc7910dab7a114394d1ce80dd62f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraConfinerIndex: 0
   teleportTo: {fileID: 1696063633}
 --- !u!61 &1125754872
 BoxCollider2D:
@@ -6351,6 +6352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fc7910dab7a114394d1ce80dd62f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraConfinerIndex: 0
   teleportTo: {fileID: 320180069}
 --- !u!61 &1213783372
 BoxCollider2D:
@@ -6717,7 +6719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8574471372477719642, guid: 615716f15f5344794bbed54e76d58666, type: 3}
       propertyPath: orthographic size
-      value: 11.25
+      value: 16.875
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27769,11 +27771,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2699074339570983340, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2699074339570983340, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871499805083650836, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27869,7 +27871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6729629032636210766, guid: 01e57db6f9132ba46b15ce77a78f6dc7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

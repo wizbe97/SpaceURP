@@ -92,9 +92,9 @@ public class CrystalGuardian : Boss
 
     protected override void SetupAbilities()
     {
-        // AddAbility(SpecialAbility1);
+        AddAbility(SpecialAbility1);
         AddAbility(SpecialAbility2);
-        // AddAbility(SpecialAbility3);
+        AddAbility(SpecialAbility3);
     }
 
     private void SpecialAbility1()
