@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
         animationState = GetComponent<UpdateAnimationState>();
         action = GetComponent<Action>();
         boxCollider = GetComponent<BoxCollider2D>();
-        dialogueManager = FindObjectOfType<DialogueManager>();
         playerAttack = GetComponent<PlayerAttack>();
     }
 
@@ -81,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDash()
     {
-        if (!dashOnCooldown && moveInput.magnitude > 0)
+        if (!dashOnCooldown && moveInput.magnitude > 0 && canMove && animationState.stateLock == false)
         {
             boxCollider.enabled = false;
             action.DeactivateCurrentItem();
@@ -127,6 +126,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnInteract()
     {
+        if (dialogueManager == null)
+        {
+            dialogueManager = FindObjectOfType<DialogueManager>();
+        }
         dialogueManager.StartDialogue();
     }
 }

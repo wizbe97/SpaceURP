@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.EditorTools;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Dialogue/Dialogue SO")]
@@ -23,4 +20,18 @@ public class DialogueSO : ScriptableObject
     public DialogueSO option1;
     public DialogueSO option2;
     public DialogueSO option3;
+
+    [Header("Option Events")]
+    public QuestAction option0Action;
+    public QuestAction option1Action;
+    public QuestAction option2Action;
+    public QuestAction option3Action;
+
+    public enum QuestAction
+    {
+        None,
+        StartQuest,
+        CompleteQuest,
+        UpdateQuestProgress
+    }
 }

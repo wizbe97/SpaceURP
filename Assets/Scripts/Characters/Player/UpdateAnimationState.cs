@@ -49,20 +49,14 @@ public class UpdateAnimationState : MonoBehaviour
                     case PlayerStates.IDLE:
                         animator.Play("Idle");
                         playerController.isDashing = false;
-                        stateLock = false;
-                        playerController.canMove = true;
                         break;
                     case PlayerStates.IDLE_HOLDING_GUN:
                         animator.Play("Idle_Holding_Gun");
                         playerController.isDashing = false;
-                        stateLock = false;
-                        playerController.canMove = true;
                         break;
                     case PlayerStates.IDLE_HOLDING_MELEE:
                         animator.Play("Idle_Holding_Melee");
                         playerController.isDashing = false;
-                        stateLock = false;
-                        playerController.canMove = true;
                         break;
                     case PlayerStates.WALK:
                         animator.Play("Walk");
@@ -104,7 +98,7 @@ public class UpdateAnimationState : MonoBehaviour
                         animator.Play("Attack");
                         playerController.isDashing = false;
                         stateLock = true;
-                        playerController.canMove = true;
+                        playerController.canMove = false;
                         break;
                     case PlayerStates.SPEAR_ATTACK:
                         animator.Play("Spear_Attack");
@@ -115,7 +109,6 @@ public class UpdateAnimationState : MonoBehaviour
                     case PlayerStates.DASH:
                         animator.Play("Dash");
                         playerController.isDashing = true;
-                        stateLock = true;
                         playerController.canMove = true;
                         break;
                     case PlayerStates.DIE:
@@ -249,6 +242,8 @@ public class UpdateAnimationState : MonoBehaviour
 
         void PlayerFaceMovementDirection()
         {
+            if (stateLock == true)
+                return;
             Vector2 directionToUse;
 
             if (playerAttack.hasRecentlyAttacked == true)

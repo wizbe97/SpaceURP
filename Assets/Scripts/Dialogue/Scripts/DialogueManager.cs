@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
 {
 
     private PlayerController playerController;
+    private UpdateAnimationState updateAnimationState;
 
     private NPCDialogue npcDialogue;
     // The NPC Dialogue we are currently stepping through
@@ -40,8 +41,13 @@ public class DialogueManager : MonoBehaviour
     {
         npcDialogue = FindObjectOfType<NPCDialogue>();
         playerController = FindObjectOfType<PlayerController>();
+        updateAnimationState = FindObjectOfType<UpdateAnimationState>();
         // Find Buttons
         optionsPanel = GameObject.Find("OptionsPanel");
+        optionButton[0] = GameObject.Find("Option 0");
+        optionButton[1] = GameObject.Find("Option 1");
+        optionButton[2] = GameObject.Find("Option 2");
+        optionButton[3] = GameObject.Find("Option 3");
         optionsPanel.SetActive(false);
 
         // // Find the TMP Text on the Buttons
@@ -137,7 +143,10 @@ public class DialogueManager : MonoBehaviour
 
         GameManager.Instance.inventoryManager.gameObject.SetActive(false);
         GameManager.Instance.healthBarManager.gameObject.SetActive(false);
+
         playerController.canMove = false;
+        updateAnimationState.stateLock = true;
+        
 
         stepNum += 1;
     }
@@ -178,31 +187,66 @@ public class DialogueManager : MonoBehaviour
 
     public void Option(int optionNum)
     {
+        // Deactivate all option buttons
         foreach (GameObject button in optionButton)
         {
             button.SetActive(false);
         }
 
-        if (optionNum == 0)
+        // Trigger the action based on the option selected
+        DialogueSO.QuestAction action = DialogueSO.QuestAction.None;
+
+        switch (optionNum)
         {
-            currentConversation = currentConversation.option0;
+            case 0:
+                action = currentConversation.option0Action;
+                currentConversation = currentConversation.option0;
+                break;
+            case 1:
+                action = currentConversation.option1Action;
+                currentConversation = currentConversation.option1;
+                break;
+            case 2:
+                action = currentConversation.option2Action;
+                currentConversation = currentConversation.option2;
+                break;
+            case 3:
+                action = currentConversation.option3Action;
+                currentConversation = currentConversation.option3;
+                break;
         }
-        if (optionNum == 1)
-        {
-            currentConversation = currentConversation.option1;
-        }
-        if (optionNum == 2)
-        {
-            currentConversation = currentConversation.option2;
-        }
-        if (optionNum == 3)
-        {
-            currentConversation = currentConversation.option3;
-        }
+
+        // Execute the corresponding quest action
+        ExecuteQuestAction(action);
+
+        // Reset the step number and continue dialogue
         stepNum = 0;
         PlayDialogue();
     }
 
+    private void ExecuteQuestAction(DialogueSO.QuestAction action)
+    {
+        if (QuestManager.Instance == null)
+        {
+            Debug.LogError("QuestManager instance is not found in the scene.");
+            return;
+        }
+
+        switch (action)
+        {
+            case DialogueSO.QuestAction.StartQuest:
+                QuestManager.Instance.StartQuest();
+                break;
+            case DialogueSO.QuestAction.CompleteQuest:
+                QuestManager.Instance.CompleteQuest();
+                break;
+            case DialogueSO.QuestAction.UpdateQuestProgress:
+                QuestManager.Instance.UpdateQuestProgress();
+                break;
+            default:
+                break;
+        }
+    }
 
     private IEnumerator TypeWriterEffect(string line)
     {
@@ -272,6 +316,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         playerController.canMove = true;
+        updateAnimationState.stateLock = false;
     }
 
 

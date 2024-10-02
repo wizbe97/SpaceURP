@@ -17,13 +17,16 @@ MonoBehaviour:
   randomActorPortrait: {fileID: 0}
   dialogue:
   - Hello mate. How are you?
-  - "Hey there. I'm doing okay thanks. Just need to type some stuff so I can see
-    how many letters are going in and can skip succesfully \n"
-  - What's up?
+  - Hey not bad thanks, what about you?
+  - I need a favor, fancy helping me out?
   optionText:
-  - Unreal amounts
-  - Not much
+  - Sure thing
+  - I'll pass
   option0: {fileID: 11400000, guid: e309e3d2201d3d1498e56c68df9d35c9, type: 2}
   option1: {fileID: 11400000, guid: 14084d6d01edd034b9c521f5c743b89a, type: 2}
   option2: {fileID: 0}
   option3: {fileID: 0}
+  option0Action: 1
+  option1Action: 0
+  option2Action: 0
+  option3Action: 0

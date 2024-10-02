@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
-            if(currentSlot == 0) currentSlot = 1;
+            if (currentSlot == 0) currentSlot = 1;
             scenePlayerSpawnPosition = playerSpawnPosition.position;
             SceneManager.sceneLoaded += OnSceneLoaded;
             DontDestroyOnLoad(this.gameObject);
@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour
         if (healthBarManager == null)
             healthBarManager = Instantiate(healthBarManagerPrefab);
 
-
         CinemachineVirtualCamera vCamGameObject = GameObject.FindWithTag("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
         vCamGameObject.Follow = playerManager.transform;
     }
@@ -106,7 +105,6 @@ public class GameManager : MonoBehaviour
 
         if (healthBarManager != null)
             Destroy(healthBarManager.gameObject);
-
 
         if (saveManager == null)
             saveManager = Instantiate(saveManagerPrefab);
@@ -136,11 +134,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadAllData()
     {
-        if(isOnMenu)
+        if (isOnMenu)
         {
             isLocal = false;
         }
-        
+
         int slotToSave = isLocal ? 0 : currentSlot;
 
         playerManager.LoadPlayerData(slotToSave);
