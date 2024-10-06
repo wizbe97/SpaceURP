@@ -57,7 +57,10 @@ public class WeaponAnimations : MonoBehaviour
 
     private void Update()
     {
-        UpdateAnimationWeapon();
+        if (playerController.canMove)
+        {
+            UpdateAnimationWeapon();
+        }
     }
     void UpdateAnimationWeapon()
     {

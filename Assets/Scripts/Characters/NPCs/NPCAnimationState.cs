@@ -11,6 +11,7 @@ public class NPCAnimationState : MonoBehaviour
     private NPCMovementController npcController;
     private NPCDialogue npcDialogue;  // Reference to NPCDialogue script
     public NPCStates currentStateValue;
+    public string faceWho;
 
     public enum NPCStates
     {
@@ -91,8 +92,17 @@ public class NPCAnimationState : MonoBehaviour
 
     public void SetAnimationDirection(Vector2 direction)
     {
-        // Update animator parameters
-        animator.SetFloat("xMove", direction.x);
-        animator.SetFloat("yMove", direction.y);
+        if (faceWho == "Player")
+        {
+            direction = (player.position - transform.position).normalized;
+            animator.SetFloat("xMove", direction.x);
+            animator.SetFloat("yMove", direction.y);
+        }
+        else if (faceWho == "WalkDirection")
+        {
+            // Update animator parameters
+            animator.SetFloat("xMove", direction.x);
+            animator.SetFloat("yMove", direction.y);
+        }
     }
 }

@@ -41,6 +41,7 @@ public class NewScene : MonoBehaviour
     {
         transition.SetTrigger("Start");
         FindAnyObjectByType<PlayerController>().canMove = false;
+        FindAnyObjectByType<UpdateAnimationState>().stateLock = true;
 
         // Wait
         yield return new WaitForSeconds(transitionTime);
@@ -48,5 +49,6 @@ public class NewScene : MonoBehaviour
         // Load scene
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         FindAnyObjectByType<PlayerController>().canMove = true;
+        FindAnyObjectByType<UpdateAnimationState>().stateLock = false;
     }
 }
