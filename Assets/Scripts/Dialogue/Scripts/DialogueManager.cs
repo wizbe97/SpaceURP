@@ -146,7 +146,7 @@ public class DialogueManager : MonoBehaviour
 
         playerController.canMove = false;
         updateAnimationState.stateLock = true;
-        
+
 
         stepNum += 1;
     }
@@ -216,8 +216,9 @@ public class DialogueManager : MonoBehaviour
                 break;
         }
 
-        // Execute the corresponding quest action
-        ExecuteQuestAction(action);
+        if (currentConversation.quest != null)
+            ExecuteQuestAction(action);
+
 
         // Reset the step number and continue dialogue
         stepNum = 0;
@@ -232,13 +233,23 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        // Log the current conversation to check what it contains
+        Debug.Log("Current conversation: " + currentConversation.name);
+        Debug.Log("Quest in current conversation: " + (currentConversation.quest != null ? currentConversation.quest.questName : "None"));
+
+        if (currentConversation.quest == null)
+        {
+            Debug.LogError("Quest reference is not set in the current dialogue conversation.");
+            return;
+        }
+
         switch (action)
         {
             case DialogueSO.QuestAction.StartQuest:
-                QuestManager.Instance.StartQuest();
+                QuestManager.Instance.StartQuest(currentConversation.quest);
                 break;
             case DialogueSO.QuestAction.CompleteQuest:
-                QuestManager.Instance.CompleteQuest();
+                QuestManager.Instance.CompleteQuest(currentConversation.quest);
                 break;
             case DialogueSO.QuestAction.UpdateQuestProgress:
                 QuestManager.Instance.UpdateQuestProgress();
@@ -247,6 +258,8 @@ public class DialogueManager : MonoBehaviour
                 break;
         }
     }
+
+
 
     private IEnumerator TypeWriterEffect(string line)
     {

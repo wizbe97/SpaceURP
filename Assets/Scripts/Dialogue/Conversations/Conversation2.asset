@@ -12,14 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538a2041bad52604ba76c8de7d60de28, type: 3}
   m_Name: Conversation2
   m_EditorClassIdentifier: 
-  actors: 0100000000000000
+  actors: 010000000000000003000000
   randomActorName: 
   randomActorPortrait: {fileID: 0}
   dialogue:
-  - Testing second conversation
-  - Yep this is cool
-  optionText: []
-  option0: {fileID: 0}
-  option1: {fileID: 0}
+  - Hi do you have something for me?
+  - Yeah this emerald!
+  optionText:
+  - Hand Over Emerald
+  - Nevermind
+  option0: {fileID: 11400000, guid: cd2f931d9491bf5419b450e32472789c, type: 2}
+  option1: {fileID: 11400000, guid: e4ed82ee99f319e46ace646000abbeb5, type: 2}
   option2: {fileID: 0}
   option3: {fileID: 0}
+  quest: {fileID: 0}
+  option0Action: 3
+  option1Action: 0
+  option2Action: 0
+  option3Action: 0

@@ -21,6 +21,8 @@ public class DialogueSO : ScriptableObject
     public DialogueSO option2;
     public DialogueSO option3;
 
+    public QuestSO quest;
+
     [Header("Option Events")]
     public QuestAction option0Action;
     public QuestAction option1Action;

@@ -26,6 +26,7 @@ MonoBehaviour:
   option1: {fileID: 11400000, guid: 14084d6d01edd034b9c521f5c743b89a, type: 2}
   option2: {fileID: 0}
   option3: {fileID: 0}
+  quest: {fileID: 0}
   option0Action: 1
   option1Action: 0
   option2Action: 0

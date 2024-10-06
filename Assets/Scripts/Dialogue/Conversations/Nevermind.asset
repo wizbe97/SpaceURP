@@ -10,20 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 538a2041bad52604ba76c8de7d60de28, type: 3}
-  m_Name: Sure
+  m_Name: Nevermind
   m_EditorClassIdentifier: 
-  actors: 0000000001000000
+  actors: 
   randomActorName: 
   randomActorPortrait: {fileID: 0}
-  dialogue:
-  - Sure I'll help with the quest
-  - Thank you so much!
+  dialogue: []
   optionText: []
   option0: {fileID: 0}
   option1: {fileID: 0}
   option2: {fileID: 0}
   option3: {fileID: 0}
-  quest: {fileID: 11400000, guid: 3bd2ed87d6004cd4b959b9b7e94bcd96, type: 2}
+  quest: {fileID: 0}
   option0Action: 0
   option1Action: 0
   option2Action: 0
