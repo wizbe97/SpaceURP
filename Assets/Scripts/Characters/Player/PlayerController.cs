@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     private UpdateAnimationState animationState;
     private PlayerAttack playerAttack;
-    private DialogueManager dialogueManager;
     private Action action;
     private Rigidbody2D rb;
     [SerializeField] private float moveDrag = 15f;
@@ -50,7 +49,6 @@ public class PlayerController : MonoBehaviour
         animationState = GetComponent<UpdateAnimationState>();
         action = GetComponent<Action>();
         boxCollider = GetComponent<BoxCollider2D>();
-        dialogueManager = FindObjectOfType<DialogueManager>();
         playerAttack = GetComponent<PlayerAttack>();
     }
 
@@ -127,6 +125,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnInteract()
     {
-        dialogueManager.StartDialogue();
+        DialogueManager.Instance.StartDialogue();
     }
 }

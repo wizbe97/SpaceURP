@@ -4,105 +4,121 @@ using UnityEngine;
 
 public class NPCAnimationState : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+    [SerializeField] protected Animator animator;
     [SerializeField] public Rigidbody2D rb;
-    [HideInInspector] private Transform player;
+    [HideInInspector] protected Transform player;
+    protected NPCMovementController npcController;
+    protected GameObject playerObject;
+    protected NPCDialogue npcDialogue;  // Reference to NPCDialogue script
+    public NPCStates currentStateValue;  // Use an enum for states
+    [HideInInspector] public bool stateLock = false;  // State lock like in player script
+    public bool lookAtPlayer = false;
+    public NPC npcType;
+    [HideInInspector] public Vector2 direction;
 
-    private NPCMovementController npcController;
-    private NPCDialogue npcDialogue;  // Reference to NPCDialogue script
-    public NPCStates currentStateValue;
-    public string faceWho;
+
+
+    public enum NPC
+    {
+        SCIENTIST,
+        ARENA_GUARD
+    }
 
     public enum NPCStates
     {
         IDLE,
-        IDLE_BOOK,
         WALK,
+        IDLE_BOOK
     }
 
     public NPCStates CurrentState
     {
         set
         {
-            currentStateValue = value;
-            switch (currentStateValue)
+            if (!stateLock) // Only update if not locked
             {
-                case NPCStates.IDLE:
-                    animator.Play("Idle");
-                    break;
-                case NPCStates.IDLE_BOOK:
-                    animator.Play("Idle_Book");
-                    break;
-                case NPCStates.WALK:
-                    animator.Play("Walk");
-                    break;
+                currentStateValue = value;
+                SetAnimationState(currentStateValue);
             }
         }
     }
 
-    private void Awake()
+    protected virtual void Start()
     {
         npcController = GetComponent<NPCMovementController>();
-        npcDialogue = GetComponentInChildren<NPCDialogue>();  // Find NPCDialogue script in children
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        npcDialogue = GetComponentInChildren<NPCDialogue>();
+        playerObject = GameObject.FindWithTag("Player");
         if (playerObject != null)
         {
             player = playerObject.transform;
         }
+        else
+        {
+            Debug.LogError("Player object with tag 'Player' not found.");
+        }
     }
 
-    public void UpdateAnimationState()
+
+    protected virtual void SetAnimationState(NPCStates state)
+    {
+        // Default implementation for NPC animation states
+        switch (state)
+        {
+            case NPCStates.IDLE:
+                animator.Play("Idle");
+                stateLock = false;
+                break;
+            case NPCStates.WALK:
+                animator.Play("Walk");
+                stateLock = false;
+                break;
+            case NPCStates.IDLE_BOOK:
+                animator.Play("Idle_Book");
+                stateLock = false;
+                break;
+        }
+    }
+
+    public virtual void UpdateNPCAnimationState()
     {
         int stateIdentifier;
-        if (npcController.isMoving)
+
+        if (npcController.isMoving == false || npcController.canMove == false && rb.velocity == Vector2.zero)
         {
-            stateIdentifier = 2;
+            stateIdentifier = 0; // IDLE
+        }
+        else if (npcController.isMoving == true && npcController.canMove == true && rb.velocity != Vector2.zero)
+        {
+            stateIdentifier = 1; // WALK
         }
         else
         {
-            stateIdentifier = 1;
+            stateIdentifier = 0; // IDLE
         }
 
+        // Set the current state based on the identifier
         switch (stateIdentifier)
         {
-            case 1:
+            case 0:
                 CurrentState = NPCStates.IDLE;
-
-                // Check if npcDialogue and speechBubbleRenderer are not null
-                Vector2 direction;
-                if (npcDialogue != null && npcDialogue.speechBubbleRenderer != null && npcDialogue.speechBubbleRenderer.enabled)
-                {
-                    direction = (player.position - transform.position).normalized;
-                }
-                else
-                {
-                    direction = rb.velocity.normalized;
-                }
-
-                SetAnimationDirection(direction);
                 break;
-
-            case 2:
+            case 1:
                 CurrentState = NPCStates.WALK;
-                SetAnimationDirection(rb.velocity.normalized);
                 break;
         }
+
+        // Update animation direction
+        if (lookAtPlayer && player != null || (npcDialogue != null && npcDialogue.speechBubbleRenderer != null && npcDialogue.speechBubbleRenderer.enabled) || npcType == NPC.ARENA_GUARD)
+            direction = (player.position - transform.position).normalized;
+        else
+            direction = rb.velocity.normalized;
+
+        SetAnimationDirection(direction);
     }
 
-
-    public void SetAnimationDirection(Vector2 direction)
+    public virtual void SetAnimationDirection(Vector2 direction)
     {
-        if (faceWho == "Player")
-        {
-            direction = (player.position - transform.position).normalized;
-            animator.SetFloat("xMove", direction.x);
-            animator.SetFloat("yMove", direction.y);
-        }
-        else if (faceWho == "WalkDirection")
-        {
-            // Update animator parameters
-            animator.SetFloat("xMove", direction.x);
-            animator.SetFloat("yMove", direction.y);
-        }
+        animator.SetFloat("xMove", direction.x);
+        animator.SetFloat("yMove", direction.y);
     }
 }

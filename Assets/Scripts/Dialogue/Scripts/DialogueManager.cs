@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
 
+    public static DialogueManager Instance { get; set; }
     private PlayerController playerController;
 
     private NPCDialogue npcDialogue;
@@ -36,19 +37,34 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typeWriterRoutine;
     private bool canContinueText = true;
 
+    private void Awake()
+    {
+        if (Instance != null) Destroy(this.gameObject);
+        else Instance = this;
+
+        DontDestroyOnLoad(this.gameObject);
+    }
     private void Start()
     {
         npcDialogue = FindObjectOfType<NPCDialogue>();
         playerController = FindObjectOfType<PlayerController>();
-        // Find Buttons
+
         optionsPanel = GameObject.Find("OptionsPanel");
+        if (optionsPanel == null)
+        {
+            Debug.LogError("OptionsPanel not found!");
+        }
         optionsPanel.SetActive(false);
 
-        // // Find the TMP Text on the Buttons
+        // Find the TMP Text on the Buttons
         optionButtonText = new TMP_Text[optionButton.Length];
         for (int i = 0; i < optionButton.Length; i++)
         {
             optionButtonText[i] = optionButton[i].GetComponentInChildren<TMP_Text>();
+            if (optionButtonText[i] == null)
+            {
+                Debug.LogError("OptionButtonText not found on button " + i);
+            }
         }
 
         // Turn off the buttons at the start of the game
@@ -57,13 +73,19 @@ public class DialogueManager : MonoBehaviour
             optionButton[i].SetActive(false);
         }
 
-        dialogueCanvas = GameObject.Find("DialogueCanvas");
+        dialogueCanvas = GetComponentInChildren<Canvas>().gameObject;
+        if (dialogueCanvas == null)
+        {
+            Debug.LogError("DialogueCanvas not found!");
+        }
+
         actor = GameObject.Find("ActorText").GetComponent<TMP_Text>();
         portrait = GameObject.Find("Portrait").GetComponent<Image>();
         dialogueText = GameObject.Find("DialogueText").GetComponent<TMP_Text>();
 
         dialogueCanvas.SetActive(false);
     }
+
 
     public void StartDialogue()
     {
@@ -281,6 +303,7 @@ public enum DialogueActors
 {
     Wizbe,
     Scientist,
-    Random,
-    Branch
+    Guard, // Arena Guard
+    Random, // Non recurring character
+    Branch // For when using options
 };

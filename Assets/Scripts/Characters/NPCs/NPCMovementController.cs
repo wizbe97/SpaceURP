@@ -78,13 +78,36 @@ public class NPCMovementController : MonoBehaviour
     [Tooltip("Tracks if the NPC is currently moving.")]
     public bool isMoving;
 
+    public bool CanMove
+    {
+        get { return canMove; }
+        set
+        {
+            canMove = value;
+            if (!canMove)
+            {
+                IsMoving = false;  // Ensure isMoving is false when canMove is false
+            }
+        }
+    }
+
     public bool IsMoving
     {
         get { return isMoving; }
         set
         {
-            isMoving = value;
-            npcAnimationState.UpdateAnimationState();
+            if (!canMove)
+            {
+                isMoving = false;
+            }
+            else
+            {
+                isMoving = value;
+            }
+
+            npcAnimationState.UpdateNPCAnimationState();
+
+            // Print to the console whenever the animation state is updated
 
             if (isMoving)
             {
@@ -96,6 +119,7 @@ public class NPCMovementController : MonoBehaviour
             }
         }
     }
+
 
     void Start()
     {
@@ -109,6 +133,12 @@ public class NPCMovementController : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+        {
+            IsMoving = false; // Ensure isMoving is false when canMove is false
+            return; // Skip the rest of the update logic if movement is disabled
+        }
+
         if (canMove)
         {
             if (isPaused)
@@ -116,6 +146,7 @@ public class NPCMovementController : MonoBehaviour
                 if (Time.time > nextPauseTime)
                 {
                     isPaused = false;
+                    IsMoving = true;
                     SetNextRandomPause();
                     nextWanderTime = Time.time + wanderTime;
                 }
@@ -125,9 +156,6 @@ public class NPCMovementController : MonoBehaviour
                 Wander();
                 HandleRandomPause();
             }
-        }
-        else {
-            IsMoving = false;
         }
     }
 
@@ -139,7 +167,7 @@ public class NPCMovementController : MonoBehaviour
             isPaused = true;
             pauseDuration = GetRandomPauseLength();
             nextPauseTime = Time.time + pauseDuration;
-            IsMoving = false; // Stop moving when pausing
+            IsMoving = false;
             return;
         }
 
@@ -153,7 +181,7 @@ public class NPCMovementController : MonoBehaviour
         // Move with the current direction
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, moveSpeed).normalized;
         rb.AddForce(moveSpeed * Time.deltaTime * wanderDirection, ForceMode2D.Force);
-        IsMoving = true; // Set IsMoving to true only when the NPC is actively wandering
+        IsMoving = true;
     }
 
     private bool IsObstacleDetectedInDirection(Vector2 direction)
