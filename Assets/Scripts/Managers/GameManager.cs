@@ -73,27 +73,21 @@ public class GameManager : MonoBehaviour
     {
         if (gameplayUI == null)
             gameplayUI = Instantiate(gameplayUIPrefab);
-            Debug.Log("Spawning gameplayUI");
 
         if (saveManager == null)
             saveManager = Instantiate(saveManagerPrefab);
-            Debug.Log("Spawning saveManager");
 
         if (inventoryManager == null)
             inventoryManager = Instantiate(inventoryManagerPrefab);
-            Debug.Log("Spawning inventoryManager");
 
         if (playerManager == null)
             playerManager = Instantiate(playerManagerPrefab, scenePlayerSpawnPosition, Quaternion.identity);
-            Debug.Log("Spawning playerManager");
 
         if (healthBarManager == null)
             healthBarManager = Instantiate(healthBarManagerPrefab);
-            Debug.Log("Spawning healthBarManager");
         
         if (dialogueManager == null) {
             dialogueManager = Instantiate(dialogueManagerPrefab);
-            Debug.Log("Spawning dialogueManager");
         }
 
         CinemachineVirtualCamera vCamGameObject = GameObject.FindWithTag("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
