@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538a2041bad52604ba76c8de7d60de28, type: 3}
+  m_Name: ArenaGuard
+  m_EditorClassIdentifier: 
+  actors: 0200000004000000
+  randomActorName: 
+  randomActorPortrait: {fileID: 0}
+  dialogue:
+  - Hey, it's dangerous back here. I strongly suggest you turn around
+  optionText:
+  - I understand. I wish to fight
+  - Nevermind then
+  option0: {fileID: 11400000, guid: 98e7ad4cee334814eacc570087e6529f, type: 2}
+  option1: {fileID: 0}
+  option2: {fileID: 0}
+  option3: {fileID: 0}
+  option0Action: 5
+  option1Action: 0
+  option2Action: 0
+  option3Action: 0

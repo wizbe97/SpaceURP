@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lab.unity
     guid: 1ff1ee8e85c2bb147a42604194a4673e
+  - enabled: 1
+    path: Assets/Scenes/Colleseum.unity
+    guid: afb22c4c7967c8045846abf790d45413
+  - enabled: 1
+    path: Assets/Scenes/Cave.unity
+    guid: 613a5b17d8b014dd0a72129f83b54234
   m_configObjects: {}

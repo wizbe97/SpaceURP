@@ -9,7 +9,6 @@ public class UpdateAnimationState : MonoBehaviour
     private PlayerController playerController;
     private Action action;
     private PlayerAttack playerAttack;
-    private Player player;
     public PlayerStates currentStateValue;
     public enum PlayerStates
     {
@@ -33,7 +32,6 @@ public class UpdateAnimationState : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
         action = GetComponent<Action>();
-        player = GetComponent<Player>();
         playerAttack = GetComponent<PlayerAttack>();
     }
 

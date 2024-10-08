@@ -83,6 +83,9 @@ public class NPCAnimationState : MonoBehaviour
     {
         int stateIdentifier;
 
+        if (rb == null || npcController == null)
+            return;
+
         if (npcController.isMoving == false || npcController.canMove == false && rb.velocity == Vector2.zero)
         {
             stateIdentifier = 0; // IDLE
