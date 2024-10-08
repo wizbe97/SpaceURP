@@ -21,7 +21,7 @@ MonoBehaviour:
   - I understand. I wish to fight
   - Nevermind then
   option0: {fileID: 11400000, guid: 98e7ad4cee334814eacc570087e6529f, type: 2}
-  option1: {fileID: 0}
+  option1: {fileID: 11400000, guid: 2fceb6c26d620c14681a7911849c93ba, type: 2}
   option2: {fileID: 0}
   option3: {fileID: 0}
   option0Action: 5

@@ -6,8 +6,6 @@ public class OpenGate : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private BoxCollider2D gateCollider;
     [SerializeField] private Rigidbody2D gateRigidbody;
-    [SerializeField] private string sceneToLoad;
-    [SerializeField] private Transform spawnPoint;
 
     private void Awake()
     {
@@ -38,9 +36,5 @@ public class OpenGate : MonoBehaviour
         animator.SetBool("isOpen", true);
         gateCollider.enabled = false;
         StartCoroutine(CloseGateAfterDelay());
-
-        yield return new WaitForSeconds(1f);
-        NewScene newScene = FindObjectOfType<NewScene>();
-        newScene.LoadNextLevel(sceneToLoad, spawnPoint);
     }
 }

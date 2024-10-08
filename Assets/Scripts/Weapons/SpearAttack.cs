@@ -53,7 +53,6 @@ public class SpearAttack : MonoBehaviour
         animationState.stateLock = false;
         animationState.UpdateCharacterAnimationState(playerController.moveInput);
         playerController.canMove = true;
-        Debug.Log("Player can move again (SPEAR ATTACK)");
         weaponAnimations.stateLock = false;
     }
 }

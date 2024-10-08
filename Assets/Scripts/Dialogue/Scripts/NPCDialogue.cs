@@ -119,8 +119,10 @@ public class NPCDialogue : MonoBehaviour
         speechBubbleRenderer.enabled = false;
         if (npcAnimationState.npcType != NPCAnimationState.NPC.ARENA_GUARD)
             npcAnimationState.lookAtPlayer = false;
-        DialogueManager.Instance.TurnOffDialogue();
-        dialogueInitiated = false;
+            
+        if (DialogueManager.Instance != null)
+            DialogueManager.Instance.TurnOffDialogue();
+            dialogueInitiated = false;
 
         if (movementDelayCoroutine != null)
         {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public static Inventory Instance;
+    private UpdateAnimationState updateAnimationState;
     private Action action;
     public int maxStackedItems = 250;
     public InventorySlot[] inventorySlots;
@@ -29,6 +30,7 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         action = FindAnyObjectByType<Action>();
+        updateAnimationState = FindAnyObjectByType<UpdateAnimationState>();
         ChangeSelectedSlot(0);
     }
 
@@ -63,7 +65,7 @@ public class Inventory : MonoBehaviour
     void ChangeSelectedSlot(int newValue)
     {
         // Check if any gun is shooting before changing the selected slot
-        if (!PlayerGun.IsAnyGunShooting())
+        if (!PlayerGun.IsAnyGunShooting() && updateAnimationState.stateLock == false)
         {
             if (selectedSlot >= 0 && selectedSlot < inventorySlots.Length)
             {

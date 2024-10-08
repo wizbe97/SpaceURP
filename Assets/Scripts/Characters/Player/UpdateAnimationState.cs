@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UpdateAnimationState : MonoBehaviour
 {
-    [HideInInspector] public bool stateLock = false;
+    public bool stateLock = false;
     public Animator animator;
     private PlayerController playerController;
     private Action action;

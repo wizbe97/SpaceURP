@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class NewScene : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class NewScene : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        LoadNextLevel(sceneName, spawnPoint); // Call overloaded method with the predefined scene name
+        LoadNextLevel(sceneName, spawnPoint);
     }
 
     public void LoadNextLevel(string newSceneName, Transform spawnPoint)
@@ -33,6 +34,11 @@ public class NewScene : MonoBehaviour
         // Store the index to pass to the new scene
         cameraConfinerIndexToPass = cameraConfinerIndex;
 
+        FindAnyObjectByType<PlayerController>().enabled = false;
+        FindAnyObjectByType<UpdateAnimationState>().stateLock = true;
+        Inventory.Instance.enabled = false;
+        HealthBar.Instance.enabled = false;
+        
         // Start loading the new scene
         StartCoroutine(LoadLevel(newSceneName));
     }
@@ -40,16 +46,17 @@ public class NewScene : MonoBehaviour
     IEnumerator LoadLevel(string sceneToLoad)
     {
         transition.SetTrigger("Start");
-        FindAnyObjectByType<PlayerController>().canMove = false;
-        FindAnyObjectByType<UpdateAnimationState>().stateLock = true;
 
         // Wait
         yield return new WaitForSeconds(transitionTime);
 
         // Load the new scene
         SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
+        transition.SetTrigger("Start");
 
-        FindAnyObjectByType<PlayerController>().canMove = true;
+        FindAnyObjectByType<PlayerController>().enabled = true;
         FindAnyObjectByType<UpdateAnimationState>().stateLock = false;
+        Inventory.Instance.enabled = true;
+        HealthBar.Instance.enabled = true;
     }
 }
