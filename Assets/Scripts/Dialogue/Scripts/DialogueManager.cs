@@ -8,7 +8,9 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
 
+    public static DialogueManager Instance { get; set; }
     private PlayerController playerController;
+    private UpdateAnimationState updateAnimationState;
 
     private NPCDialogue npcDialogue;
     // The NPC Dialogue we are currently stepping through
@@ -36,19 +38,40 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typeWriterRoutine;
     private bool canContinueText = true;
 
+    private void Awake()
+    {
+        if (Instance != null) Destroy(this.gameObject);
+        else Instance = this;
+
+        DontDestroyOnLoad(this.gameObject);
+    }
     private void Start()
     {
         npcDialogue = FindObjectOfType<NPCDialogue>();
         playerController = FindObjectOfType<PlayerController>();
-        // Find Buttons
+        updateAnimationState = FindObjectOfType<UpdateAnimationState>();
+
+        if (playerController == null)
+        {
+            Debug.LogError("PlayerController not found!");
+        }
+
         optionsPanel = GameObject.Find("OptionsPanel");
+        if (optionsPanel == null)
+        {
+            Debug.LogError("OptionsPanel not found!");
+        }
         optionsPanel.SetActive(false);
 
-        // // Find the TMP Text on the Buttons
+        // Find the TMP Text on the Buttons
         optionButtonText = new TMP_Text[optionButton.Length];
         for (int i = 0; i < optionButton.Length; i++)
         {
             optionButtonText[i] = optionButton[i].GetComponentInChildren<TMP_Text>();
+            if (optionButtonText[i] == null)
+            {
+                Debug.LogError("OptionButtonText not found on button " + i);
+            }
         }
 
         // Turn off the buttons at the start of the game
@@ -57,7 +80,12 @@ public class DialogueManager : MonoBehaviour
             optionButton[i].SetActive(false);
         }
 
-        dialogueCanvas = GameObject.Find("DialogueCanvas");
+        dialogueCanvas = GetComponentInChildren<Canvas>().gameObject;
+        if (dialogueCanvas == null)
+        {
+            Debug.LogError("DialogueCanvas not found!");
+        }
+
         actor = GameObject.Find("ActorText").GetComponent<TMP_Text>();
         portrait = GameObject.Find("Portrait").GetComponent<Image>();
         dialogueText = GameObject.Find("DialogueText").GetComponent<TMP_Text>();
@@ -65,9 +93,10 @@ public class DialogueManager : MonoBehaviour
         dialogueCanvas.SetActive(false);
     }
 
+
     public void StartDialogue()
     {
-        if (dialogueActivated && Input.GetKeyDown(KeyCode.F) && canContinueText && AllOptionButtonsDeactivated())
+        if (dialogueActivated && canContinueText && AllOptionButtonsDeactivated())
         {
             if (stepNum >= currentConversation.actors.Length)
             {
@@ -82,6 +111,8 @@ public class DialogueManager : MonoBehaviour
 
     private void PlayDialogue()
     {
+        PlayerController playerC = FindObjectOfType<PlayerController>();
+        playerC.canMove = false;
         // If it's a random character
         if (currentConversation.actors[stepNum] == DialogueActors.Random)
         {
@@ -137,8 +168,6 @@ public class DialogueManager : MonoBehaviour
 
         GameManager.Instance.inventoryManager.gameObject.SetActive(false);
         GameManager.Instance.healthBarManager.gameObject.SetActive(false);
-        playerController.canMove = false;
-
         stepNum += 1;
     }
 
@@ -178,29 +207,61 @@ public class DialogueManager : MonoBehaviour
 
     public void Option(int optionNum)
     {
+        // Deactivate all option buttons
         foreach (GameObject button in optionButton)
         {
             button.SetActive(false);
         }
 
-        if (optionNum == 0)
+        // Trigger the action based on the option selected
+        DialogueSO.OptionAction action = DialogueSO.OptionAction.None;
+
+        switch (optionNum)
         {
-            currentConversation = currentConversation.option0;
+            case 0:
+                action = currentConversation.option0Action;
+                currentConversation = currentConversation.option0;
+                break;
+            case 1:
+                action = currentConversation.option1Action;
+                currentConversation = currentConversation.option1;
+                break;
+            case 2:
+                action = currentConversation.option2Action;
+                currentConversation = currentConversation.option2;
+                break;
+            case 3:
+                action = currentConversation.option3Action;
+                currentConversation = currentConversation.option3;
+                break;
         }
-        if (optionNum == 1)
-        {
-            currentConversation = currentConversation.option1;
-        }
-        if (optionNum == 2)
-        {
-            currentConversation = currentConversation.option2;
-        }
-        if (optionNum == 3)
-        {
-            currentConversation = currentConversation.option3;
-        }
+
+        ExecuteAction(action);
+        // Reset the step number and continue dialogue
         stepNum = 0;
         PlayDialogue();
+    }
+
+    private void ExecuteAction(DialogueSO.OptionAction action)
+    {
+        switch (action)
+        {
+            case DialogueSO.OptionAction.None:
+                break;
+            case DialogueSO.OptionAction.GiveQuest:
+                break;
+            case DialogueSO.OptionAction.CompleteQuest:
+                break;
+            case DialogueSO.OptionAction.UpdateQuest:
+                break;
+            case DialogueSO.OptionAction.EndDialogue:
+                TurnOffDialogue();
+                break;
+            case DialogueSO.OptionAction.OpenGate:
+                OpenGate openGate = FindObjectOfType<OpenGate>();
+                openGate.OpenTheGate();
+                break;
+        }
     }
 
 
@@ -250,6 +311,10 @@ public class DialogueManager : MonoBehaviour
 
     public void TurnOffDialogue()
     {
+        PlayerController playerC = FindObjectOfType<PlayerController>();
+        if (playerC != null)
+          playerC.canMove = true;
+        
         // Reset the current conversation
         stepNum = 0;
         dialogueActivated = false;
@@ -271,7 +336,6 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        playerController.canMove = true;
     }
 
 
@@ -281,6 +345,7 @@ public enum DialogueActors
 {
     Wizbe,
     Scientist,
-    Random,
-    Branch
+    Guard, // Arena Guard
+    Random, // Non recurring character
+    Branch // For when using options
 };

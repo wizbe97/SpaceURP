@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     private UpdateAnimationState animationState;
     private PlayerAttack playerAttack;
-    private DialogueManager dialogueManager;
     private Action action;
     private Rigidbody2D rb;
     [SerializeField] private float moveDrag = 15f;
@@ -22,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public float movementSpeed = 1250f;
     [HideInInspector] public Vector2 moveInput = Vector2.zero;
-    [HideInInspector] public bool isDashing;
+    public bool isDashing;
 
     private BoxCollider2D boxCollider;
 
@@ -32,6 +31,9 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = value;
             animationState.UpdateCharacterAnimationState(moveInput);
+            if (GetComponentInChildren<WeaponAnimations>() != null)
+                GetComponentInChildren<WeaponAnimations>().HandleWeaponAnimation();
+
 
             if (isMoving)
             {
@@ -50,7 +52,6 @@ public class PlayerController : MonoBehaviour
         animationState = GetComponent<UpdateAnimationState>();
         action = GetComponent<Action>();
         boxCollider = GetComponent<BoxCollider2D>();
-        dialogueManager = FindObjectOfType<DialogueManager>();
         playerAttack = GetComponent<PlayerAttack>();
     }
 
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDash()
     {
-        if (!dashOnCooldown && moveInput.magnitude > 0)
+        if (!dashOnCooldown && moveInput.magnitude > 0 && canMove)
         {
             boxCollider.enabled = false;
             action.DeactivateCurrentItem();
@@ -97,10 +98,11 @@ public class PlayerController : MonoBehaviour
     public void OnDashEnd()
     {
         isDashing = false;
-        animationState.UpdateCharacterAnimationState(moveInput);
         action.CurrentItem();
-        animationState.stateLock = false;
         StartCoroutine(ReactivateColliderAfterDelay(0.5f)); // Start the coroutine with a 1-second delay
+        animationState.UpdateCharacterAnimationState(moveInput);
+        if (GetComponentInChildren<WeaponAnimations>() != null)
+            GetComponentInChildren<WeaponAnimations>().HandleWeaponAnimation();
     }
 
     // Coroutine to reactivate the box collider after a delay
@@ -127,6 +129,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnInteract()
     {
-        dialogueManager.StartDialogue();
+        if (DialogueManager.Instance != null)
+            DialogueManager.Instance.StartDialogue();
     }
+
 }

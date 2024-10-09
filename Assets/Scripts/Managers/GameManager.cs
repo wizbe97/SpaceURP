@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Inventory inventoryManagerPrefab;
     public HealthBar healthBarManagerPrefab;
     public Player playerManagerPrefab;
+    public DialogueManager dialogueManagerPrefab;
 
     //THIS WILL BE THE INITIAL POSITION WHERE THE PLAYER WILL SPAWN WHEN YOU FIRST START THE SCENE
     public Transform playerSpawnPosition;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Inventory inventoryManager;
     [HideInInspector] public HealthBar healthBarManager;
     [HideInInspector] public Player playerManager;
+    [HideInInspector] public DialogueManager dialogueManager;
 
     public int currentSlot;
     private bool isOnMenu = false;
@@ -83,7 +85,10 @@ public class GameManager : MonoBehaviour
 
         if (healthBarManager == null)
             healthBarManager = Instantiate(healthBarManagerPrefab);
-
+        
+        if (dialogueManager == null) {
+            dialogueManager = Instantiate(dialogueManagerPrefab);
+        }
 
         CinemachineVirtualCamera vCamGameObject = GameObject.FindWithTag("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
         vCamGameObject.Follow = playerManager.transform;
@@ -107,9 +112,11 @@ public class GameManager : MonoBehaviour
         if (healthBarManager != null)
             Destroy(healthBarManager.gameObject);
 
-
         if (saveManager == null)
             saveManager = Instantiate(saveManagerPrefab);
+
+        if (dialogueManagerPrefab == null)
+            Destroy(dialogueManagerPrefab.gameObject);
     }
 
     private Vector3 GetPlayerPosition()

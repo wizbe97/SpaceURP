@@ -5,6 +5,7 @@ public class PlayerAttack : MonoBehaviour
     public bool isAttacking = false;
     private Inventory inventory;
     private UpdateAnimationState animationState;
+    private PlayerController playerController;
     private PlayerGun playerGun;
     private Action action;
     private SpearAttack spearAttack;
@@ -21,19 +22,19 @@ public class PlayerAttack : MonoBehaviour
         action = GetComponent<Action>();
         inventory = FindObjectOfType<Inventory>();
         animationState = GetComponent<UpdateAnimationState>();
+        playerController = GetComponent<PlayerController>();
     }
 
     public void Attack()
     {
-        if (animationState.stateLock == true)
+        if (animationState.stateLock == true || playerController.isDashing == true || FindAnyObjectByType<NPCDialogue>().dialogueInitiated == true)
             return;
 
         if (action.currentItem.itemType == Item.ItemType.MELEE_WEAPON)
         {
             if (Time.time - lastAttackTime < spearCooldown)
-            {
                 return; // Exit if cooldown is still active
-            }
+
             isAttacking = true;
             hasRecentlyAttacked = true; // Mark that the player has recently attacked
 
@@ -74,4 +75,12 @@ public class PlayerAttack : MonoBehaviour
         return attackDirection;
     }
 
+
+    public void OnAttackEnd()
+    {
+        isAttacking = false;
+        animationState.stateLock = false;
+        playerController.canMove = true;
+        animationState.UpdateCharacterAnimationState(GetComponent<PlayerController>().moveInput);
+    }
 }

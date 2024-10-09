@@ -1,22 +1,17 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class NewScene : MonoBehaviour
 {
     public string sceneName;
     public Animator transition;
 
-    private ConfinerManager confinerManager;
     [SerializeField] private int cameraConfinerIndex;
     public static int cameraConfinerIndexToPass; // Static variable to persist across scenes
     public float transitionTime = 1f;
     public Transform spawnPoint;
-
-    private void Awake()
-    {
-        confinerManager = FindObjectOfType<ConfinerManager>();
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -28,25 +23,40 @@ public class NewScene : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        LoadNextLevel(sceneName, spawnPoint);
+    }
+
+    public void LoadNextLevel(string newSceneName, Transform spawnPoint)
+    {
         GameManager.Instance.scenePlayerSpawnPosition = spawnPoint.position;
         GameManager.Instance.SaveAllData(isLocal: true);
 
         // Store the index to pass to the new scene
         cameraConfinerIndexToPass = cameraConfinerIndex;
 
-        StartCoroutine(LoadLevel());
+        FindAnyObjectByType<PlayerController>().enabled = false;
+        FindAnyObjectByType<UpdateAnimationState>().stateLock = true;
+        GameManager.Instance.inventoryManager.gameObject.SetActive(false);
+        GameManager.Instance.healthBarManager.gameObject.SetActive(false);
+        
+        // Start loading the new scene
+        StartCoroutine(LoadLevel(newSceneName));
     }
 
-    IEnumerator LoadLevel()
+    IEnumerator LoadLevel(string sceneToLoad)
     {
         transition.SetTrigger("Start");
-        FindAnyObjectByType<PlayerController>().canMove = false;
 
         // Wait
         yield return new WaitForSeconds(transitionTime);
 
-        // Load scene
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-        FindAnyObjectByType<PlayerController>().canMove = true;
+        // Load the new scene
+        SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
+        transition.SetTrigger("Start");
+
+        FindAnyObjectByType<PlayerController>().enabled = true;
+        FindAnyObjectByType<UpdateAnimationState>().stateLock = false;
+        GameManager.Instance.inventoryManager.gameObject.SetActive(true);
+        GameManager.Instance.healthBarManager.gameObject.SetActive(true);
     }
 }

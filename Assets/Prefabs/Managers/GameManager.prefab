@@ -51,6 +51,7 @@ MonoBehaviour:
   inventoryManagerPrefab: {fileID: -3428646450097662223, guid: f6f1f1de18f6c134dab26a41d82691fd, type: 3}
   healthBarManagerPrefab: {fileID: 7422304651374352738, guid: f502ccf4bbf154b45b2fb5ac4721cdd8, type: 3}
   playerManagerPrefab: {fileID: 8418841744619551669, guid: b203df2328e89774bb817a9056af7f17, type: 3}
+  dialogueManagerPrefab: {fileID: 1703907124661349092, guid: b363b99863ba02849926ff08de6acc4c, type: 3}
   playerSpawnPosition: {fileID: 3086480680340539565}
   scenePlayerSpawnPosition: {x: 0, y: 0, z: 0}
   gameplayUI: {fileID: 0}
@@ -58,6 +59,7 @@ MonoBehaviour:
   inventoryManager: {fileID: 0}
   healthBarManager: {fileID: 0}
   playerManager: {fileID: 0}
+  dialogueManager: {fileID: 0}
   currentSlot: 0
 --- !u!1 &5603976622474370350
 GameObject:

@@ -23,4 +23,23 @@ public class DialogueSO : ScriptableObject
     public DialogueSO option1;
     public DialogueSO option2;
     public DialogueSO option3;
+
+
+    [Header("Option Events")]
+    public OptionAction option0Action;
+    public OptionAction option1Action;
+    public OptionAction option2Action;
+    public OptionAction option3Action;
+
+    public enum OptionAction
+    {
+        None,
+        GiveQuest,
+        CompleteQuest,
+        UpdateQuest,
+        EndDialogue,
+        OpenGate
+    }
 }
+
+

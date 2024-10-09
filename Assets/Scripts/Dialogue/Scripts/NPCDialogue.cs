@@ -5,7 +5,6 @@ public class NPCDialogue : MonoBehaviour
 {
     [HideInInspector] public SpriteRenderer speechBubbleRenderer;
     public DialogueSO[] conversation;
-    private DialogueManager dialogueManager;
     private NPCMovementController npcController;
     private NPCAnimationState npcAnimationState;
     public bool dialogueInitiated;
@@ -20,11 +19,17 @@ public class NPCDialogue : MonoBehaviour
     void Start()
     {
         npcAnimationState = GetComponentInParent<NPCAnimationState>();
+        if (npcAnimationState == null)
+        {
+            Debug.LogError("NPCAnimationState component not found in parent.");
+        }
+
         npcController = GetComponentInParent<NPCMovementController>();
         speechBubbleRenderer = GetComponent<SpriteRenderer>();
         speechBubbleRenderer.enabled = false;
-        dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
+
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -77,7 +82,8 @@ public class NPCDialogue : MonoBehaviour
                 if (hit.CompareTag("Player"))
                 {
                     speechBubbleRenderer.enabled = true;
-                    npcAnimationState.UpdateAnimationState();
+                    npcAnimationState.lookAtPlayer = true;
+                    npcAnimationState.UpdateNPCAnimationState();
                     if (!dialogueInitiated)
                     {
                         StartDialogue();
@@ -97,7 +103,7 @@ public class NPCDialogue : MonoBehaviour
 
     private void StartDialogue()
     {
-        dialogueManager.InitiateDialogue(this, 0);
+        DialogueManager.Instance.InitiateDialogue(this, 0);
         dialogueInitiated = true;
 
         if (movementDelayCoroutine != null)
@@ -111,15 +117,20 @@ public class NPCDialogue : MonoBehaviour
     private void EndDialogue()
     {
         speechBubbleRenderer.enabled = false;
-        dialogueManager.TurnOffDialogue();
-        dialogueInitiated = false;
+        if (npcAnimationState.npcType != NPCAnimationState.NPC.ARENA_GUARD)
+            npcAnimationState.lookAtPlayer = false;
+            
+        if (DialogueManager.Instance != null)
+            DialogueManager.Instance.TurnOffDialogue();
+            dialogueInitiated = false;
 
         if (movementDelayCoroutine != null)
         {
             StopCoroutine(movementDelayCoroutine);
         }
 
-        movementDelayCoroutine = StartCoroutine(EnableMovementAfterDelay());
+        if (npcAnimationState.npcType != NPCAnimationState.NPC.ARENA_GUARD)
+            movementDelayCoroutine = StartCoroutine(EnableMovementAfterDelay());
     }
 
     private IEnumerator EnableMovementAfterDelay()
