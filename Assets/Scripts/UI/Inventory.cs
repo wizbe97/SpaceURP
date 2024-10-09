@@ -85,7 +85,6 @@ public class Inventory : MonoBehaviour
 
                     // Call CurrentItem() method here
                     action.CurrentItem();
-
                     break;
                 }
             }

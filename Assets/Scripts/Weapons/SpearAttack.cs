@@ -52,6 +52,7 @@ public class SpearAttack : MonoBehaviour
         playerAttack.isAttacking = false;
         animationState.stateLock = false;
         animationState.UpdateCharacterAnimationState(playerController.moveInput);
+        weaponAnimations.HandleWeaponAnimation();
         playerController.canMove = true;
         weaponAnimations.stateLock = false;
     }

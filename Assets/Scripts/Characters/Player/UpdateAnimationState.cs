@@ -124,7 +124,7 @@ public class UpdateAnimationState : MonoBehaviour
         {
             stateIdentifier = 10; // DASH
         }
-        else if (playerAttack.isAttacking) // ATTACKING
+        else if (playerController.isDashing == false && playerAttack.isAttacking) // ATTACKING
         {
             if (action != null && action.currentItem.itemName == "Spear")
             {

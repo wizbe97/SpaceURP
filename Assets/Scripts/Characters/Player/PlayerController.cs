@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public float movementSpeed = 1250f;
     [HideInInspector] public Vector2 moveInput = Vector2.zero;
-    [HideInInspector] public bool isDashing;
+    public bool isDashing;
 
     private BoxCollider2D boxCollider;
 
@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = value;
             animationState.UpdateCharacterAnimationState(moveInput);
+            if (GetComponentInChildren<WeaponAnimations>() != null)
+                GetComponentInChildren<WeaponAnimations>().HandleWeaponAnimation();
+
 
             if (isMoving)
             {
@@ -95,10 +98,11 @@ public class PlayerController : MonoBehaviour
     public void OnDashEnd()
     {
         isDashing = false;
-        animationState.UpdateCharacterAnimationState(moveInput);
         action.CurrentItem();
-        animationState.stateLock = false;
         StartCoroutine(ReactivateColliderAfterDelay(0.5f)); // Start the coroutine with a 1-second delay
+        animationState.UpdateCharacterAnimationState(moveInput);
+        if (GetComponentInChildren<WeaponAnimations>() != null)
+            GetComponentInChildren<WeaponAnimations>().HandleWeaponAnimation();
     }
 
     // Coroutine to reactivate the box collider after a delay
@@ -125,6 +129,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnInteract()
     {
-        DialogueManager.Instance.StartDialogue();
+        if (DialogueManager.Instance != null)
+            DialogueManager.Instance.StartDialogue();
     }
+
 }

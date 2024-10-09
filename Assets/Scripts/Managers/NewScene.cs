@@ -36,8 +36,8 @@ public class NewScene : MonoBehaviour
 
         FindAnyObjectByType<PlayerController>().enabled = false;
         FindAnyObjectByType<UpdateAnimationState>().stateLock = true;
-        Inventory.Instance.enabled = false;
-        HealthBar.Instance.enabled = false;
+        GameManager.Instance.inventoryManager.gameObject.SetActive(false);
+        GameManager.Instance.healthBarManager.gameObject.SetActive(false);
         
         // Start loading the new scene
         StartCoroutine(LoadLevel(newSceneName));
@@ -56,7 +56,7 @@ public class NewScene : MonoBehaviour
 
         FindAnyObjectByType<PlayerController>().enabled = true;
         FindAnyObjectByType<UpdateAnimationState>().stateLock = false;
-        Inventory.Instance.enabled = true;
-        HealthBar.Instance.enabled = true;
+        GameManager.Instance.inventoryManager.gameObject.SetActive(true);
+        GameManager.Instance.healthBarManager.gameObject.SetActive(true);
     }
 }

@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
 
     public static DialogueManager Instance { get; set; }
     private PlayerController playerController;
+    private UpdateAnimationState updateAnimationState;
 
     private NPCDialogue npcDialogue;
     // The NPC Dialogue we are currently stepping through
@@ -48,6 +49,7 @@ public class DialogueManager : MonoBehaviour
     {
         npcDialogue = FindObjectOfType<NPCDialogue>();
         playerController = FindObjectOfType<PlayerController>();
+        updateAnimationState = FindObjectOfType<UpdateAnimationState>();
 
         if (playerController == null)
         {
@@ -94,7 +96,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue()
     {
-        if (dialogueActivated && Input.GetKeyDown(KeyCode.F) && canContinueText && AllOptionButtonsDeactivated())
+        if (dialogueActivated && canContinueText && AllOptionButtonsDeactivated())
         {
             if (stepNum >= currentConversation.actors.Length)
             {
