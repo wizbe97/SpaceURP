@@ -120,7 +120,6 @@ public class NPCMovementController : MonoBehaviour
         }
     }
 
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -148,6 +147,10 @@ public class NPCMovementController : MonoBehaviour
                     isPaused = false;
                     IsMoving = true;
                     SetNextRandomPause();
+
+                    // Change the direction after any pause ends (including random and collision pauses)
+                    FindNewWanderDirection();
+                    
                     nextWanderTime = Time.time + wanderTime;
                 }
             }
@@ -199,6 +202,7 @@ public class NPCMovementController : MonoBehaviour
         nextPauseTime = Time.time + pauseDuration;
         IsMoving = false;
 
+        // Find a new direction after collision pause
         FindNewWanderDirection();
     }
 

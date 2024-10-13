@@ -15,13 +15,15 @@ public class NPCAnimationState : MonoBehaviour
     public bool lookAtPlayer = false;
     public NPC npcType;
     [HideInInspector] public Vector2 direction;
-
-
+    
+    // Add a variable to store the last non-zero movement direction
+    private Vector2 lastNonZeroDirection;
 
     public enum NPC
     {
         SCIENTIST,
-        ARENA_GUARD
+        ARENA_GUARD,
+        SIDE_CHARACTER
     }
 
     public enum NPCStates
@@ -56,8 +58,10 @@ public class NPCAnimationState : MonoBehaviour
         {
             Debug.LogError("Player object with tag 'Player' not found.");
         }
-    }
 
+        // Initialize the lastNonZeroDirection to avoid facing down initially
+        lastNonZeroDirection = Vector2.down; // Default initial facing direction
+    }
 
     protected virtual void SetAnimationState(NPCStates state)
     {
@@ -112,9 +116,22 @@ public class NPCAnimationState : MonoBehaviour
 
         // Update animation direction
         if (lookAtPlayer && player != null || (npcDialogue != null && npcDialogue.speechBubbleRenderer != null && npcDialogue.speechBubbleRenderer.enabled) || npcType == NPC.ARENA_GUARD)
+        {
             direction = (player.position - transform.position).normalized;
+        }
         else
-            direction = rb.velocity.normalized;
+        {
+            // Only update direction if the NPC is moving
+            if (rb.velocity.magnitude > 0.1f)
+            {
+                direction = rb.velocity.normalized;
+                lastNonZeroDirection = direction; // Store the last non-zero direction
+            }
+            else
+            {
+                direction = lastNonZeroDirection; // Use the last direction when not moving
+            }
+        }
 
         SetAnimationDirection(direction);
     }

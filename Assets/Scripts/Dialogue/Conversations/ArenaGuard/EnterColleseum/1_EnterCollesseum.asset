@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 538a2041bad52604ba76c8de7d60de28, type: 3}
-  m_Name: ArenaGuard
+  m_Name: 1_EnterCollesseum
   m_EditorClassIdentifier: 
   actors: 0200000004000000
   randomActorName: 
