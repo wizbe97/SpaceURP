@@ -18,7 +18,6 @@ public class WaveSpawner : MonoBehaviour
 
     public List<GameObject> spawnedEnemies = new List<GameObject>();
 
-    // New variables for wave cooldown
     public float waveCooldown = 5f;  // Time between waves
     private float waveCooldownTimer = 0f;
 
@@ -73,7 +72,6 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    // New method to handle wave cooldown
     private void StartWaveCooldown()
     {
         waveCooldownTimer = waveCooldown;  // Set the cooldown timer

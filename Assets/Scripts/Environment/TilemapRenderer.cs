@@ -9,7 +9,6 @@ public class TilemapLayerAdjuster : MonoBehaviour
 
     void Start()
     {
-        // Get the TilemapRenderer component
         tilemap = GetComponent<TilemapRenderer>();
 
         // Store the original order in layer

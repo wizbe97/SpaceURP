@@ -14,12 +14,11 @@ public class GameManager : MonoBehaviour
     public Player playerManagerPrefab;
     public DialogueManager dialogueManagerPrefab;
 
-    //THIS WILL BE THE INITIAL POSITION WHERE THE PLAYER WILL SPAWN WHEN YOU FIRST START THE SCENE
     public Transform playerSpawnPosition;
     public Vector3 scenePlayerSpawnPosition;
 
 
-    //THESE WILL HOLD REFERENCES FOR THE OTHER MANAGERS WHICH YOU CAN CALL FROM ANY SCRIPT USING GameManager.Instance....
+    // References for other game managers, called using GameManager.Instance....
     [HideInInspector] public GameplayUI gameplayUI;
     [HideInInspector] public SaveManager saveManager;
     [HideInInspector] public Inventory inventoryManager;
@@ -41,7 +40,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
-            if(currentSlot == 0) currentSlot = 1;
+            if (currentSlot == 0) currentSlot = 1;
             scenePlayerSpawnPosition = playerSpawnPosition.position;
             SceneManager.sceneLoaded += OnSceneLoaded;
             DontDestroyOnLoad(this.gameObject);
@@ -68,7 +67,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //SPAWN ALL PREFABS AND ASSIGN THE MANAGERS TO THEM
+    // Spawn all prefabs and assign managers to them
     private void SpawnManagers()
     {
         if (gameplayUI == null)
@@ -85,8 +84,9 @@ public class GameManager : MonoBehaviour
 
         if (healthBarManager == null)
             healthBarManager = Instantiate(healthBarManagerPrefab);
-        
-        if (dialogueManager == null) {
+
+        if (dialogueManager == null)
+        {
             dialogueManager = Instantiate(dialogueManagerPrefab);
         }
 
@@ -96,8 +96,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    //IF IT IS ON MENU IT DOESN"T NEED TO SPAWN PLAYER AND OTHER MANAGERS
-    //AND ALSO DESTROY MANAGERS SUCH AS PLAYER,INVENTORY...
+    // Not needed to spawn most managers on menu scene, destroys all except save manager
     private void SpawnMenuManagers()
     {
         if (playerManager != null)
@@ -129,8 +128,7 @@ public class GameManager : MonoBehaviour
         return playerSpawnPosition.position;
     }
 
-    //HERE YOU WILL PUT OTHER THINGS THAT YOU WANT TO SAVE IN THE FUTURE
-    //CURRENTLY ONLY HAS INVENTORY AND PLAYER STATS
+    // Add here the stuff to save
     public void SaveAllData(bool isLocal)
     {
         this.isLocal = isLocal;
@@ -143,11 +141,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadAllData()
     {
-        if(isOnMenu)
+        if (isOnMenu)
         {
             isLocal = false;
         }
-        
+
         int slotToSave = isLocal ? 0 : currentSlot;
 
         playerManager.LoadPlayerData(slotToSave);

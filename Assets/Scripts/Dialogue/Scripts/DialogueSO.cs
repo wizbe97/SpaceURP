@@ -41,5 +41,3 @@ public class DialogueSO : ScriptableObject
         OpenGate
     }
 }
-
-
