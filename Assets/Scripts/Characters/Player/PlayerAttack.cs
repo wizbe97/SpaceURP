@@ -11,11 +11,9 @@ public class PlayerAttack : MonoBehaviour
     private SpearAttack spearAttack;
 
     public float lastAttackTime;
-    public float spearCooldown = 1f; // Cooldown duration in seconds
-
-    // Store the attack direction and whether the player has recently attacked
+    public float spearCooldown = 1f; 
     private Vector2 attackDirection;
-    public bool hasRecentlyAttacked = false; // New flag for tracking recent attack
+    public bool hasRecentlyAttacked = false; 
 
     void Start()
     {
@@ -33,10 +31,10 @@ public class PlayerAttack : MonoBehaviour
         if (action.currentItem.itemType == Item.ItemType.MELEE_WEAPON)
         {
             if (Time.time - lastAttackTime < spearCooldown)
-                return; // Exit if cooldown is still active
+                return; 
 
             isAttacking = true;
-            hasRecentlyAttacked = true; // Mark that the player has recently attacked
+            hasRecentlyAttacked = true; 
 
             // Store the attack direction (based on the mouse position)
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

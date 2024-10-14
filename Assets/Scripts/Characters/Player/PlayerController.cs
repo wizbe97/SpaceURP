@@ -132,5 +132,4 @@ public class PlayerController : MonoBehaviour
         if (DialogueManager.Instance != null)
             DialogueManager.Instance.StartDialogue();
     }
-
 }
