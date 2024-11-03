@@ -192,6 +192,7 @@ Transform:
   - {fileID: 1771739989179061736}
   - {fileID: 2464021173266099578}
   - {fileID: 2466072202279096312}
+  - {fileID: 2312229558270902207}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2843759742767081566
@@ -329,6 +330,7 @@ MonoBehaviour:
   collisionsCapsule: {fileID: 6233723867239113009}
   healthBar: {fileID: 1842577151576190909}
   floatingDamage: {fileID: 5596010984081927688, guid: 748baa23e86d8a34f8aceb6730f342c7, type: 3}
+  hitPoints: 0
 --- !u!114 &-2948688100467753451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +531,51 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3004716832232001483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2312229558270902207}
+  - component: {fileID: 7879330672268391944}
+  m_Layer: 7
+  m_Name: KillEvent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2312229558270902207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3004716832232001483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9063805345157768997}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7879330672268391944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3004716832232001483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3662e3a6a6e091540b6df36e48f1e399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killEvent: {fileID: 11400000, guid: e6d5d4d5fced4464f98ec02ebce0ba21, type: 2}
 --- !u!1 &4153698874951894766
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +635,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -1059150131
+  m_SortingLayerID: -1400585243
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &6893771727508143262
@@ -744,7 +791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2464021173266099578}
   m_Layer: 7
-  m_Name: FirePointDown
+  m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

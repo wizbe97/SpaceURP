@@ -31,6 +31,10 @@ public class DialogueSO : ScriptableObject
     public OptionAction option2Action;
     public OptionAction option3Action;
 
+    [Header("Quest Info")]
+    public bool isQuestDialogue = false;
+    public QuestSO questToGive;
+
     public enum OptionAction
     {
         None,
